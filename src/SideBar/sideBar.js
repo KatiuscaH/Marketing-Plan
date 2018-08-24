@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
-import logoudc from '../logoudc.png';
-
+//import logoudc from '../logoudc.png';
 
 const { Header, Sider, Content } = Layout;
 
@@ -24,13 +23,13 @@ class SiderDemo extends Component {
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
-
+          style={{ minHeight: '100vh' }}
         >
           <div className="logo">
-         
+
           </div>
-          
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+
+          <Menu theme="dark" mode="inline" >
             <Menu.Item key="1">
               <Icon type="user" />
               <span>nav 1</span>
@@ -43,6 +42,7 @@ class SiderDemo extends Component {
               <Icon type="upload" />
               <span>nav 3</span>
             </Menu.Item>
+
           </Menu>
         </Sider>
         <Layout>
@@ -53,9 +53,12 @@ class SiderDemo extends Component {
               onClick={this.toggle}
             />
           </Header>
-          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            Content
+          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff'}}>
+            <div >
+     
+            </div>
           </Content>
+
         </Layout>
       </Layout>
     );
