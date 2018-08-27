@@ -48,7 +48,7 @@ class MenuEstudiante extends Component {
                         <Menu.Item key="4">Análisis Fuerzas de Porter</Menu.Item>
                     </MenuItemGroup>
                     <MenuItemGroup title="ANÁLISIS DEL ENTORNO INTERNO">
-                        <Menu.Item key="5">Cuatro P's</Menu.Item>
+                        <Menu.Item key="5">Cuatro P</Menu.Item>
                         <Menu.Item key="6">Matríz BCG</Menu.Item>
                         <Menu.Item key="7">Análisis de clientes</Menu.Item>
                         <Menu.Item key="8">Competencia</Menu.Item>
