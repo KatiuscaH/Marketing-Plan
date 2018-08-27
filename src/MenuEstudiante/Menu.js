@@ -38,7 +38,8 @@ class MenuEstudiante extends Component {
                 onOpenChange={this.onOpenChange}*/
                 theme="dark"
             >
-                <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Resumen Ejecutivo</span></span>}>
+
+                <SubMenu key="sub1" title={<span><Icon type="file" /><span>Resumen Ejecutivo</span></span>}>
                     <Menu.Item key="1">Presentación de la empresa</Menu.Item>
                     <Menu.Item key="2">Historia</Menu.Item>
                 </SubMenu>
@@ -62,7 +63,7 @@ class MenuEstudiante extends Component {
                     <Menu.Item key="13">Plan de medios</Menu.Item>
                     <Menu.Item key="14">Plan de acción</Menu.Item>
                  </SubMenu>
-                 <SubMenu key="sub4" title={<span><Icon type="setting" /><span>Archivos ANEXOS</span></span>}>
+                 <SubMenu key="sub4" title={<span><Icon type="paper-clip" /><span>Archivos ANEXOS</span></span>}>
                  <Menu.Item key="15">Subir ANEXOS</Menu.Item>
                  </SubMenu>
             </Menu>
