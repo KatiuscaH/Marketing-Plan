@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import './Login.css';
-import logoudc from '../logoudc.png';
+import logoudc from '../logoudc';
 
 const FormItem = Form.Item;
 
