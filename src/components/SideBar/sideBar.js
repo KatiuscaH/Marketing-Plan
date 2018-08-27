@@ -3,7 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
 import NavBar from '../NavBar/navBar';
 import MenuEstudiante from '../MenuEstudiante/Menu';
-import PresentacionEmpresa from '.../contenido/PresentacionEmpresa';
+import PresentacionEmpresa from '../contenido/PresentacionEmpresa';
 
 
 const { Header, Sider, Content } = Layout;
@@ -29,7 +29,7 @@ class SiderDemo extends Component {
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
-        >
+       >
           <div className="logo"></div>
 
           <Menu theme="dark" mode="inline" >

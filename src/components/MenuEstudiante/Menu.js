@@ -57,10 +57,12 @@ class MenuEstudiante extends Component {
                         <Menu.Item key="11">Matríz MEFI</Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
-                <SubMenu key="sub3" title={<span><Icon type="setting" /><span>Objetivos estratégicos de marketing</span></span>}>
+                <SubMenu key="sub3" title={<span><Icon type="setting" /><span>Objetivos </span></span>}>
+                <MenuItemGroup title="OBJETIVOS ESTRATÉGICOS DE MARKETING">
                     <Menu.Item key="12">Objetivos según plazos</Menu.Item>
                     <Menu.Item key="13">Plan de medios</Menu.Item>
                     <Menu.Item key="14">Plan de acción</Menu.Item>
+                    </MenuItemGroup>
                 </SubMenu>
                 <SubMenu key="sub4" title={<span><Icon type="paper-clip" /><span>Archivos ANEXOS</span></span>}>
                     <Menu.Item key="15">Subir ANEXOS</Menu.Item>
