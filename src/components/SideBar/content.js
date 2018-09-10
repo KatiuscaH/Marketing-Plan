@@ -9,7 +9,7 @@ class Contenido extends Component {
         return (
             <div>
                 <Route path="/presentacion" component={PresentacionEmpresa} />
-      <Route path="/historia" component={Historia} />
+                <Route path="/historia" component={Historia} />
                 {this.props.children}
             </div>
         );
