@@ -36,7 +36,7 @@ class MenuEstudiante extends Component {
         return (
             <Menu
                 onClick={handleClick}
-                mode="vertical"//inline - vertical
+                mode="inline"//inline - vertical
                 /* openKeys={this.state.openKeys}
                  onOpenChange={this.onOpenChange}*/
                 theme="dark"

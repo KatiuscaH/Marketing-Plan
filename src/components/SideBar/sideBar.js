@@ -30,6 +30,7 @@ class SiderDemo extends Component {
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
+          width = '250px'
         >
           <div className="logo"></div>
 
