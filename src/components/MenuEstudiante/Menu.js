@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
+import { Route, Link } from 'react-router-dom';
+import PresentacionEmpresa from '../contenido/PresentacionEmpresa';
+
+
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -39,7 +43,7 @@ class MenuEstudiante extends Component {
                 theme="dark"
             >
                 <SubMenu key="sub1" title={<span><Icon type="file" /><span>Resumen Ejecutivo</span></span>}>
-                    <Menu.Item key="1">Presentación de la empresa</Menu.Item>
+                    <Menu.Item key="1"><Link to="/presentacion">Presentación de la empresa</Link></Menu.Item>
                     <Menu.Item key="2">Historia</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Análisis del entorno</span></span>}>
@@ -58,15 +62,19 @@ class MenuEstudiante extends Component {
                     </MenuItemGroup>
                 </SubMenu>
                 <SubMenu key="sub3" title={<span><Icon type="setting" /><span>Objetivos </span></span>}>
-                <MenuItemGroup title="OBJETIVOS ESTRATÉGICOS DE MARKETING">
-                    <Menu.Item key="12">Objetivos según plazos</Menu.Item>
-                    <Menu.Item key="13">Plan de medios</Menu.Item>
-                    <Menu.Item key="14">Plan de acción</Menu.Item>
+                    <MenuItemGroup title="OBJETIVOS ESTRATÉGICOS DE MARKETING">
+                        <Menu.Item key="12">Objetivos según plazos</Menu.Item>
+                        <Menu.Item key="13">Plan de medios</Menu.Item>
+                        <Menu.Item key="14">Plan de acción</Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
                 <SubMenu key="sub4" title={<span><Icon type="paper-clip" /><span>Archivos ANEXOS</span></span>}>
                     <Menu.Item key="15">Subir ANEXOS</Menu.Item>
                 </SubMenu>
+
+                
+            <Route path="/presentacion" component={PresentacionEmpresa} />
+
             </Menu>
         );
     }

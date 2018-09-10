@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import './index.css';
-import SiderDemo from '../src/components/SideBar/sideBar';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<SiderDemo  />, document.getElementById('root'));
+import SiderDemo from '../src/components/SideBar/sideBar';
+
+
+ReactDOM.render(
+    <Router>
+       <Route path="/" component={SiderDemo} />
+    </Router>,
+
+    document.getElementById('root'));
 registerServiceWorker();
