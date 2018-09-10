@@ -29,7 +29,7 @@ class SiderDemo extends Component {
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
-       >
+         >
           <div className="logo"></div>
 
           <Menu theme="dark" mode="inline" >

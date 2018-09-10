@@ -12,15 +12,27 @@
     height: 32px;
     background: rgba(255,255,255,.2);
     margin: 16px;
+    
   }
 
   .sider{
     min-height: 100vh;
+    /*revisar no sirve*/
+   /* flex: 0 0 250px;
+    max-width: 250px;
+    min-width: 250px;
+    width: 250px;*/
       }
 
   .header{
     color: 'rgba(0, 0, 0, 0.65)';
     padding: 0 ;
   }
-
-  
+/*
+  .sider .ant-layout-sider .ant-layout-sider-dark{
+    flex: 0 0 250px;
+    max-width: 250px;
+    min-width: 250px;
+    width: 250px;
+  }
+  */
