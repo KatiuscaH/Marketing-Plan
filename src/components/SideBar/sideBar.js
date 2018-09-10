@@ -3,6 +3,8 @@ import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
 import NavBar from '../NavBar/navBar';
 import MenuEstudiante from '../MenuEstudiante/Menu';
+import Contenido from './content';
+import { Route } from "react-router-dom";
 
 
 const { Header, Sider, Content } = Layout;
@@ -28,7 +30,7 @@ class SiderDemo extends Component {
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
-         >
+        >
           <div className="logo"></div>
 
           <Menu theme="dark" mode="inline" >
@@ -57,12 +59,13 @@ class SiderDemo extends Component {
 
           <Content
             className="content" style={{ margin: '24px 16px', padding: 24, background: '#fff' }}>
-            
+
+            <Route component={Contenido}></Route>
 
           </Content>
 
         </Layout>
-        
+
       </Layout>
     );
   }

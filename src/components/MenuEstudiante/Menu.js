@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
-import { Route, Link } from 'react-router-dom';
-import PresentacionEmpresa from '../contenido/PresentacionEmpresa';
+import { Link } from 'react-router-dom';
 
 
 
@@ -44,36 +43,35 @@ class MenuEstudiante extends Component {
             >
                 <SubMenu key="sub1" title={<span><Icon type="file" /><span>Resumen Ejecutivo</span></span>}>
                     <Menu.Item key="1"><Link to="/presentacion">Presentación de la empresa</Link></Menu.Item>
-                    <Menu.Item key="2">Historia</Menu.Item>
+                    <Menu.Item key="2"><Link to="/historia">Historia</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Análisis del entorno</span></span>}>
                     <MenuItemGroup title="ANÁLISIS DEL ENTORNO EXTERNO">
-                        <Menu.Item key="3">Análisis PES</Menu.Item>
-                        <Menu.Item key="4">Análisis Fuerzas de Porter</Menu.Item>
+                        <Menu.Item key="3"><Link to="/analisis-pes">Análisis PES</Link></Menu.Item>
+                        <Menu.Item key="4"><Link to="/analisis-porter">Análisis Fuerzas de Porter</Link></Menu.Item>
                     </MenuItemGroup>
                     <MenuItemGroup title="ANÁLISIS DEL ENTORNO INTERNO">
-                        <Menu.Item key="5">Cuatro P</Menu.Item>
-                        <Menu.Item key="6">Matríz BCG</Menu.Item>
-                        <Menu.Item key="7">Análisis de clientes</Menu.Item>
-                        <Menu.Item key="8">Competencia</Menu.Item>
-                        <Menu.Item key="9">Proveedores</Menu.Item>
-                        <Menu.Item key="10">Matríz DOFA</Menu.Item>
-                        <Menu.Item key="11">Matríz MEFI</Menu.Item>
+                        <Menu.Item key="5"><Link to="/cuatro-p">Cuatro P</Link></Menu.Item>
+                        <Menu.Item key="6"><Link to="/matriz-bcg">Matríz BCG</Link></Menu.Item>
+                        <Menu.Item key="7"><Link to="/analisis-clientes">Análisis de clientes</Link></Menu.Item>
+                        <Menu.Item key="8"><Link to="/competencia">Competencia</Link></Menu.Item>
+                        <Menu.Item key="9"><Link to="/proveedores">Proveedores</Link></Menu.Item>
+                        <Menu.Item key="10"><Link to="/matriz-dofa">Matríz DOFA</Link></Menu.Item>
+                        <Menu.Item key="11"><Link to="/matriz-mefi">Matríz MEFI</Link></Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
                 <SubMenu key="sub3" title={<span><Icon type="setting" /><span>Objetivos </span></span>}>
                     <MenuItemGroup title="OBJETIVOS ESTRATÉGICOS DE MARKETING">
-                        <Menu.Item key="12">Objetivos según plazos</Menu.Item>
-                        <Menu.Item key="13">Plan de medios</Menu.Item>
-                        <Menu.Item key="14">Plan de acción</Menu.Item>
+                        <Menu.Item key="12"><Link to="/objetivos-plazos">Objetivos según plazos</Link></Menu.Item>
+                        <Menu.Item key="13"><Link to="/plan-medios">Plan de medios</Link></Menu.Item>
+                        <Menu.Item key="14"><Link to="/plan-accion">Plan de acción</Link></Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
                 <SubMenu key="sub4" title={<span><Icon type="paper-clip" /><span>Archivos ANEXOS</span></span>}>
-                    <Menu.Item key="15">Subir ANEXOS</Menu.Item>
+                    <Menu.Item key="15"><Link to="/subir-anexos">Subir ANEXOS</Link></Menu.Item>
                 </SubMenu>
 
                 
-            <Route path="/presentacion" component={PresentacionEmpresa} />
 
             </Menu>
         );
