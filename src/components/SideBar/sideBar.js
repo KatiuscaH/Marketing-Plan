@@ -26,11 +26,17 @@ class SiderDemo extends Component {
       <Layout>
 
         <Sider
+        
           className="sider"
-          trigger={null}
+          breakpoint="lg"
+      collapsedWidth="0"
+      onBreakpoint={(broken) => { console.log(broken); }}
+      onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
+      width = '250px'
+         /* trigger={null}
           collapsible
           collapsed={this.state.collapsed}
-          width = '250px'
+          width = '250px'*/
         >
           <div className="logo"></div>
 
@@ -48,10 +54,11 @@ class SiderDemo extends Component {
 
               <NavBar />
               <Icon
-                className="trigger"
+               /* PARA PONER EL TRIGGER SIN EL RESPONSIVE
+               className="trigger"
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={this.toggle}
-                style={{ color: '#fff' }}
+                style={{ color: '#fff' }}*/
               />
 
             </div>
