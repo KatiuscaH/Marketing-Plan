@@ -1,14 +1,11 @@
-body {
-    margin: 0;
-    padding: 2em;
-    background: #333;
-    font-family: sans-serif;
-  }
-  
+
   .DraftEditor-root{
-  background: #fff;
-    border-radius: .3em;
+  background: #F7F2EE;
+  border-radius: .3em;
    padding: 1em;
+   margin: 0;
+    padding: 2em;
+    
  }
   button{
    background: #999;
