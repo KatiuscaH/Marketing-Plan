@@ -55,8 +55,8 @@ class HeadlinesPicker extends Component {
     render() {
       return (
         <div className={editorStyles.headlineButtonWrapper}>
-          <button onClick={this.onClick} className={editorStyles.headlineButton}>
-            Tamaño
+          <button onClick={this.onClick} className={"headlineButton"}>
+            A
           </button>
         </div>
       );
