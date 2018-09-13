@@ -1,10 +1,13 @@
 
   .DraftEditor-root{
-  background: #F7F2EE;
-  border-radius: .3em;
-   padding: 1em;
-   margin: 0;
-    padding: 2em;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    cursor: text;
+    padding: 16px;
+    border-radius: 2px;
+    margin-bottom: 2em;
+    box-shadow: inset 0px 1px 8px -3px #ABABAB;
+    background: #fefefe;
     
  }
   button{

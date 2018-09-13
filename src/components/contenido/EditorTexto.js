@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import { EditorState, RichUtils } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+import createEmojiPlugin from 'draft-js-emoji-plugin';
+import createImagePlugin from 'draft-js-image-plugin';
+import 'draft-js-emoji-plugin/lib/plugin.css'
 import './EditorTexto.css';
+
+
+const emojiPlugin = createEmojiPlugin();
+const imagePlugin = createImagePlugin();
+const { EmojiSuggestions, EmojiSelect  } = emojiPlugin;
 
 class EditorTexto extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             editorState: EditorState.createEmpty(),
         };
     }
     onChange = (editorState) => {
-        this.setState({ editorState });
+        this.setState({ editorState, });
     };
 
     handleyKeyCommand = (command) => {
@@ -42,7 +51,10 @@ class EditorTexto extends Component {
                     editorState={this.state.editorState}
                     handleKeyCommand={this.handleyKeyCommand}
                     onChange={this.onChange}
+                    plugins={[emojiPlugin,imagePlugin]}
                 />
+                <EmojiSuggestions />
+                <EmojiSelect />
             </div>
         );
     }
