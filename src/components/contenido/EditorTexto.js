@@ -7,14 +7,13 @@ import {
     ItalicButton,
     BoldButton,
     UnderlineButton,
-    CodeButton,
+    
     HeadlineOneButton,
     HeadlineTwoButton,
     HeadlineThreeButton,
     UnorderedListButton,
     OrderedListButton,
-    BlockquoteButton,
-    CodeBlockButton,
+    
   } from 'draft-js-buttons';
 import './editorStyles.css';
 import editorStyles from'./editorStyles.css';
@@ -71,13 +70,12 @@ const toolbarPlugin = createToolbarPlugin({
       BoldButton,
       ItalicButton,
       UnderlineButton,
-      CodeButton,
+     
       
       HeadlinesButton,
       UnorderedListButton,
       OrderedListButton,
-      BlockquoteButton,
-      CodeBlockButton
+      
     ]
   });
 const { Toolbar } = toolbarPlugin;
