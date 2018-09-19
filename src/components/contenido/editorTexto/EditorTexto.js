@@ -3,37 +3,41 @@ import { Editor } from 'slate-react';
 import { Value } from 'slate';
 
 import Icon from 'react-icons-kit';
-import { bold } from 'react-icons-kit/feather/bold';
-import { italic } from 'react-icons-kit/feather/italic';
-import { list } from 'react-icons-kit/feather/list';
-import { underline } from 'react-icons-kit/feather/underline';
-
+import { bold } from 'react-icons-kit/icomoon/bold';
+import { italic } from 'react-icons-kit/icomoon/italic';
+import { list } from 'react-icons-kit/icomoon/list';
+import { underline } from 'react-icons-kit/icomoon/underline';
+import { cancelCircle } from 'react-icons-kit/icomoon/cancelCircle';
 
 import { BoldMark, ItalicMark, FormatToolbar } from './indexEditor';
 import './editorStyles.css'
 
 
+const existingValue = JSON.parse(localStorage.getItem('content'))
+const initialValue = Value.fromJSON(
+  existingValue || {
+    document: {
+      nodes: [
+        {
+          object: 'block',
+          type: 'paragraph',
+          nodes: [
+            {
+              object: 'text',
+              leaves: [
+                {
+                  text: 'A line of text in a paragraph.',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  }
+)
 
-const initialValue = Value.fromJSON({
-  document: {
-    nodes: [
-      {
-        object: 'block',
-        type: 'paragraph',
-        nodes: [
-          {
-            object: 'text',
-            leaves: [
-              {
-                text: 'Presentación empresa.',
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-})
+
 
 class EditorTexto extends Component {
 
@@ -42,6 +46,10 @@ class EditorTexto extends Component {
   }
 
   onChange = ({ value }) => {
+    if (value.document != this.state.value.document) {
+      const content = JSON.stringify(value.toJSON())
+      localStorage.setItem('content', content)
+    }
     this.setState({ value })
   }
 
@@ -93,6 +101,9 @@ class EditorTexto extends Component {
       case 'underline':
         return <u {...props.attributes}>{props.children}</u>;
 
+      case 'h1':
+        return <h1 {...props.attributes}>{props.children}</h1>
+
       default: {
         return;
       }
@@ -100,21 +111,19 @@ class EditorTexto extends Component {
   }
 
   onMarkClick = (e, type) => {
-    /* disabling browser default behavior like page refresh, etc */
+
     e.preventDefault();
 
-    /* grabbing the this.state.value */
+
     const { value } = this.state;
 
-		/*
-			applying the formatting on the selected text
-			which the desired formatting
-		*/
+
     const change = value.change().toggleMark(type);
 
-    /* calling the  onChange method we declared */
+
     this.onChange(change);
   };
+
 
   render() {
     return (
@@ -143,8 +152,17 @@ class EditorTexto extends Component {
           >
             <Icon icon={underline} />
           </button>
+
+          <button
+            onPointerDown={(e) => this.onMarkClick(e, 'h1')}
+            className="tooltip-icon-button"
+          >
+            <Icon icon={cancelCircle} />
+          </button>
+
         </FormatToolbar>
         <Editor className="editor"
+          //  plugins={plugins}
           value={this.state.value}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
