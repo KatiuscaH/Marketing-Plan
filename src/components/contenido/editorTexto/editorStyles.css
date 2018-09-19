@@ -1,47 +1,26 @@
   .editor{
-   /* box-sizing: border-box;
+    box-sizing: border-box;
     border: 1px solid #ddd;
     cursor: text;
     padding: 16px;
     border-radius: 2px;
     margin-bottom: 2em;
-    box-shadow: inset 0px 1px 8px -3px #ABABAB;
-    background: #fefefe;
-    margin-top: 15px;*/
-
-    color: rgb(17, 17, 17);
-   
-    background-color: rgb(255, 255, 255);
+   /*box-shadow: inset 0px 1px 8px -3px #ABABAB;*/
     box-shadow: rgba(118, 143, 255, 0.1) 0px 16px 24px 0px;
-    padding: 40px;
-    margin: 65px auto 45px;
-    border-radius: 4.5px;
-    border: 1px solid rgb(158, 156, 156);
+    background: #fefefe;
+    margin-top: 15px;
+
+   
  }
 
- .draftJsToolbar__toolbar__dNtBH{
-   display: flex;
-   border: 1px solid #111;
-    
-    border-radius: 4px;
-    box-shadow: 0px 1px 3px 0px rgba(220,220,220,1);
-    z-index: 2;
-    box-sizing: border-box;
- }
+.format-toolbar{
+  display: flex;
+border-bottom: solid 1.7px rgba(199, 198, 255, 0.15);
+  padding: 10px 0;
+  margin: 0 0 10px 0;
+}
 
- .headlineButton {
-  background: #fbfbfb;
-  color: #888;
-  font-size: 18px;
+.tooltip-icon-button{
   border: 0;
-  padding-top: 5px;
-  vertical-align: bottom;
-  height: 34px;
-  width: 36px;
+  cursor: pointer;
 }
-
-.headlineButton:hover,
-.headlineButton:focus {
-  background: #f3f3f3;
-}
-

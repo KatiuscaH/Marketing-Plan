@@ -1,7 +1,7 @@
 import EditorTexto from './EditorTexto';
 import BoldMark from './BoldMark';
 import ItalicMark from './ItalicMark';
+import FormatToolbar from './Toolbar';
 
 
-
-export { EditorTexto, BoldMark, ItalicMark };
+export { EditorTexto, BoldMark, ItalicMark, FormatToolbar };
