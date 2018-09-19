@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import EditorTexto from './editorTexto/EditorTexto';
 
 class PresentacionEmpresa extends Component {
     render() {
         return (
             <div>
-                <p>Presentacion empresa</p>
-                Hey! I'm a component
+                <EditorTexto/>
                 
             </div>
         );

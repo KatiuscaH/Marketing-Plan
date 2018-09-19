@@ -1,5 +1,5 @@
-  .DraftEditor-root{
-    box-sizing: border-box;
+  .editor{
+   /* box-sizing: border-box;
     border: 1px solid #ddd;
     cursor: text;
     padding: 16px;
@@ -7,7 +7,16 @@
     margin-bottom: 2em;
     box-shadow: inset 0px 1px 8px -3px #ABABAB;
     background: #fefefe;
-    margin-top: 15px;
+    margin-top: 15px;*/
+
+    color: rgb(17, 17, 17);
+   
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(118, 143, 255, 0.1) 0px 16px 24px 0px;
+    padding: 40px;
+    margin: 65px auto 45px;
+    border-radius: 4.5px;
+    border: 1px solid rgb(158, 156, 156);
  }
 
  .draftJsToolbar__toolbar__dNtBH{
