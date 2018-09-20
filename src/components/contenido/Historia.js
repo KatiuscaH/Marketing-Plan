@@ -6,7 +6,7 @@ class Historia extends Component {
     
     render() {
         return (
-            <div></div>
+            <div>ffff</div>
         );
     }
 }

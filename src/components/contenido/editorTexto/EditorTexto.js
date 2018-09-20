@@ -7,7 +7,8 @@ import { bold } from 'react-icons-kit/icomoon/bold';
 import { italic } from 'react-icons-kit/icomoon/italic';
 import { list } from 'react-icons-kit/icomoon/list';
 import { underline } from 'react-icons-kit/icomoon/underline';
-import { cancelCircle } from 'react-icons-kit/icomoon/cancelCircle';
+import {fontSize} from 'react-icons-kit/icomoon/fontSize'
+import {strikethrough} from 'react-icons-kit/icomoon/strikethrough'
 
 import { BoldMark, ItalicMark, FormatToolbar } from './indexEditor';
 import './editorStyles.css'
@@ -46,7 +47,7 @@ class EditorTexto extends Component {
   }
 
   onChange = ({ value }) => {
-    if (value.document != this.state.value.document) {
+    if (value.document !== this.state.value.document) {
       const content = JSON.stringify(value.toJSON())
       localStorage.setItem('content', content)
     }
@@ -76,6 +77,7 @@ class EditorTexto extends Component {
         change.toggleMark('underline');
         return true;
       }
+     
 
       default: {
         return;
@@ -101,9 +103,11 @@ class EditorTexto extends Component {
       case 'underline':
         return <u {...props.attributes}>{props.children}</u>;
 
-      case 'h1':
-        return <h1 {...props.attributes}>{props.children}</h1>
+      case 'heading-1':
+          return <h1 {...props.attributes}>{props.children}</h1>
 
+      case 'strike':
+          return <strike {...props.attributes}>{props.children}</strike>;
       default: {
         return;
       }
@@ -125,10 +129,11 @@ class EditorTexto extends Component {
   };
 
 
+  
   render() {
     return (
 
-      <Fragment>
+      <div>
         <FormatToolbar>
           <button
             onPointerDown={(e) => this.onMarkClick(e, 'bold')}
@@ -152,14 +157,18 @@ class EditorTexto extends Component {
           >
             <Icon icon={underline} />
           </button>
-
           <button
-            onPointerDown={(e) => this.onMarkClick(e, 'h1')}
+            onPointerDown={(e) => this.onMarkClick(e, 'heading-1')}
             className="tooltip-icon-button"
           >
-            <Icon icon={cancelCircle} />
+            <Icon icon={fontSize} />
           </button>
-
+          <button
+            onPointerDown={(e) => this.onMarkClick(e, 'strike')}
+            className="tooltip-icon-button"
+          >
+            <Icon icon={strikethrough} />
+          </button>
         </FormatToolbar>
         <Editor className="editor"
           //  plugins={plugins}
@@ -167,8 +176,9 @@ class EditorTexto extends Component {
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
           renderMark={this.renderMark}
+          
         />
-      </Fragment>
+      </div>
     );
   }
 
