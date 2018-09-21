@@ -12,11 +12,13 @@
     "react-app-rewire-less": "^2.1.3",
     "react-app-rewired": "^1.5.2",
     "react-dom": "^16.5.0",
+    "react-draft-wysiwyg": "^1.12.13",
     "react-emotion": "^9.2.10",
     "react-icons-kit": "^1.1.11",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "slate": "^0.40.2",
+    "slate-drop-or-paste-images": "^0.8.4",
     "slate-edit-table": "^0.18.0",
     "slate-react": "^0.18.5"
   },

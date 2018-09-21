@@ -7,8 +7,8 @@ import { bold } from 'react-icons-kit/icomoon/bold';
 import { italic } from 'react-icons-kit/icomoon/italic';
 import { list } from 'react-icons-kit/icomoon/list';
 import { underline } from 'react-icons-kit/icomoon/underline';
-import {fontSize} from 'react-icons-kit/icomoon/fontSize'
-import {strikethrough} from 'react-icons-kit/icomoon/strikethrough'
+import { fontSize } from 'react-icons-kit/icomoon/fontSize'
+import { strikethrough } from 'react-icons-kit/icomoon/strikethrough'
 
 import { BoldMark, ItalicMark, FormatToolbar } from './indexEditor';
 import './editorStyles.css'
@@ -16,7 +16,7 @@ import './editorStyles.css'
 
 const existingValue = JSON.parse(localStorage.getItem('content'))
 const initialValue = Value.fromJSON(
-  existingValue || {
+ existingValue || {
     document: {
       nodes: [
         {
@@ -77,7 +77,6 @@ class EditorTexto extends Component {
         change.toggleMark('underline');
         return true;
       }
-     
 
       default: {
         return;
@@ -103,11 +102,8 @@ class EditorTexto extends Component {
       case 'underline':
         return <u {...props.attributes}>{props.children}</u>;
 
-      case 'heading-1':
-          return <h1 {...props.attributes}>{props.children}</h1>
-
       case 'strike':
-          return <strike {...props.attributes}>{props.children}</strike>;
+        return <strike {...props.attributes}>{props.children}</strike>;
       default: {
         return;
       }
@@ -115,21 +111,40 @@ class EditorTexto extends Component {
   }
 
   onMarkClick = (e, type) => {
-
     e.preventDefault();
-
-
     const { value } = this.state;
-
-
     const change = value.change().toggleMark(type);
-
-
     this.onChange(change);
   };
 
+  renderNode = props => {
+    switch (props.node.type) {
+      case 'heading-1':
+        return <h1 {...props.attributes}>{props.children}</h1>
 
-  
+      case 'heading-2':
+        return <h2 {...props.attributes}>{props.children}</h2>
+
+      case 'heading-5':
+        return <h5 {...props.attributes}>{props.children}</h5>
+
+    }
+  }
+
+  hasBlock = type => {
+    const { value } = this.state
+    return value.blocks.some(node => node.type == type)
+  }
+
+  onBlockClick = (e, type) => {
+    e.preventDefault();
+    const { value } = this.state;
+    const change = value.change()
+    const isH = this.hasBlock(type)
+    change.setBlocks(isH ? 'paragraph' : type)
+    this.onChange(change);
+  }
+
   render() {
     return (
 
@@ -158,7 +173,7 @@ class EditorTexto extends Component {
             <Icon icon={underline} />
           </button>
           <button
-            onPointerDown={(e) => this.onMarkClick(e, 'heading-1')}
+            onPointerDown={(e) => this.onBlockClick(e, 'heading-1')}
             className="tooltip-icon-button"
           >
             <Icon icon={fontSize} />
@@ -169,18 +184,36 @@ class EditorTexto extends Component {
           >
             <Icon icon={strikethrough} />
           </button>
+          <button
+            onPointerDown={(e) => this.onBlockClick(e, 'heading-2')}
+            className="tooltip-icon-button"
+          >
+            Mediano
+          </button>
+
+          <button
+            onPointerDown={(e) => this.onBlockClick(e, 'heading-5')}
+            className="tooltip-icon-button"
+          >
+            Pequeño
+          </button>
+
+          
+
         </FormatToolbar>
         <Editor className="editor"
-          //  plugins={plugins}
+          //plugins={plugins}
           value={this.state.value}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
           renderMark={this.renderMark}
+          renderNode={this.renderNode}
           
         />
       </div>
     );
   }
+  
 
 }
 
