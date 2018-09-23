@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 
 class Historia extends Component {
 
     
     render() {
         return (
-            <div>ffff</div>
+            <div><EditorDraft/></div>
         );
     }
 }
