@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 class MatrizBcg extends Component {
     render() {
         return (
             <div>
-                <p>MatrizBcg</p>
-                
+                <h1 style={{ textAlign: 'center' }}>Matriz BCG</h1>
+                <EditorDraft />
             </div>
         );
     }

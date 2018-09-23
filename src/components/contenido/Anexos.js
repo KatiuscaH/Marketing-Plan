@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 class Anexos extends Component {
     render() {
         return (
             <div>
-                <p>Anexos</p>
-                
+                <h1 style={{textAlign: 'center'}}>Anexos</h1>
+                <EditorDraft />
             </div>
         );
     }

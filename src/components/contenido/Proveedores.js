@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import EditorDraft from './editorTexto/editorDraft';
 
 class Proveedores extends Component {
     render() {
         return (
             <div>
-                <p>Proveedores</p>
-                
+               <h1 style={{ textAlign: 'center' }}>Proveedores</h1>
+               <EditorDraft />
             </div>
         );
     }

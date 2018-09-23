@@ -25,14 +25,16 @@ function uploadImageCallBack(file) {
   }
 
 class EditorDraft extends Component {
-    saveContent = (content) => {
+   /* saveContent = (content) => {
         localStorage.setItem('content', JSON.stringify(convertToRaw(content)));
     }
-
+*/
     constructor(props) {
         super(props);
-        
-        const content = localStorage.getItem('content');
+        this.state = {
+            editorState: EditorState.createEmpty(),
+          }
+        /*const content = localStorage.getItem('content');
        
         if(content) {
             const contentState = convertFromRaw(JSON.parse(content));
@@ -46,16 +48,19 @@ class EditorDraft extends Component {
             this.state = {
                 editorState: EditorState.createEmpty(),
               }
-        }
+    }*/
       }
     //OnChange
       onEditorStateChange = (editorState) => {
-        const contentState = editorState.getCurrentContent();
+        this.setState({
+            editorState,
+          });
+        /*const contentState = editorState.getCurrentContent();
         console.log('content state', convertToRaw(contentState));
         this.saveContent(editorState);
         this.setState({
             editorState,
-        });
+        });*/
         /*this.setState({editorState: editorState});
         this.saveContent(editorState);*/
       };

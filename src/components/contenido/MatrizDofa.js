@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 class MatrizDofa extends Component {
     render() {
         return (
             <div>
-                <p>MatrizDofa</p>
-                
+                <h1 style={{ textAlign: 'center' }}>Matriz DOFA</h1>
+                <EditorDraft />
             </div>
         );
     }

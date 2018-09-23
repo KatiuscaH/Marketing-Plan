@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 class ObjetivoAPlazos extends Component {
     render() {
         return (
             <div>
-                <p>Objetivo A Plazos</p>
-                
+                <h1 style={{ textAlign: 'center' }}>Objetivos a largo plazo</h1>
+                <EditorDraft />
             </div>
         );
     }

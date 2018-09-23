@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 class CuatroP extends Component {
     render() {
         return (
             <div>
-                <p>CuatroP</p>
-                
+                <h1 style={{textAlign: 'center'}}>Cuatro P</h1>
+                <EditorDraft />
             </div>
         );
     }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 class MatrizMefi extends Component {
     render() {
         return (
             <div>
-                <p>MatrizMefi</p>
-                
+                <h1 style={{ textAlign: 'center' }}>Matriz MEFI y MEFE</h1>
+                <EditorDraft />
             </div>
         );
     }

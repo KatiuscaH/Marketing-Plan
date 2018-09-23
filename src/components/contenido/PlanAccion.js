@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import EditorDraft from './editorTexto/editorDraft';
 class PlanAccion extends Component {
     render() {
         return (
             <div>
-                <p>Plan de accion</p>
-                
+                <h1 style={{ textAlign: 'center' }}>Plan de acción</h1>
+                <EditorDraft />
             </div>
         );
     }
