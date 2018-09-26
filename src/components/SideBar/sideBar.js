@@ -3,7 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
 import NavBar from '../NavBar/navBar';
 import MenuEstudiante from '../MenuEstudiante/Menu';
-import Contenido from '../contenido/ContenidoEstudiante';
+import ContenidoEstudiante from '../contenido/ContenidoEstudiante';
 import { Route } from "react-router-dom";
 
 
@@ -68,7 +68,7 @@ class SiderDemo extends Component {
           <Content
             className="content" style={{ margin: '24px 16px', padding: 24, background: '#fff' }}>
 
-            <Route component={Contenido}></Route>
+            <Route component={ContenidoEstudiante}></Route>
 
           </Content>
 

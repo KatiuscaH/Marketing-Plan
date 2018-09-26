@@ -1,0 +1,10 @@
+.vertical{
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    padding-top: 80px;
+}
+
+.caja{
+    display: flex;
+    align-items: flex-end;
+}

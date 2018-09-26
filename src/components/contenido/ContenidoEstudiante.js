@@ -18,7 +18,7 @@ import PlanAccion from './PlanAccion';
 import Anexos from './Anexos';
 import MatrizAnsoff from './MatrizAnsoff';
 
-class Contenido extends Component {
+class ContenidoEstudiante extends Component {
     render() {
         return (
             <div>
@@ -47,7 +47,7 @@ class Contenido extends Component {
 }
 
 
-export default Contenido;
+export default ContenidoEstudiante;
 
 
 
