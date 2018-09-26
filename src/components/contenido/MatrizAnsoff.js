@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import EditorDraft from './editorTexto/editorDraft';
-class AnalisisPes extends Component {
+class MatrizAnsoff extends Component {
     render() {
         return (
             <div>
-                <h1 style={{textAlign: 'center'}}>Análisis PEST</h1>
+                <h1 style={{textAlign: 'center'}}>Matriz Ansoff</h1>
                 <EditorDraft />
             </div>
         );
@@ -12,4 +12,4 @@ class AnalisisPes extends Component {
 }
 
 
-export default AnalisisPes;
+export default MatrizAnsoff;

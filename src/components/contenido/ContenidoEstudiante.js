@@ -16,7 +16,7 @@ import ObjetivosPlazos from './ObjetivosPlazos';
 import PlanMedios from './PlanMedios';
 import PlanAccion from './PlanAccion';
 import Anexos from './Anexos';
-
+import MatrizAnsoff from './MatrizAnsoff';
 
 class Contenido extends Component {
     render() {
@@ -33,11 +33,12 @@ class Contenido extends Component {
                     <Route path="/competencia" component={Competencia} />
                     <Route path="/proveedores" component={Proveedores} />
                     <Route path="/matriz-dofa" component={MatrizDofa} />
-                    <Route path="/matriz-mefi" component={MatrizMefi} />
+                    <Route path="/matriz-mefi-mefe" component={MatrizMefi} />
                     <Route path="/objetivos-plazos" component={ObjetivosPlazos} />
                     <Route path="/plan-medios" component={PlanMedios} />
                     <Route path="/plan-accion" component={PlanAccion} />
                     <Route path="/subir-anexos" component={Anexos} />
+                    <Route path="/matriz-ansoff" component={MatrizAnsoff} />
                     </Switch>
                 {this.props.children}
             </div>

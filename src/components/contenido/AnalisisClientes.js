@@ -4,7 +4,7 @@ class AnalisisClientes extends Component {
     render() {
         return (
             <div>
-                <h1 style={{textAlign: 'center'}}>Análisis de clientes</h1>
+                <h1 style={{textAlign: 'center'}}>Identificación de clientes actuales</h1>
                 <EditorDraft />
             </div>
         );

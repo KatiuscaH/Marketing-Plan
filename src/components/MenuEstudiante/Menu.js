@@ -47,28 +47,29 @@ class MenuEstudiante extends Component {
                 </SubMenu>
                 <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Análisis del entorno</span></span>}>
                     <MenuItemGroup title="ANÁLISIS DEL ENTORNO EXTERNO">
-                        <Menu.Item key="3"><Link to="/analisis-pes">Análisis PES</Link></Menu.Item>
+                        <Menu.Item key="3"><Link to="/analisis-pes">Análisis PEST</Link></Menu.Item>
                         <Menu.Item key="4"><Link to="/analisis-porter">Análisis Fuerzas de Porter</Link></Menu.Item>
                     </MenuItemGroup>
                     <MenuItemGroup title="ANÁLISIS DEL ENTORNO INTERNO">
                         <Menu.Item key="5"><Link to="/cuatro-p">Cuatro P</Link></Menu.Item>
-                        <Menu.Item key="6"><Link to="/matriz-bcg">Matríz BCG</Link></Menu.Item>
-                        <Menu.Item key="7"><Link to="/analisis-clientes">Análisis de clientes</Link></Menu.Item>
-                        <Menu.Item key="8"><Link to="/competencia">Competencia</Link></Menu.Item>
-                        <Menu.Item key="9"><Link to="/proveedores">Proveedores</Link></Menu.Item>
+                        <Menu.Item key="6"><Link to="/analisis-clientes">Identificación de clientes actuales</Link></Menu.Item>
+                        <Menu.Item key="7"><Link to="/competencia">Análisis de la Competencia</Link></Menu.Item>
+                        <Menu.Item key="8"><Link to="/proveedores">Proveedores</Link></Menu.Item>
+                        <Menu.Item key="9"><Link to="/matriz-bcg">Matriz BCG</Link></Menu.Item>
                         <Menu.Item key="10"><Link to="/matriz-dofa">Matríz DOFA</Link></Menu.Item>
-                        <Menu.Item key="11"><Link to="/matriz-mefi">Matríz MEFI</Link></Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
                 <SubMenu key="sub3" title={<span><Icon type="setting" /><span>Objetivos </span></span>}>
                     <MenuItemGroup title="OBJETIVOS ESTRATÉGICOS DE MARKETING">
-                        <Menu.Item key="12"><Link to="/objetivos-plazos">Objetivos según plazos</Link></Menu.Item>
-                        <Menu.Item key="13"><Link to="/plan-medios">Plan de medios</Link></Menu.Item>
-                        <Menu.Item key="14"><Link to="/plan-accion">Plan de acción</Link></Menu.Item>
+                        <Menu.Item key="11"><Link to="/matriz-mefi-mefe">Matríz MEFI y MEFE</Link></Menu.Item>
+                        <Menu.Item key="12"><Link to="/matriz-ansoff">Matríz Ansoff</Link></Menu.Item>
+                        <Menu.Item key="13"><Link to="/objetivos-plazos">Objetivos a largo plazo</Link></Menu.Item>
+                        <Menu.Item key="14"><Link to="/plan-medios">Plan de medios</Link></Menu.Item>
+                        <Menu.Item key="15"><Link to="/plan-accion">Plan de acción</Link></Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
                 <SubMenu key="sub4" title={<span><Icon type="paper-clip" /><span>Archivos ANEXOS</span></span>}>
-                    <Menu.Item key="15"><Link to="/subir-anexos">Subir ANEXOS</Link></Menu.Item>
+                    <Menu.Item key="16"><Link to="/subir-anexos">Subir ANEXOS</Link></Menu.Item>
                 </SubMenu>
 
                 
