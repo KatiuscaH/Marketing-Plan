@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import FormEstudiante from './FormEstudiante';
 
-class GestionEstudiantes extends Component {
-    render() {
-        return (
+class GestionEstudiantes extends Component{
+    render(){
+        return(
             <div>
-                GestionEstudiantes
+                <FormEstudiante/>
             </div>
-        );
+        )
     }
 }
 
 
+
 export default GestionEstudiantes;
+
