@@ -4,13 +4,12 @@ import {
     Modal,
     Form,
     Input,
-    Radio,
     Dropdown,
     Menu,
     message
 } from 'antd';
 
-
+const { TextArea } = Input;
 const FormItem = Form.Item;
 const CollectionCreateForm = Form.create()(
 
@@ -67,12 +66,15 @@ const CollectionCreateForm = Form.create()(
                                 rules: [{ required: true, message: 'Por favor ingrese la contraseña' }],
                             })(<Input />)}
                         </FormItem>
+                        <div style={{display: 'inline-block'}}>
                         <FormItem label="Año">
                             {getFieldDecorator('anio', {
                                 rules: [{ required: true, message: 'Por favor ingrese el año' }],
                             })(<Input  style={{ width: '100px', marginRight: '3%' }} />)}
                         </FormItem>
-
+                        </div>
+                        
+                        <div style={{display: 'inline-block'}}>
                         <FormItem >
                             {getFieldDecorator('periodo', {
                                 rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
@@ -82,16 +84,17 @@ const CollectionCreateForm = Form.create()(
                                 </Button>
                             </Dropdown>)}
                         </FormItem>
-
-                        <FormItem className="collection-create-form_last-form-item">
-                            {getFieldDecorator('rol', {
-                                initialValue: 'estudiante',
-                            })(
-                                <Radio.Group>
-                                    <Radio value="estudiante">Estudiante</Radio>
-
-                                </Radio.Group>
-                            )}
+                        </div>
+                        
+                        <FormItem label="Integrantes">
+                            {getFieldDecorator('integrantes', {
+                                rules: [{ required: true, message: 'Por favor ingrese los integrantes' }],
+                            })(<TextArea rows={5} />)}
+                        </FormItem>
+                        <FormItem label="Empresario">
+                            {getFieldDecorator('empresario', {
+                                rules: [{ required: true, message: 'Por favor ingrese el empresario asignado' }],
+                            })(<Input />)}
                         </FormItem>
                     </Form>
                 </Modal>
