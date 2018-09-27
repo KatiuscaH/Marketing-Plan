@@ -32,7 +32,7 @@ class SiderDocente extends Component {
           collapsedWidth="0"
           onBreakpoint={(broken) => { console.log(broken); }}
           onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
-          width='270px'
+          width='250px'
         /* trigger={null}
          collapsible
          collapsed={this.state.collapsed}

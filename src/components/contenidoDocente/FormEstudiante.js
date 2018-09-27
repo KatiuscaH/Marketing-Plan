@@ -8,6 +8,7 @@ import {
     Menu,
     message
 } from 'antd';
+import TablaEstudiante from './TablaEstudiante';
 
 const { TextArea } = Input;
 const FormItem = Form.Item;
@@ -66,26 +67,26 @@ const CollectionCreateForm = Form.create()(
                                 rules: [{ required: true, message: 'Por favor ingrese la contraseña' }],
                             })(<Input />)}
                         </FormItem>
-                        <div style={{display: 'inline-block'}}>
-                        <FormItem label="Año">
-                            {getFieldDecorator('anio', {
-                                rules: [{ required: true, message: 'Por favor ingrese el año' }],
-                            })(<Input  style={{ width: '100px', marginRight: '3%' }} />)}
-                        </FormItem>
+                        <div style={{ display: 'inline-block' }}>
+                            <FormItem label="Año">
+                                {getFieldDecorator('anio', {
+                                    rules: [{ required: true, message: 'Por favor ingrese el año' }],
+                                })(<Input style={{ width: '100px', marginRight: '3%' }} />)}
+                            </FormItem>
                         </div>
-                        
-                        <div style={{display: 'inline-block'}}>
-                        <FormItem >
-                            {getFieldDecorator('periodo', {
-                                rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
-                            })(<Dropdown overlay={menu} trigger={['click']}>
-                                <Button style={{  width: '100px'}}>
-                                    Periodo 
+
+                        <div style={{ display: 'inline-block' }}>
+                            <FormItem >
+                                {getFieldDecorator('periodo', {
+                                    rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
+                                })(<Dropdown overlay={menu} trigger={['click']}>
+                                    <Button style={{ width: '100px' }}>
+                                        Periodo
                                 </Button>
-                            </Dropdown>)}
-                        </FormItem>
+                                </Dropdown>)}
+                            </FormItem>
                         </div>
-                        
+
                         <FormItem label="Integrantes">
                             {getFieldDecorator('integrantes', {
                                 rules: [{ required: true, message: 'Por favor ingrese los integrantes' }],
@@ -137,13 +138,17 @@ class FormEstudiante extends Component {
     render() {
         return (
             <div>
-                <Button type="primary" onClick={this.showModal}>Agregar estudiante</Button>
+                <div style={{paddingBottom: '30px'}}>
+                    <Button type="primary" onClick={this.showModal}>Agregar estudiante</Button>
+                </div>
+
                 <CollectionCreateForm
                     wrappedComponentRef={this.saveFormRef}
                     visible={this.state.visible}
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
+                <TablaEstudiante />
             </div>
         );
     }
