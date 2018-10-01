@@ -154,7 +154,7 @@ class EditableTable extends Component {
         );
       },
     }];
-
+/*
     this.state = {
       dataSource: [{
         key: '0',
@@ -186,8 +186,21 @@ class EditableTable extends Component {
         empresario: 'Pablito perez',
       }],
       count: 2,
-    };
+    };*/
+
+    this.state = { usuarios: [] }
   }
+/*
+componentWillMount(){
+    fetch('URL_API')
+    .then((response) => {
+        return response.json()
+    })
+    .then((usuarios) => {
+        this.setState({usuarios: usuarios})
+    })
+}
+*/
 
   handleDelete = (key) => {
     const dataSource = [...this.state.dataSource];

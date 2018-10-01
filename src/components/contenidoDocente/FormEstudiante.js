@@ -4,32 +4,26 @@ import {
     Modal,
     Form,
     Input,
-    Dropdown,
     Menu,
-    message
+    message,
+    Select
 } from 'antd';
 import TablaEstudiante from './TablaEstudiante';
 
 const { TextArea } = Input;
 const FormItem = Form.Item;
+const Option = Select.Option;
+
 const CollectionCreateForm = Form.create()(
 
     class extends React.Component {
         render() {
 
-            function handleMenuClick(e) {
-                message.info('Click on menu item.');
-                console.log('click', e);
+
+            function handleChange(value) {
+                console.log(`Valor: ${value}`);
             }
-
-            const menu = (
-                <Menu onClick={handleMenuClick}>
-                    <Menu.Item key="1">1</Menu.Item>
-                    <Menu.Item key="1">2</Menu.Item>
-
-                </Menu>
-            );
-
+            
             const { visible, onCancel, onCreate, form } = this.props;
             const { getFieldDecorator } = form;
             return (
@@ -79,14 +73,28 @@ const CollectionCreateForm = Form.create()(
                             <FormItem >
                                 {getFieldDecorator('periodo', {
                                     rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
-                                })(<Dropdown overlay={menu} trigger={['click']}>
-                                    <Button style={{ width: '100px' }}>
-                                        Periodo
-                                </Button>
-                                </Dropdown>)}
+                                })(<Select onChange={handleChange}
+                                placeholder= "Periodo"
+                                style={{ width: 100 }}>
+                                <Option value="1">1</Option>
+                                <Option value="2">2</Option>
+
+                                </Select>)}
                             </FormItem>
                         </div>
-
+                        <div style={{ display: 'inline-block' }}>
+                        <FormItem >
+                                {getFieldDecorator('rol', {
+                                    rules: [{ required: true, message: 'Por favor ingrese el rol' }],
+                                })(<Select onChange={handleChange}
+                                    placeholder= "Rol"
+                                    style={{ width: 200 }}>
+                                    <Option value="estudiante">Estudiante</Option>
+                                    <Option value="empresario">Empresario</Option>
+    
+                                    </Select>)}
+                            </FormItem>
+                        </div>
                         <FormItem label="Integrantes">
                             {getFieldDecorator('integrantes', {
                                 rules: [{ required: true, message: 'Por favor ingrese los integrantes' }],
@@ -138,7 +146,7 @@ class FormEstudiante extends Component {
     render() {
         return (
             <div>
-                <div style={{paddingBottom: '30px'}}>
+                <div style={{ paddingBottom: '30px' }}>
                     <Button type="primary" onClick={this.showModal}>Agregar estudiante</Button>
                 </div>
 
