@@ -6,9 +6,8 @@ import {
     Input,
     Select
 } from 'antd';
-import TablaEstudiante from './TablaEstudiante';
+import TablaEmpresario from './TablaEmpresario';
 
-const { TextArea } = Input;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -27,7 +26,7 @@ const CollectionCreateForm = Form.create()(
             return (
                 <Modal
                     visible={visible}
-                    title="Agregar nuevo estudiante"
+                    title="Agregar nuevo empresario"
                     okText="Crear"
                     onCancel={onCancel}
                     onOk={onCreate}
@@ -93,14 +92,9 @@ const CollectionCreateForm = Form.create()(
                                     </Select>)}
                             </FormItem>
                         </div>
-                        <FormItem label="Integrantes">
-                            {getFieldDecorator('integrantes', {
-                                rules: [{ required: true, message: 'Por favor ingrese los integrantes' }],
-                            })(<TextArea rows={5} />)}
-                        </FormItem>
-                        <FormItem label="Empresario">
-                            {getFieldDecorator('empresario', {
-                                rules: [{ required: true, message: 'Por favor ingrese el empresario asignado' }],
+                        <FormItem label="Estudiante">
+                            {getFieldDecorator('estudiante', {
+                                rules: [{ required: true, message: 'Por favor ingrese el estudiante lider asignado' }],
                             })(<Input />)}
                         </FormItem>
                     </Form>
@@ -145,7 +139,7 @@ class FormEstudiante extends Component {
         return (
             <div>
                 <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Agregar estudiante</Button>
+                    <Button type="primary" onClick={this.showModal}>Agregar empresario</Button>
                 </div>
 
                 <CollectionCreateForm
@@ -154,7 +148,7 @@ class FormEstudiante extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                <TablaEstudiante />
+                <TablaEmpresario />
             </div>
         );
     }
