@@ -5,6 +5,7 @@ class GestionEmpresarios extends Component {
     render() {
         return (
             <div>
+                <h1 style={{textAlign: 'center'}}>Gestión de empresarios</h1>
                 <FormEmpresario/>
             </div>
         );

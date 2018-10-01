@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import TablaProgresoEstudiante from './TablaProgresoEstudiante';
 
 class ProgresoEstudiantes extends Component {
     render() {
         return (
             <div>
-                ProgresoEstudiantes
+                <h1 style={{textAlign: 'center'}}>Progreso de estudiantes</h1>
+                <TablaProgresoEstudiante/>
             </div>
         );
     }
