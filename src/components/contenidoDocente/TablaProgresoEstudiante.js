@@ -18,11 +18,10 @@ const columns = [{
     key: 'operacion',
     render: (text, record) => (
         <div>
-            <Button type="primary" style={{marginRight: '10px'}}>
+            <Button type="primary" style={{marginRight: '10px'}} href="https://google.com">
                 Ver Plan
             </Button>
-
-            <Button type="primary">
+            <Button type="primary" href="https://google.com">
                 Ver Estrategias
              </Button>
         </div>

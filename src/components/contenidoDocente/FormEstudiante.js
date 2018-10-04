@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {
     Button,
     Modal,
@@ -8,20 +9,45 @@ import {
 } from 'antd';
 import TablaEstudiante from './TablaEstudiante';
 
-const { TextArea } = Input;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 const CollectionCreateForm = Form.create()(
 
     class extends React.Component {
+
+        constructor() {
+            super();
+            this.state = {
+                name: "",
+                lastname: "",
+                email: "",
+                password: "",
+                period: "",
+                year: ""
+            }
+        }
+
+        /* handleChange = (e) => {
+             this.setState({ [e.target.name]: e.target.value });
+         }*/
+
+        handleSubmit = (e) => {
+            e.preventDefault();
+            const { name, lastname, email, password, period, year } = this.state;
+
+            this.props.form.validateFields((err, values) => {
+
+                if (!err) {
+
+                }
+            });
+
+
+
+        }
         render() {
 
-
-            function handleChange(value) {
-                console.log(`Valor: ${value}`);
-            }
-            
             const { visible, onCancel, onCreate, form } = this.props;
             const { getFieldDecorator } = form;
             return (
@@ -32,21 +58,21 @@ const CollectionCreateForm = Form.create()(
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
-                    <Form layout="vertical">
+                    <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Nombre">
-                            {getFieldDecorator('nombre', {
+                            {getFieldDecorator('name', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
                             })(
                                 <Input />
                             )}
                         </FormItem>
                         <FormItem label="Apellido">
-                            {getFieldDecorator('apellido', {
+                            {getFieldDecorator('lastname', {
                                 rules: [{ required: true, message: 'Por favor ingrese el apellido' }],
                             })(<Input />)}
                         </FormItem>
                         <FormItem label="Correo">
-                            {getFieldDecorator('correo', {
+                            {getFieldDecorator('email', {
                                 rules: [{
                                     type: 'email', message: 'Ingrese un correo válido',
                                 }, {
@@ -55,54 +81,33 @@ const CollectionCreateForm = Form.create()(
                             })(<Input />)}
                         </FormItem>
                         <FormItem label="Contraseña">
-                            {getFieldDecorator('contrasenia', {
+                            {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Por favor ingrese la contraseña' }],
                             })(<Input />)}
                         </FormItem>
                         <div style={{ display: 'inline-block' }}>
                             <FormItem label="Año">
-                                {getFieldDecorator('anio', {
-                                    rules: [{required: true, message: 'Por favor ingrese el año' }],
+                                {getFieldDecorator('year', {
+                                    rules: [{ required: true, message: 'Por favor ingrese el año' }],
                                 })(<Input style={{ width: '100px', marginRight: '3%', paddingLeft: '20px' }} />)}
                             </FormItem>
                         </div>
 
                         <div style={{ display: 'inline-block' }}>
                             <FormItem >
-                                {getFieldDecorator('periodo', {
+                                {getFieldDecorator('period', {
                                     rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
-                                })(<Select onChange={handleChange}
-                                placeholder= "Periodo"
-                                style={{ width: 100 }}>
-                                <Option value="1">1</Option>
-                                <Option value="2">2</Option>
+                                })(<Select
+                                    placeholder="Periodo"
+                                    style={{ width: 100 }}>
+                                    <Option value="1">1</Option>
+                                    <Option value="2">2</Option>
 
                                 </Select>)}
                             </FormItem>
                         </div>
                         <div style={{ display: 'inline-block' }}>
-                        <FormItem >
-                                {getFieldDecorator('rol', {
-                                    rules: [{ required: true, message: 'Por favor ingrese el rol' }],
-                                })(<Select onChange={handleChange}
-                                    placeholder= "Rol"
-                                    style={{ width: 200 }}>
-                                    <Option value="estudiante">Estudiante</Option>
-                                    <Option value="empresario">Empresario</Option>
-    
-                                    </Select>)}
-                            </FormItem>
                         </div>
-                        <FormItem label="Integrantes">
-                            {getFieldDecorator('integrantes', {
-                                rules: [{ required: true, message: 'Por favor ingrese los integrantes' }],
-                            })(<TextArea rows={5} />)}
-                        </FormItem>
-                        <FormItem label="Empresario">
-                            {getFieldDecorator('empresario', {
-                                rules: [{ required: true, message: 'Por favor ingrese el empresario asignado' }],
-                            })(<Input />)}
-                        </FormItem>
                     </Form>
                 </Modal>
             );
@@ -131,8 +136,12 @@ class FormEstudiante extends Component {
             if (err) {
                 return;
             }
-
-            console.log('Received values of form: ', values);
+            axios.post('http://45.76.233.169:8080/api/student', { values })
+                .then((result) => {
+                    console.log(result.data);
+                })
+            console.log('Received : ', values);
+            console.log('Received  form: ', values);
             form.resetFields();
             this.setState({ visible: false });
         });
@@ -145,7 +154,7 @@ class FormEstudiante extends Component {
         return (
             <div>
                 <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Agregar estudiante</Button>
+                    <Button type="primary" onClick={this.showModal} >Agregar estudiante</Button>
                 </div>
 
                 <CollectionCreateForm

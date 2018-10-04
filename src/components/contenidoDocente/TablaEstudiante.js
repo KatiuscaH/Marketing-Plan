@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
-
+import axios from 'axios';
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
 
@@ -112,34 +112,26 @@ class EditableTable extends Component {
     super(props);
     this.columns = [{
       title: 'Nombre',
-      dataIndex: 'nombre',
+      dataIndex: 'name',
       editable: true,
       
     }, {
       title: 'Apellido',
-      dataIndex: 'apellido',
+      dataIndex: 'lastname',
       editable: true,
     }, {
       title: 'Correo',
-      dataIndex: 'correo',
+      dataIndex: 'email',
       editable: true,
     }, {
         title: 'Año',
-        dataIndex: 'anio',
+        dataIndex: 'year',
         editable: true,
       }, {
         title: 'Periodo',
-        dataIndex: 'periodo',
+        dataIndex: 'period',
         editable: true,
-      }, {
-        title: 'Integrantes',
-        dataIndex: 'integrantes',
-        editable: true,
-      }, {
-        title: 'Empresario asignado',
-        dataIndex: 'empresario',
-        editable: true,
-      }, {
+      },  {
       title: 'Operaciones',
       dataIndex: 'operacion',
       
@@ -154,53 +146,25 @@ class EditableTable extends Component {
         );
       },
     }];
-/*
-    this.state = {
-      dataSource: [{
-        key: '0',
-        nombre: 'Edward ',
-        apellido: 'King 0',
-        correo: 'a@a.com',
-        anio: '2018',
-        periodo: '2',
-        integrantes: 'Maria Perez, Ana Lopez, Juan French',
-        empresario: 'Pablito perez',
 
-      }, {
-        key: '1',
-        nombre: 'Edward ',
-        apellido: 'King 1',
-        correo: 'b@b.com',
-        anio: '2018',
-        periodo: '2',
-        integrantes: 'Maria Perez, Ana Lopez, Juan French',
-        empresario: 'Pablito perez',
-      }, {
-        key: '2',
-        nombre: 'Edward ',
-        apellido: 'King 2',
-        correo: 'c@c.com',
-        anio: '2018',
-        periodo: '2',
-        integrantes: 'Maria Perez, Ana Lopez, Juan French',
-        empresario: 'Pablito perez',
-      }],
-      count: 2,
-    };*/
 
-    this.state = { usuarios: [] }
   }
-/*
-componentWillMount(){
-    fetch('URL_API')
-    .then((response) => {
-        return response.json()
-    })
-    .then((usuarios) => {
-        this.setState({usuarios: usuarios})
+
+  
+  state = { dataSource: [] };
+componentDidMount(){
+  var config = {
+    headers: {'Access-Control-Allow-Origin': '*'}
+  }
+    axios.get(`http://45.76.233.169:8080/api/student`, config)
+    .then(res => {
+      const dataSource = res.data;
+      this.setState({dataSource});
+    }).catch(err => {
+      console.log(err.res)
     })
 }
-*/
+
 
   handleDelete = (key) => {
     const dataSource = [...this.state.dataSource];

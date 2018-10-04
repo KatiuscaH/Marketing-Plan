@@ -5,6 +5,7 @@
   "dependencies": {
     "add": "^2.0.6",
     "antd": "^3.8.0",
+    "axios": "^0.18.0",
     "babel-plugin-import": "^1.8.0",
     "emotion": "^9.2.10",
     "immutable": "^3.8.2",
