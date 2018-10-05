@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
 import axios from 'axios';
+import { HOST, AC_ESTUDIANTES } from '../../config';
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
 
@@ -46,12 +47,15 @@ class EditableCell extends Component {
   }
 
   save = () => {
+    console.log("asd")
     const { record, handleSave } = this.props;
     this.form.validateFields((error, values) => {
       if (error) {
         return;
       }
       this.toggleEdit();
+      console.log(values)
+      console.log(record)
       handleSave({ ...record, ...values });
     });
   }
@@ -90,14 +94,14 @@ class EditableCell extends Component {
                     )}
                   </FormItem>
                 ) : (
-                  <div
-                    className="editable-cell-value-wrap"
-                    style={{ paddingRight: 24 }}
-                    onClick={this.toggleEdit}
-                  >
-                    {restProps.children}
-                  </div>
-                )
+                    <div
+                      className="editable-cell-value-wrap"
+                      style={{ paddingRight: 24 }}
+                      onClick={this.toggleEdit}
+                    >
+                      {restProps.children}
+                    </div>
+                  )
               );
             }}
           </EditableContext.Consumer>
@@ -114,7 +118,7 @@ class EditableTable extends Component {
       title: 'Nombre',
       dataIndex: 'name',
       editable: true,
-      
+
     }, {
       title: 'Apellido',
       dataIndex: 'lastname',
@@ -124,22 +128,22 @@ class EditableTable extends Component {
       dataIndex: 'email',
       editable: true,
     }, {
-        title: 'Año',
-        dataIndex: 'year',
-        editable: true,
-      }, {
-        title: 'Periodo',
-        dataIndex: 'period',
-        editable: true,
-      },  {
+      title: 'Año',
+      dataIndex: 'year',
+      editable: true,
+    }, {
+      title: 'Periodo',
+      dataIndex: 'periodo',
+      editable: true,
+    }, {
       title: 'Operaciones',
       dataIndex: 'operacion',
-      
+
       render: (text, record) => {
         return (
           this.state.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => this.handleDelete(record.key)}>
+              <Popconfirm title="¿Eliminar?" onConfirm={() => this.handleDelete(record.id)}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null
@@ -150,24 +154,27 @@ class EditableTable extends Component {
 
   }
 
-  
+
   state = { dataSource: [] };
-componentDidMount(){
-  var config = {
-    headers: {'Access-Control-Allow-Origin': '*'}
+  componentDidMount() {
+
+    axios.get(`${HOST}/api/student`)
+      .then(res => {
+        const dataSource = res.data;
+        this.setState({ dataSource });
+      }).catch(err => {
+        console.log(err.res)
+      })
   }
-    axios.get(`http://45.76.233.169:8080/api/student`, config)
-    .then(res => {
-      const dataSource = res.data;
-      this.setState({dataSource});
-    }).catch(err => {
-      console.log(err.res)
-    })
-}
 
 
   handleDelete = (key) => {
+    axios.delete(AC_ESTUDIANTES.replace(":id", key))
+      .then((result) => {
+        console.log(result.data);
+      })
     const dataSource = [...this.state.dataSource];
+
     this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
   }
 
@@ -186,8 +193,14 @@ componentDidMount(){
   }
 
   handleSave = (row) => {
+    console.log("Updated:", row);
+    axios.put(AC_ESTUDIANTES.replace(":id", row.id), row)
+      .then((result) => {
+        console.log(result.data);
+      })
+
     const newData = [...this.state.dataSource];
-    const index = newData.findIndex(item => row.key === item.key);
+    const index = newData.findIndex(item => row.id === item.id);
     const item = newData[index];
     newData.splice(index, 1, {
       ...item,
@@ -222,7 +235,7 @@ componentDidMount(){
     //onClick={this.handleApp} le metodo para agregar
     return (
       <div>
-        <Table
+        <Table rowKey="id"
           components={components}
           rowClassName={() => 'editable-row'}
           bordered

@@ -95,7 +95,7 @@ const CollectionCreateForm = Form.create()(
 
                         <div style={{ display: 'inline-block' }}>
                             <FormItem >
-                                {getFieldDecorator('period', {
+                                {getFieldDecorator('periodo', {
                                     rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
                                 })(<Select
                                     placeholder="Periodo"
@@ -136,7 +136,8 @@ class FormEstudiante extends Component {
             if (err) {
                 return;
             }
-            axios.post('http://45.76.233.169:8080/api/student', { values })
+            
+            axios.post('http://127.0.0.1:8080/api/student',  values)
                 .then((result) => {
                     console.log(result.data);
                 })
