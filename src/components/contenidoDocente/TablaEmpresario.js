@@ -79,7 +79,7 @@ class EditableCell extends Component {
                     {form.getFieldDecorator(dataIndex, {
                       rules: [{
                         required: true,
-                        message: `${title} is required.`,
+                        message: `${title} es requerido.`,
                       }],
                       initialValue: record[dataIndex],
                     })(
@@ -151,40 +151,8 @@ class EditableTable extends Component {
       },
     }];
 
-    this.state = {
-      dataSource: [{
-        key: '0',
-        nombre: 'Edward ',
-        apellido: 'King 0',
-        correo: 'a@a.com',
-        anio: '2018',
-        periodo: '2',
-        integrantes: 'Maria Perez, Ana Lopez, Juan French',
-        empresario: 'Pablito perez',
 
-      }, {
-        key: '1',
-        nombre: 'Edward ',
-        apellido: 'King 1',
-        correo: 'b@b.com',
-        anio: '2018',
-        periodo: '2',
-        integrantes: 'Maria Perez, Ana Lopez, Juan French',
-        empresario: 'Pablito perez',
-      }, {
-        key: '2',
-        nombre: 'Edward ',
-        apellido: 'King 2',
-        correo: 'c@c.com',
-        anio: '2018',
-        periodo: '2',
-        integrantes: 'Maria Perez, Ana Lopez, Juan French',
-        empresario: 'Pablito perez',
-      }],
-      count: 2,
-    };
-
-  //  this.state = { usuarios: [] }
+   this.state = { dataSource: [] }
   }
 /*
 componentWillMount(){
@@ -259,7 +227,7 @@ componentWillMount(){
           rowClassName={() => 'editable-row'}
           bordered
           dataSource={dataSource}
-          columns={columns}
+          columns={columns} 
         />
       </div>
     );

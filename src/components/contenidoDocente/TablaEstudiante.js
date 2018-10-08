@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Button, Popconfirm, Form } from 'antd';
+import { Table, Input, Spin , Popconfirm, Form } from 'antd';
 import axios from 'axios';
 import { HOST, AC_ESTUDIANTES } from '../../config';
 const FormItem = Form.Item;
@@ -83,7 +83,7 @@ class EditableCell extends Component {
                     {form.getFieldDecorator(dataIndex, {
                       rules: [{
                         required: true,
-                        message: `${title} is required.`,
+                        message: `${title} es requerido.`,
                       }],
                       initialValue: record[dataIndex],
                     })(
@@ -156,8 +156,8 @@ class EditableTable extends Component {
 
 
   state = { dataSource: [] };
-  componentDidMount() {
 
+  componentDidMount() {
     axios.get(`${HOST}/api/student`)
       .then(res => {
         const dataSource = res.data;
@@ -217,22 +217,28 @@ class EditableTable extends Component {
         cell: EditableCell,
       },
     };
+
+   
     const columns = this.columns.map((col) => {
       if (!col.editable) {
         return col;
       }
-      return {
-        ...col,
-        onCell: record => ({
-          record,
-          editable: col.editable,
-          dataIndex: col.dataIndex,
-          title: col.title,
-          handleSave: this.handleSave,
-        }),
-      };
+
+        return {
+          ...col,
+           onCell: record => ({
+             record,
+             editable: col.editable,
+             dataIndex: col.dataIndex,
+             title: col.title,
+             handleSave: this.handleSave,
+           }),
+         };
+      
+
+      
     });
-    //onClick={this.handleApp} le metodo para agregar
+
     return (
       <div>
         <Table rowKey="id"

@@ -18,14 +18,7 @@ const CollectionCreateForm = Form.create()(
 
         constructor() {
             super();
-            this.state = {
-                name: "",
-                lastname: "",
-                email: "",
-                password: "",
-                period: "",
-                year: ""
-            }
+            
         }
 
         /* handleChange = (e) => {
@@ -34,7 +27,6 @@ const CollectionCreateForm = Form.create()(
 
         handleSubmit = (e) => {
             e.preventDefault();
-            const { name, lastname, email, password, period, year } = this.state;
 
             this.props.form.validateFields((err, values) => {
 
@@ -88,15 +80,15 @@ const CollectionCreateForm = Form.create()(
                         <div style={{ display: 'inline-block' }}>
                             <FormItem label="Año">
                                 {getFieldDecorator('year', {
-                                    rules: [{ required: true, message: 'Por favor ingrese el año' }],
-                                })(<Input style={{ width: '100px', marginRight: '3%', paddingLeft: '20px' }} />)}
+                                    rules: [{ required: true, message: 'Ingrese el año' }],
+                                })(<Input style={{ width: '100px', marginRight: '3%' }} />)}
                             </FormItem>
                         </div>
 
                         <div style={{ display: 'inline-block' }}>
-                            <FormItem >
+                            <FormItem label="Periodo">
                                 {getFieldDecorator('periodo', {
-                                    rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
+                                    rules: [{ required: true, message: 'Ingrese el periodo' }],
                                 })(<Select
                                     placeholder="Periodo"
                                     style={{ width: 100 }}>
@@ -105,9 +97,8 @@ const CollectionCreateForm = Form.create()(
 
                                 </Select>)}
                             </FormItem>
-                        </div>
-                        <div style={{ display: 'inline-block' }}>
-                        </div>
+                            </div>
+                        
                     </Form>
                 </Modal>
             );

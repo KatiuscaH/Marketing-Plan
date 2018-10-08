@@ -60,38 +60,26 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                         <div style={{ display: 'inline-block' }}>
                             <FormItem label="Año">
-                                {getFieldDecorator('anio', {
-                                    rules: [{required: true, message: 'Por favor ingrese el año' }],
-                                })(<Input style={{ width: '100px', marginRight: '3%', paddingLeft: '20px' }} />)}
+                                {getFieldDecorator('year', {
+                                    rules: [{ required: true, message: 'Ingrese el año' }],
+                                })(<Input style={{ width: '100px', marginRight: '3%' }} />)}
                             </FormItem>
                         </div>
 
                         <div style={{ display: 'inline-block' }}>
-                            <FormItem >
+                            <FormItem label="Periodo">
                                 {getFieldDecorator('periodo', {
-                                    rules: [{ required: true, message: 'Por favor ingrese el periodo' }],
-                                })(<Select onChange={handleChange}
-                                placeholder= "Periodo"
-                                style={{ width: 100 }}>
-                                <Option value="1">1</Option>
-                                <Option value="2">2</Option>
+                                    rules: [{ required: true, message: 'Ingrese el periodo' }],
+                                })(<Select
+                                    placeholder="Periodo"
+                                    style={{ width: 100 }}>
+                                    <Option value="1">1</Option>
+                                    <Option value="2">2</Option>
 
                                 </Select>)}
                             </FormItem>
-                        </div>
-                        <div style={{ display: 'inline-block' }}>
-                        <FormItem >
-                                {getFieldDecorator('rol', {
-                                    rules: [{ required: true, message: 'Por favor ingrese el rol' }],
-                                })(<Select onChange={handleChange}
-                                    placeholder= "Rol"
-                                    style={{ width: 200 }}>
-                                    <Option value="estudiante">Estudiante</Option>
-                                    <Option value="empresario">Empresario</Option>
-    
-                                    </Select>)}
-                            </FormItem>
-                        </div>
+                            </div>
+                        
                         <FormItem label="Estudiante">
                             {getFieldDecorator('estudiante', {
                                 rules: [{ required: true, message: 'Por favor ingrese el estudiante lider asignado' }],
@@ -153,6 +141,6 @@ class FormEstudiante extends Component {
         );
     }
 }
-
+ 
 
 export default FormEstudiante;
