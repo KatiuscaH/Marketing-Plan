@@ -132,10 +132,6 @@ class EditableTable extends Component {
         dataIndex: 'periodo',
         editable: true,
       }, {
-        title: 'Estudiante asignado',
-        dataIndex: 'estudiante',
-        editable: true,
-      }, {
       title: 'Operaciones',
       dataIndex: 'operacion',
       

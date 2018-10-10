@@ -79,12 +79,6 @@ const CollectionCreateForm = Form.create()(
                                 </Select>)}
                             </FormItem>
                             </div>
-                        
-                        <FormItem label="Estudiante">
-                            {getFieldDecorator('estudiante', {
-                                rules: [{ required: true, message: 'Por favor ingrese el estudiante lider asignado' }],
-                            })(<Input />)}
-                        </FormItem>
                     </Form>
                 </Modal>
             );
