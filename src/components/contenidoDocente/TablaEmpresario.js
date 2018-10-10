@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import { Table, Input, Button, Popconfirm, Form } from 'antd';
+import { Table, Input,  Popconfirm, Form } from 'antd';
+import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
+import axios from 'axios';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -112,20 +114,20 @@ class EditableTable extends Component {
     super(props);
     this.columns = [{
       title: 'Nombre',
-      dataIndex: 'nombre',
+      dataIndex: 'name',
       editable: true,
       
     }, {
       title: 'Apellido',
-      dataIndex: 'apellido',
+      dataIndex: 'lastname',
       editable: true,
     }, {
       title: 'Correo',
-      dataIndex: 'correo',
+      dataIndex: 'email',
       editable: true,
     }, {
         title: 'Año',
-        dataIndex: 'anio',
+        dataIndex: 'year',
         editable: true,
       }, {
         title: 'Periodo',
@@ -139,7 +141,7 @@ class EditableTable extends Component {
         return (
           this.state.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => this.handleDelete(record.key)}>
+              <Popconfirm title="¿Eliminar?" onConfirm={() => this.handleDelete(record.id)}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null
@@ -150,19 +152,23 @@ class EditableTable extends Component {
 
    this.state = { dataSource: [] }
   }
-/*
-componentWillMount(){
-    fetch('URL_API')
-    .then((response) => {
-        return response.json()
-    })
-    .then((usuarios) => {
-        this.setState({usuarios: usuarios})
-    })
-}
-*/
+
+  
+  componentDidMount() {
+    axios.get('http://127.0.0.1:8080/api/empresario')
+      .then(res => {
+        const dataSource = res.data;
+        this.setState({ dataSource });
+      }).catch(err => {
+        console.log(err.res)
+      })
+  }
 
   handleDelete = (key) => {
+    axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key))
+    .then((result) => {
+      console.log(result.data);
+    })
     const dataSource = [...this.state.dataSource];
     this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
   }
@@ -182,8 +188,14 @@ componentWillMount(){
   }
 
   handleSave = (row) => {
+    console.log("Updated:", row);
+    axios.put(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", row.id), row)
+    .then((result)=>{
+      console.log(result.data);
+    })
+
     const newData = [...this.state.dataSource];
-    const index = newData.findIndex(item => row.key === item.key);
+    const index = newData.findIndex(item => row.id === item.id);
     const item = newData[index];
     newData.splice(index, 1, {
       ...item,
@@ -218,7 +230,7 @@ componentWillMount(){
     //onClick={this.handleApp} le metodo para agregar
     return (
       <div>
-        <Table
+        <Table rowKey="id"
           components={components}
           rowClassName={() => 'editable-row'}
           bordered

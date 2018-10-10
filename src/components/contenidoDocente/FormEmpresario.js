@@ -7,6 +7,9 @@ import {
     Select
 } from 'antd';
 import TablaEmpresario from './TablaEmpresario';
+import {LISTAR_EMPRESARIO, HOST} from '../../config';
+import axios from 'axios';
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -33,19 +36,19 @@ const CollectionCreateForm = Form.create()(
                 >
                     <Form layout="vertical">
                         <FormItem label="Nombre">
-                            {getFieldDecorator('nombre', {
+                            {getFieldDecorator('name', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
                             })(
                                 <Input />
                             )}
                         </FormItem>
                         <FormItem label="Apellido">
-                            {getFieldDecorator('apellido', {
+                            {getFieldDecorator('lastname', {
                                 rules: [{ required: true, message: 'Por favor ingrese el apellido' }],
                             })(<Input />)}
                         </FormItem>
                         <FormItem label="Correo">
-                            {getFieldDecorator('correo', {
+                            {getFieldDecorator('email', {
                                 rules: [{
                                     type: 'email', message: 'Ingrese un correo válido',
                                 }, {
@@ -54,7 +57,7 @@ const CollectionCreateForm = Form.create()(
                             })(<Input />)}
                         </FormItem>
                         <FormItem label="Contraseña">
-                            {getFieldDecorator('contrasenia', {
+                            {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Por favor ingrese la contraseña' }],
                             })(<Input />)}
                         </FormItem>
@@ -107,7 +110,10 @@ class FormEstudiante extends Component {
             if (err) {
                 return;
             }
-
+            axios.post('http://127.0.0.1:8080/api/empresario',  values)
+            .then((result) => {
+                console.log(result.data);
+            })
             console.log('Received values of form: ', values);
             form.resetFields();
             this.setState({ visible: false });
