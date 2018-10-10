@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, convertFromRaw   } from 'draft-js';
 import './editorDraft.css';
+import { Button } from 'antd';
+
 
 function uploadImageCallBack(file) {
     return new Promise(
@@ -23,6 +25,13 @@ function uploadImageCallBack(file) {
       },
     );
   }
+
+
+  function BotonGuardar(e) {
+      console.log("Clic Boton: ", e)
+    
+}
+
 
 class EditorDraft extends Component {
    /* saveContent = (content) => {
@@ -66,11 +75,12 @@ class EditorDraft extends Component {
       };
 
 
-
     render() {
         
         return (
             <div>
+                
+                
                 <Editor
                 editorState={this.state.editorState}
                 
@@ -97,7 +107,10 @@ class EditorDraft extends Component {
                           },
                     }}
                     onEditorStateChange={this.onEditorStateChange}
-                />
+                  />
+                <div style={{display: "flex", flexDirection: "row-reverse"}}>
+                <Button type="primary" icon="save" onClick={BotonGuardar}>Guardar</Button>
+                </div>
             </div>
 
         )

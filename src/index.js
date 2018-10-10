@@ -10,7 +10,7 @@ import SiderDocente from '../src/components/SideBar/sideBarDocente';
 ReactDOM.render(
 
     <Router>
-        <SiderDocente />
+        <SiderDemo />
    </Router>,
 
     document.getElementById('root'));

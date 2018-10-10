@@ -17,6 +17,7 @@ import PlanMedios from './PlanMedios';
 import PlanAccion from './PlanAccion';
 import Anexos from './Anexos';
 import MatrizAnsoff from './MatrizAnsoff';
+import DatosPlanMarketing from './DatosPlanMarketing';
 
 class ContenidoEstudiante extends Component {
     render() {
@@ -39,6 +40,8 @@ class ContenidoEstudiante extends Component {
                     <Route path="/plan-accion" component={PlanAccion} />
                     <Route path="/subir-anexos" component={Anexos} />
                     <Route path="/matriz-ansoff" component={MatrizAnsoff} />
+                    <Route path="/datos-iniciales" component={DatosPlanMarketing} />
+
                     </Switch>
                 {this.props.children}
             </div>

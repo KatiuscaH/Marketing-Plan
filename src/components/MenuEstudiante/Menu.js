@@ -42,6 +42,7 @@ class MenuEstudiante extends Component {
                 theme="dark"
             >
                 <SubMenu key="sub1" title={<span><Icon type="file" /><span>Resumen Ejecutivo</span></span>}>
+                    <Menu.Item key="17"><Link to="/datos-iniciales">Datos iniciales</Link></Menu.Item>
                     <Menu.Item key="1"><Link to="/presentacion">Presentación de la empresa</Link></Menu.Item>
                     <Menu.Item key="2"><Link to="/historia">Historia</Link></Menu.Item>
                 </SubMenu>
@@ -72,7 +73,7 @@ class MenuEstudiante extends Component {
                     <Menu.Item key="16"><Link to="/subir-anexos">Subir ANEXOS</Link></Menu.Item>
                 </SubMenu>
 
-                
+
 
             </Menu>
         );
