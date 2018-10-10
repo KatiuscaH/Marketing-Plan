@@ -5,7 +5,7 @@ import {
     Input,
     Select
 } from 'antd';
-
+import TablaDatosPlan from './TablaDatosPlan';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -99,6 +99,7 @@ class DatosPlanMarketing extends Component {
                 <div style={{ paddingBottom: '30px' }}>
                     <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
                 </div>
+                <TablaDatosPlan/>
             </div>
         );
     }
