@@ -115,20 +115,15 @@ class TablaDatosPlan extends Component {
     this.columns = [{
       title: 'Nombre del Plan de Marketing',
       dataIndex: 'name',
-      editable: true,
-      
+        
     }, {
       title: 'Grupo de estudiantes',
       dataIndex: 'lastname',
-      editable: true,
-    }, {
-      title: 'Correo',
-      dataIndex: 'email',
-      editable: true,
-    }, {
+      
+    },  {
         title: 'Empresario asignado',
         dataIndex: 'year',
-        editable: true,
+        
       }, {
       title: 'Operaciones',
       dataIndex: 'operacion',
@@ -146,10 +141,15 @@ class TablaDatosPlan extends Component {
     }];
 
 
-   this.state = { dataSource: [] }
+   this.state = { dataSource: [{
+     name: 'Bostwana',
+     lastname: 'Jose garcia montes, Jose garcia montes, Jose garcia montes , Jose garcia montes',
+     year: 'John Snow'
+   }] }
+   
   }
 
-  
+  //fetch
   componentDidMount() {
     axios.get('http://127.0.0.1:8080/api/empresario')
       .then(res => {

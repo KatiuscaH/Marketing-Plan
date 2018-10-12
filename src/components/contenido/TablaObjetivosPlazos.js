@@ -109,32 +109,18 @@ class EditableCell extends Component {
   }
 }
 
-class EditableTable extends Component {
+class TablaObjetivosPlan extends Component {
   constructor(props) {
     super(props);
     this.columns = [{
-      title: 'Nombre',
+      title: 'Número de objetivo',
       dataIndex: 'name',
-      editable: true,
-      
-      
+        
     }, {
-      title: 'Apellido',
+      title: 'Descripción del objetivo',
       dataIndex: 'lastname',
-      editable: true,
+      
     }, {
-      title: 'Correo',
-      dataIndex: 'email',
-      editable: true,
-    }, {
-        title: 'Año',
-        dataIndex: 'year',
-        editable: true,
-      }, {
-        title: 'Periodo',
-        dataIndex: 'periodo',
-        editable: true,
-      }, {
       title: 'Operaciones',
       dataIndex: 'operacion',
       
@@ -151,10 +137,15 @@ class EditableTable extends Component {
     }];
 
 
-   this.state = { dataSource: [] }
+   this.state = { dataSource: [{
+     name: 'Bostwana',
+     lastname: 'Jose garcia montes, Jose garcia montes, Jose garcia montes , Jose garcia montes',
+     
+   }] }
+   
   }
 
-  
+  //fetch
   componentDidMount() {
     axios.get('http://127.0.0.1:8080/api/empresario')
       .then(res => {
@@ -243,4 +234,4 @@ class EditableTable extends Component {
   }
 }
 
-export default EditableTable;
+export default TablaObjetivosPlan;
