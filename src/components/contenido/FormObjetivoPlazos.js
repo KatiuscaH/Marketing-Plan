@@ -75,10 +75,10 @@ class FormObjetivoPlazos extends Component {
             if (err) {
                 return;
             }
-            axios.post('http://127.0.0.1:8080/api/empresario',  values)
+          /*  axios.post('http://127.0.0.1:8080/api/empresario',  values)
             .then((result) => {
                 console.log(result.data);
-            })
+            })*/
             console.log('Received values of form: ', values);
             form.resetFields();
             this.setState({ visible: false });

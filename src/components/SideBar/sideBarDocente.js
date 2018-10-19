@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
 import NavBar from '../NavBar/navBar';
-import { Route } from "react-router-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 
 import MenuDocente from '../contenidoDocente/MenuDocente';
-import contenidoDocente from '../contenidoDocente/ContenidoDocente';
+import ContenidoDocente from '../contenidoDocente/ContenidoDocente';
+
 
 const { Header, Sider, Content } = Layout;
- 
+
 class SiderDocente extends Component {
   state = {
     collapsed: false,
@@ -41,7 +42,8 @@ class SiderDocente extends Component {
           <div className="logo"></div>
 
           <Menu theme="dark" mode="inline" >
-            <MenuDocente/>
+
+            <MenuDocente />
           </Menu>
 
         </Sider>
@@ -67,9 +69,9 @@ class SiderDocente extends Component {
 
           <Content
             className="content" style={{ margin: '24px 16px', padding: 24, background: '#fff' }}>
-
-            <Route component={contenidoDocente}></Route>
-
+            
+                <Route component={ContenidoDocente}/>
+              
           </Content>
 
         </Layout>

@@ -146,6 +146,7 @@ class TablaObjetivosPlan extends Component {
   }
 
   //fetch
+  /*
   componentDidMount() {
     axios.get('http://127.0.0.1:8080/api/empresario')
       .then(res => {
@@ -154,7 +155,7 @@ class TablaObjetivosPlan extends Component {
       }).catch(err => {
         console.log(err.res)
       })
-  }
+  }*/
 
   handleDelete = (key) => {
     axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key))
