@@ -8,18 +8,19 @@ import SiderDocente from '../src/components/SideBar/sideBarDocente';
 import Login from '../src/components/login/Login';
 import App from './App';
 
-//<Route path="/login" component={Login}/>
-//<Route path="/" component={App} />
+/*
+<Switch>
+        <Route path="/login" component={Login}/> 
+            <Route path="/" component={SiderDocente}/>
+           </Switch>
+*/
 
 ReactDOM.render(
     
     <Router>
         <div>
 
-        <Switch>
-        <Route path="/login" component={Login}/> 
-            <Route path="/" component={SiderDocente}/>
-           </Switch>
+            <SiderDemo/>
                 
 
 
