@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Spin , Popconfirm, Form } from 'antd';
+import { Table, Input, Spin, Popconfirm, Form } from 'antd';
 import axios from 'axios';
 import { HOST, AC_ESTUDIANTES } from '../../config';
 const FormItem = Form.Item;
@@ -156,7 +156,7 @@ class EditableTable extends Component {
 
 
   state = { dataSource: [] };
-
+/*
   componentDidMount() {
     axios.get(`${HOST}/api/student`)
       .then(res => {
@@ -166,7 +166,22 @@ class EditableTable extends Component {
         console.log(err.res)
       })
   }
+*/
 
+  componentDidMount() {
+    setInterval(() => {
+      this.setState(() => {
+        console.log('setting state');
+        axios.get(`${HOST}/api/student`)
+          .then(res => {
+            const dataSource = res.data;
+            this.setState({ dataSource });
+          }).catch(err => {
+            console.log(err.res)
+          })
+      });
+    }, 1000);
+  }
 
   handleDelete = (key) => {
     axios.delete(AC_ESTUDIANTES.replace(":id", key))
@@ -218,25 +233,25 @@ class EditableTable extends Component {
       },
     };
 
-   
+
     const columns = this.columns.map((col) => {
       if (!col.editable) {
         return col;
       }
 
-        return {
-          ...col,
-           onCell: record => ({
-             record,
-             editable: col.editable,
-             dataIndex: col.dataIndex,
-             title: col.title,
-             handleSave: this.handleSave,
-           }),
-         };
-      
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
 
-      
+
+
     });
 
     return (
