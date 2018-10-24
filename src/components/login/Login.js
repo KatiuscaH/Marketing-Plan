@@ -18,15 +18,16 @@ constructor(){
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.Auth.login(this.values)//Pendiente aqui
+        //console.log('Received values of form: ', {values});
+        this.Auth.login(values.email, values.password)//Pendiente aqui
         .then(res => {
           this.props.history.replace('/');
+          localStorage.setItem('rol', 1);
         })
         .catch(err => {
           console.log("Error aqui ", err)
           alert(err);
         })
-        console.log('Received values of form: ', values);
       }
     });
   }
