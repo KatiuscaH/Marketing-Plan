@@ -12,14 +12,16 @@ import App from './App';
 //<Route path="/" component={App} />
 
 ReactDOM.render(
-
+    
     <Router>
         <div>
+
         <Switch>
         <Route path="/login" component={Login}/> 
             <Route path="/" component={SiderDocente}/>
            </Switch>
                 
+
 
         </div>
     </Router>,
