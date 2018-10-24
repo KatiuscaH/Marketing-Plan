@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
 import NavBar from '../NavBar/navBar';
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import MenuDocente from '../contenidoDocente/MenuDocente';
 import ContenidoDocente from '../contenidoDocente/ContenidoDocente';
-
+import GestionEstudiantes from '../contenidoDocente/GestionEstudiantes';
+import GestionEmpresarios from '../contenidoDocente/GestionEmpresarios';
+import ProgresoEstudiante from '../contenidoDocente/ProgresoEstudiante';
+import ProgresoEmpresario from '../contenidoDocente/ProgresoEmpresario';
+import Retroalimentacion from '../contenidoDocente/Retroalimentacion';
 
 const { Header, Sider, Content } = Layout;
 
@@ -69,9 +73,12 @@ class SiderDocente extends Component {
 
           <Content
             className="content" style={{ margin: '24px 16px', padding: 24, background: '#fff' }}>
-            
-                <Route component={ContenidoDocente}/>
+
+            <Switch>
               
+              <Route component={ContenidoDocente} />
+            </Switch>
+
           </Content>
 
         </Layout>

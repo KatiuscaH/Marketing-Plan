@@ -8,26 +8,27 @@ import Login from './components/login/Login';
 
 class App extends Component {
     //TRATAR DE RENDERIZAR SEGUN EL TIPO DE USER 
-    state = {
+    /*state = {
         rol: this.rol,
-    }
+    }*/
 
     render() {
-
-        <Router>
+        
+        /*<Router>
             <div>
                 <Route exact path="/login" component={Login} />
                 
             </div>
-        </Router>
-        if(this.rol === 1){
+        </Router>*/
+        let rol = localStorage.getItem('rol') || 1;
+        if(rol === 1){
             return(
                 <div><Route component={(props) => (
                     <SiderDocente timestamp={new Date().toString()} {...props} />
                 )} /></div>
             )
         }
-         if(this.rol === 2){
+         if(rol === 2){
                 return(
                     <div><Route component={(props) => (
                         <SiderEstudiante timestamp={new Date().toString()} {...props} />
@@ -35,13 +36,15 @@ class App extends Component {
                 )
             }
        
-        if(this.rol === 3){//EMPRESARIO
+        if(rol === 3){//EMPRESARIO
             return(
                 <div><Route component={(props) => (
                     <SiderEstudiante timestamp={new Date().toString()} {...props} />
                 )} /></div>
             )
             }
+
+            return <span>asdsadas</span>
         
     }
 }
