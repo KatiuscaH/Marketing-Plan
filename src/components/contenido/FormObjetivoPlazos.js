@@ -3,11 +3,10 @@ import {
     Button,
     Modal,
     Form,
-    Input,
+    Input
 } from 'antd';
 import TablaObjetivosPlazos from './TablaObjetivosPlazos';
 import axios from 'axios';
-
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -47,6 +46,7 @@ const CollectionCreateForm = Form.create()(
                                 }],
                             })(<TextArea autosize />)}
                         </FormItem>
+                       
                     </Form>
                 </Modal>
             );
