@@ -143,13 +143,14 @@ class TablaDatosPlan extends Component {
 
    this.state = { dataSource: [{
      name: 'Bostwana',
-     lastname: 'Jose garcia montes, Jose garcia montes, Jose garcia montes , Jose garcia montes',
+     lastname: 'John doe, John doe, Jane doe, Jane doe',
      year: 'John Snow'
    }] }
    
   }
 
   //fetch
+  /*
   componentDidMount() {
     axios.get('http://127.0.0.1:8080/api/empresario')
       .then(res => {
@@ -158,7 +159,7 @@ class TablaDatosPlan extends Component {
       }).catch(err => {
         console.log(err.res)
       })
-  }
+  }*/
 
   handleDelete = (key) => {
     axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key))

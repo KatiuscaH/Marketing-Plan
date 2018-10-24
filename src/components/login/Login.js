@@ -1,19 +1,41 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import './Login.css';
-import logoudc from '../logoudc';
+import logoudc from '../../../src/logoudc.png';
+import AuthService from '../AuthService';
 
 const FormItem = Form.Item;
 
 class Login extends Component {
+constructor(){
+  super();
+  this.Auth = new AuthService();
+  //this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        this.Auth.login(this.values)//Pendiente aqui
+        .then(res => {
+          this.props.history.replace('/');
+        })
+        .catch(err => {
+          console.log("Error aqui ", err)
+          alert(err);
+        })
         console.log('Received values of form: ', values);
       }
     });
   }
+
+  componentWillMount(){
+    if(this.Auth.loggedIn())
+        this.props.history.replace('/');
+  }
+
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -25,7 +47,7 @@ class Login extends Component {
         </div>
 
         <FormItem>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('email', {
             rules: [{ required: true, message: 'Por favor ingrese el usuario' }],
           })(
             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Usuario" />
