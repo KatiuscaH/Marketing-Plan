@@ -7,11 +7,11 @@ import AuthService from '../AuthService';
 const FormItem = Form.Item;
 
 class Login extends Component {
-constructor(){
-  super();
-  this.Auth = new AuthService();
-  //this.handleSubmit = this.handleSubmit.bind(this);
-}
+  constructor() {
+    super();
+    this.Auth = new AuthService();
+    //this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
 
   handleSubmit = (e) => {
@@ -20,21 +20,22 @@ constructor(){
       if (!err) {
         //console.log('Received values of form: ', {values});
         this.Auth.login(values.email, values.password)//Pendiente aqui
-        .then(res => {
-          this.props.history.replace('/');
-          localStorage.setItem('rol', 1);
-        })
-        .catch(err => {
-          console.log("Error aqui ", err)
-          alert(err);
-        })
+          .then(res => {
+            this.props.history.replace('/');
+            //localStorage.setItem('rol', 1);
+          })
+          .catch(err => {
+            console.log("Error aqui ", err)
+            alert(err);
+          })
       }
     });
   }
 
-  componentWillMount(){
-    if(this.Auth.loggedIn())
-        this.props.history.replace('/');
+  componentWillMount() {
+    if (this.Auth.loggedIn()) {
+      this.props.history.replace('/');
+    }
   }
 
 
@@ -49,7 +50,7 @@ constructor(){
 
         <FormItem>
           {getFieldDecorator('email', {
-            rules: [{ required: true, message: 'Por favor ingrese el usuario' }],
+            rules: [{type: 'email', required: true, message: 'Por favor ingrese el correo' }],
           })(
             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Usuario" />
           )}

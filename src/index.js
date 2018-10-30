@@ -16,15 +16,12 @@ import App from './App';
 */
 
 ReactDOM.render(
-    
+
     <Router>
-        <div>
-
-            <SiderDemo/>
-                
-
-
-        </div>
+        <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/" component={SiderDocente} />
+        </Switch>
     </Router>,
 
     document.getElementById('root'));

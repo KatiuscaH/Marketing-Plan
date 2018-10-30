@@ -6,12 +6,6 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import MenuDocente from '../contenidoDocente/MenuDocente';
 import ContenidoDocente from '../contenidoDocente/ContenidoDocente';
-import GestionEstudiantes from '../contenidoDocente/GestionEstudiantes';
-import GestionEmpresarios from '../contenidoDocente/GestionEmpresarios';
-import ProgresoEstudiante from '../contenidoDocente/ProgresoEstudiante';
-import ProgresoEmpresario from '../contenidoDocente/ProgresoEmpresario';
-import Retroalimentacion from '../contenidoDocente/Retroalimentacion';
-
 const { Header, Sider, Content } = Layout;
 
 class SiderDocente extends Component {
