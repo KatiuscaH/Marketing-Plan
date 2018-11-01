@@ -3,8 +3,11 @@ import {
     Button,
     Form,
     Input,
-    Select
+    Modal
 } from 'antd';
+import Select from 'react-select'
+import { LISTAR_EMPRESARIO } from '../../config';
+import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
 
 const FormItem = Form.Item;
@@ -13,9 +16,29 @@ const Option = Select.Option;
 const CollectionCreateForm = Form.create()(
 
     class extends React.Component {
+        state = { dataSource: [] };
+
+        componentDidMount() {
+            this.setState(() => {
+                console.log('setting state');
+                axios.get(LISTAR_EMPRESARIO)
+                    .then(res => {
+                        const dataSource = [];
+                        res.data.forEach(element => {
+                            dataSource.push({
+                                value: element.id,
+                                label: `${element.name} ${element.lastname}`,
+                                
+                            })
+                        });
+                        this.setState({ dataSource });
+                    }).catch(err => {
+                        console.log(err.res)
+                    })
+            });
+        }
+
         render() {
-
-
             function handleChange(value) {
                 console.log(`Valor: ${value}`);
             }
@@ -23,32 +46,43 @@ const CollectionCreateForm = Form.create()(
             const { visible, onCancel, onCreate, form } = this.props;
             const { getFieldDecorator } = form;
             return (
-
-                <Form layout="vertical">
-                    <FormItem label="Nombre del Plan de Marketing">
-                        {getFieldDecorator('name_plan', {
-                            rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
-                        })(
-                            <Input placeholder="Nombre plan de marketing" />
-                        )}
-                    </FormItem>
-                    <FormItem label="Grupo de estudiantes">
-                        {getFieldDecorator('grupo_estudiantes', {
-                            rules: [{ required: true, message: 'Por favor ingrese los nombres' }],
-                        })(<Input placeholder="Nombres separados por coma" />)}
-                    </FormItem>
-                    <FormItem label="Empresario asignado">
-                        {getFieldDecorator('empresario_asignado', {
-                            rules: [{
-                                required: true, message: 'Por favor ingrese el empresario asignado',
-                            }],
-                        })(<Input placeholder="Nombres del empresario asignado" />)}
-                    </FormItem>
-                </Form>
-
+                <Modal
+                    visible={visible}
+                    title="Agregar nuevo estudiante"
+                    okText="Crear"
+                    onCancel={onCancel}
+                    onOk={onCreate}
+                >
+                    <Form layout="vertical" >
+                        <FormItem label="Nombre del Plan de Marketing">
+                            {getFieldDecorator('name_plan', {
+                                rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
+                            })(
+                                <Input placeholder="Nombre plan de marketing" />
+                            )}
+                        </FormItem>
+                        <FormItem label="Grupo de estudiantes">
+                            {getFieldDecorator('grupo_estudiantes', {
+                                rules: [{ required: true, message: 'Por favor ingrese los nombres' }],
+                            })(<Input placeholder="Nombres separados por coma" />)}
+                        </FormItem>
+                        <FormItem label="Empresario asignado">
+                            {getFieldDecorator('empresario_asignado', {
+                                
+                                rules: [{
+                                    required: true, message: 'Por favor ingrese el empresario asignado',
+                                }],
+                                
+                            })(<Select options={this.state.dataSource} />)}
+                        </FormItem>
+                    </Form>
+                </Modal>
             );
         }
     }
+
+
+
 );
 
 
@@ -72,11 +106,9 @@ class DatosPlanMarketing extends Component {
             if (err) {
                 return;
             }
-            /* axios.post('http://127.0.0.1:8080/api/empresario',  values)
-             .then((result) => {
-                 console.log(result.data);
-             })*/
-            console.log('Received values of form: ', values);
+
+            console.log('Received : ', values);
+            console.log('Received  form: ', values);
             form.resetFields();
             this.setState({ visible: false });
         });
@@ -99,7 +131,7 @@ class DatosPlanMarketing extends Component {
                 <div style={{ paddingBottom: '30px' }}>
                     <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
                 </div>
-                <TablaDatosPlan/>
+                <TablaDatosPlan />
             </div>
         );
     }

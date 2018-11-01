@@ -20,7 +20,7 @@ ReactDOM.render(
     <Router>
         <Switch>
             <Route path="/login" component={Login} />
-            <Route path="/" component={SiderDocente} />
+            <Route path="/" component={SiderDemo} />
         </Switch>
     </Router>,
 

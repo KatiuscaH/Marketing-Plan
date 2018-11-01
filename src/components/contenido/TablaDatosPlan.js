@@ -122,7 +122,7 @@ class TablaDatosPlan extends Component {
       
     },  {
         title: 'Empresario asignado',
-        dataIndex: 'year',
+        dataIndex: 'empresario_asignado',
         
       }, {
       title: 'Operaciones',

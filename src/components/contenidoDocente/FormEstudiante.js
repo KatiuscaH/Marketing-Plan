@@ -18,7 +18,7 @@ const CollectionCreateForm = Form.create()(
 
         constructor() {
             super();
-            
+
         }
 
         /* handleChange = (e) => {
@@ -97,8 +97,8 @@ const CollectionCreateForm = Form.create()(
 
                                 </Select>)}
                             </FormItem>
-                            </div>
-                        
+                        </div>
+
                     </Form>
                 </Modal>
             );
@@ -127,8 +127,8 @@ class FormEstudiante extends Component {
             if (err) {
                 return;
             }
-            
-            axios.post('http://127.0.0.1:8080/api/student',  values)
+
+            axios.post('http://127.0.0.1:8080/api/student', values)
                 .then((result) => {
                     console.log(result.data);
                 })
