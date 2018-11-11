@@ -114,42 +114,7 @@ class EditableCell extends Component {
 class EditableTable extends Component {
   constructor(props) {
     super(props);
-    this.columns = [{
-      title: 'Nombre',
-      dataIndex: 'name',
-      editable: true,
-
-    }, {
-      title: 'Apellido',
-      dataIndex: 'lastname',
-      editable: true,
-    }, {
-      title: 'Correo',
-      dataIndex: 'email',
-      editable: true,
-    }, {
-      title: 'Año',
-      dataIndex: 'year',
-      editable: true,
-    }, {
-      title: 'Periodo',
-      dataIndex: 'periodo',
-      editable: true,
-    }, {
-      title: 'Operaciones',
-      dataIndex: 'operacion',
-
-      render: (text, record) => {
-        return (
-          this.state.dataSource.length >= 1
-            ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => this.handleDelete(record.id)}>
-                <a href="javascript:;">Eliminar</a>
-              </Popconfirm>
-            ) : null
-        );
-      },
-    }];
+    
 
 
   }
@@ -169,7 +134,7 @@ class EditableTable extends Component {
 */
 
   componentDidMount() {
-    setInterval(() => {
+    /*setInterval(() => {
       this.setState(() => {
         console.log('setting state');
         axios.get(`${HOST}/api/student`)
@@ -180,18 +145,9 @@ class EditableTable extends Component {
             console.log(err.res)
           })
       });
-    }, 1000);
+    }, 1000); */
   }
 
-  handleDelete = (key) => {
-    axios.delete(AC_ESTUDIANTES.replace(":id", key))
-      .then((result) => {
-        console.log(result.data);
-      })
-    const dataSource = [...this.state.dataSource];
-
-    this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
-  }
 
   handleAdd = () => {
     const { count, dataSource } = this.state;
@@ -225,16 +181,52 @@ class EditableTable extends Component {
   }
 
   render() {
-    const { dataSource } = this.state;
+    const { dataSource, onDelete } = this.props;
     const components = {
       body: {
         row: EditableFormRow,
         cell: EditableCell,
       },
     };
+    const configColumns = [{
+      title: 'Nombre',
+      dataIndex: 'name',
+      editable: true,
+
+    }, {
+      title: 'Apellido',
+      dataIndex: 'lastname',
+      editable: true,
+    }, {
+      title: 'Correo',
+      dataIndex: 'email',
+      editable: true,
+    }, {
+      title: 'Año',
+      dataIndex: 'year',
+      editable: true,
+    }, {
+      title: 'Periodo',
+      dataIndex: 'periodo',
+      editable: true,
+    }, {
+      title: 'Operaciones',
+      dataIndex: 'operacion',
+
+      render: (text, record) => {
+        return (
+          this.props.dataSource.length >= 1
+            ? (
+              <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
+                <a href="javascript:;">Eliminar</a>
+              </Popconfirm>
+            ) : null
+        );
+      },
+    }];
 
 
-    const columns = this.columns.map((col) => {
+    const columns = configColumns.map((col) => {
       if (!col.editable) {
         return col;
       }

@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
+import axios from 'axios';
+import { ME } from '../config';
 export default class AuthService {
     constructor(domain) {
         this.domain = domain || 'http://localhost:8080' //APi server dominio
@@ -17,6 +19,15 @@ export default class AuthService {
             })
         }).then(res => {
             this.setToken(res.token)
+            axios.post(ME, null, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.getToken()}`
+                }
+            }).then(data => {
+                console.log(data)
+                localStorage.setItem('user', JSON.stringify(data.data));
+            })
             return Promise.resolve(res);
         })
     }

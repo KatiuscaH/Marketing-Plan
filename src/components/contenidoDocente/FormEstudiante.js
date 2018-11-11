@@ -8,6 +8,7 @@ import {
     Select
 } from 'antd';
 import TablaEstudiante from './TablaEstudiante';
+import { HOST, AC_ESTUDIANTES} from '../../config';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -111,7 +112,24 @@ const CollectionCreateForm = Form.create()(
 class FormEstudiante extends Component {
     state = {
         visible: false,
+        studentList: []
     };
+
+    componentDidMount() {
+        /*setInterval(() => {
+          this.setState(() => {
+            console.log('setting state');
+            
+          });
+        }, 1000); */
+        axios.get(`${HOST}/api/student`)
+            .then(res => {
+                const studentList = res.data;
+                this.setState({ studentList });
+            }).catch(err => {
+                console.log(err.res)
+            })
+    }
 
     showModal = () => {
         this.setState({ visible: true });
@@ -131,18 +149,30 @@ class FormEstudiante extends Component {
             axios.post('http://127.0.0.1:8080/api/student', values)
                 .then((result) => {
                     console.log(result.data);
+                    console.log('Received : ', values);
+                    console.log('Received  form: ', values);
+                    form.resetFields();
+                    this.setState({ visible: false, studentList: [...this.state.studentList, result.data] });
                 })
-            console.log('Received : ', values);
-            console.log('Received  form: ', values);
-            form.resetFields();
-            this.setState({ visible: false });
         });
     }
 
     saveFormRef = (formRef) => {
         this.formRef = formRef;
     }
+
+
+    handleDelete = (key) => {
+        axios.delete(AC_ESTUDIANTES.replace(":id", key))
+            .then((result) => {
+
+                this.setState({ studentList: this.state.studentList.filter(item => item.id !== key) });
+            })
+    }
+
     render() {
+        const { studentList } = this.state
+
         return (
             <div>
                 <div style={{ paddingBottom: '30px' }}>
@@ -155,7 +185,7 @@ class FormEstudiante extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                <TablaEstudiante />
+                <TablaEstudiante dataSource={studentList} onDelete={this.handleDelete} />
             </div>
         );
     }

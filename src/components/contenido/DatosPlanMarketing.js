@@ -3,7 +3,8 @@ import {
     Button,
     Form,
     Input,
-    Modal
+    Modal,
+    Select as AntdSelect
 } from 'antd';
 import Select from 'react-select'
 import { LISTAR_EMPRESARIO } from '../../config';
@@ -11,7 +12,7 @@ import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
+const Option = AntdSelect.Option;
 
 const CollectionCreateForm = Form.create()(
 
@@ -67,13 +68,15 @@ const CollectionCreateForm = Form.create()(
                             })(<Input placeholder="Nombres separados por coma" />)}
                         </FormItem>
                         <FormItem label="Empresario asignado">
-                            {getFieldDecorator('empresario_asignado', {
+                            {getFieldDecorator('empresario_id', {
                                 
                                 rules: [{
                                     required: true, message: 'Por favor ingrese el empresario asignado',
                                 }],
                                 
-                            })(<Select options={this.state.dataSource} />)}
+                            })(<AntdSelect>
+                                {this.state.dataSource.map(item => (<Option key={item.value} value={item.value}>{item.label}</Option>))}
+                            </AntdSelect>)}
                         </FormItem>
                     </Form>
                 </Modal>

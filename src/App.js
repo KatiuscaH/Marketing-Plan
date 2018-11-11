@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 
 import SiderDocente from '../src/components/SideBar/sideBarDocente';
 import SiderEstudiante from '../src/components/SideBar/sideBar';
@@ -13,22 +13,26 @@ class App extends Component {
     }*/
 
     render() {
-        
-        /*<Router>
-            <div>
+        /*
+        <Router>
+           <Switch>
+
                 <Route exact path="/login" component={Login} />
-                
-            </div>
-        </Router>*/
-        let rol = localStorage.getItem('rol') || 1;
-        if(rol === 1){
+           </Switch>
+        </Router>  
+                    */
+        let rol = JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).rol;
+
+        console.log(rol)
+        
+        if (rol == 0){
             return(
-                <div><Route component={(props) => (
-                    <SiderDocente timestamp={new Date().toString()} {...props} />
-                )} /></div>
+                <div>
+                    <Route component={props => <SiderDocente timestamp={new Date().toString()} {...props} />} />
+                </div>
             )
         }
-         if(rol === 2){
+         if(rol == 1){
                 return(
                     <div><Route component={(props) => (
                         <SiderEstudiante timestamp={new Date().toString()} {...props} />
@@ -36,7 +40,7 @@ class App extends Component {
                 )
             }
        
-        if(rol === 3){//EMPRESARIO
+        if(rol == 2){//EMPRESARIO
             return(
                 <div><Route component={(props) => (
                     <SiderEstudiante timestamp={new Date().toString()} {...props} />

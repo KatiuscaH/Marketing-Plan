@@ -7,6 +7,7 @@ import SiderDemo from '../src/components/SideBar/sideBar';
 import SiderDocente from '../src/components/SideBar/sideBarDocente';
 import Login from '../src/components/login/Login';
 import App from './App';
+import ProtectedRoute from './components/routes/ProtectedRoute';
 
 /*
 <Switch>
@@ -19,8 +20,8 @@ ReactDOM.render(
 
     <Router>
         <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/" component={SiderDemo} />
+            <Route exact path="/login" component={Login} />
+            <ProtectedRoute path="/" component={App} />
         </Switch>
     </Router>,
 
