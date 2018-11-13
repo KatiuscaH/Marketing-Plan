@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Input, Spin, Popconfirm, Form } from 'antd';
 import axios from 'axios';
-import { HOST, AC_ESTUDIANTES } from '../../config';
+import { AC_ESTUDIANTES } from '../../config';
+
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
 

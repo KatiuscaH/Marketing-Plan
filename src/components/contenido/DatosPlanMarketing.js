@@ -6,7 +6,6 @@ import {
     Modal,
     Select as AntdSelect
 } from 'antd';
-import { LISTAR_EMPRESARIO } from '../../config';
 import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
 
@@ -53,7 +52,7 @@ const CollectionCreateForm = Form.create()(
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
-                    <Form layout="vertical" >
+                    <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Nombre del Plan de Marketing">
                             {getFieldDecorator('name_plan', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
@@ -92,7 +91,21 @@ const CollectionCreateForm = Form.create()(
 class DatosPlanMarketing extends Component {
     state = {
         visible: false,
+        datosPlanList: []
     };
+/*
+AQUI VA EL GET DE LOS DATOS DEL PLAN
+    componentDidMount() {
+        
+        axios.get(`${HOST}/api/student`)
+        .then(res => {
+            const studentList = res.data;
+            this.setState({ studentList });
+        }).catch(err => {
+            console.log(err.res)
+        })
+}
+*/
 
     showModal = () => {
         this.setState({ visible: true });
@@ -108,7 +121,16 @@ class DatosPlanMarketing extends Component {
             if (err) {
                 return;
             }
-
+/*
+AQUI VA EL POST PARA AGREGAR LOS DATOS!
+            axios.post('http://127.0.0.1:8080/api/student', values)
+            .then((result) => {
+                console.log(result.data);
+                console.log('Received : ', values);
+                console.log('Received  form: ', values);
+                form.resetFields();
+                this.setState({ visible: false, studentList: [...this.state.studentList, result.data] });
+            })*/
             console.log('Received : ', values);
             console.log('Received  form: ', values);
             form.resetFields();
@@ -119,7 +141,17 @@ class DatosPlanMarketing extends Component {
     saveFormRef = (formRef) => {
         this.formRef = formRef;
     }
+
+    handleDelete = (key) => {
+        axios.delete(/*ENDPOINT_ELIMINAR_DATOS.*/replace(":id", key))
+        .then((result) => {
+            this.setState({ datosPlanList: this.state.datosPlanList.filter(item => item.id !== key)});
+        })
+    }
+
+
     render() {
+        const { datosPlanList } = this.state
         return (
             <div>
                 <h1>Datos iniciales del Plan de Marketing</h1>
@@ -133,7 +165,7 @@ class DatosPlanMarketing extends Component {
                 <div style={{ paddingBottom: '30px' }}>
                     <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
                 </div>
-                <TablaDatosPlan />
+                <TablaDatosPlan dataSource={datosPlanList} onDelete={this.handleDelete}/>
             </div>
         );
     }

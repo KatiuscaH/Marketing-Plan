@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Table, Input,  Popconfirm, Form } from 'antd';
-import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
+
 import axios from 'axios';
 
 const FormItem = Form.Item;
@@ -112,42 +112,16 @@ class EditableCell extends Component {
 class TablaDatosPlan extends Component {
   constructor(props) {
     super(props);
-    this.columns = [{
-      title: 'Nombre del Plan de Marketing',
-      dataIndex: 'name',
-        
-    }, {
-      title: 'Grupo de estudiantes',
-      dataIndex: 'lastname',
-      
-    },  {
-        title: 'Empresario asignado',
-        dataIndex: 'empresario_asignado',
-        
-      }, {
-      title: 'Operaciones',
-      dataIndex: 'operacion',
-      
-      render: (text, record) => {
-        return (
-          this.state.dataSource.length >= 1
-            ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => this.handleDelete(record.id)}>
-                <a href="javascript:;">Eliminar</a>
-              </Popconfirm>
-            ) : null
-        );
-      },
-    }];
+  }
 
 
-   this.state = { dataSource: [{
+   state = { dataSource: [{
      name: 'Bostwana',
      lastname: 'John doe, John doe, Jane doe, Jane doe',
      year: 'John Snow'
    }] }
    
-  }
+  
 
   //fetch
   /*
@@ -202,13 +176,42 @@ class TablaDatosPlan extends Component {
   }
 
   render() {
-    const { dataSource } = this.state;
+    const { dataSource, onDelete } = this.props;
     const components = {
       body: {
         row: EditableFormRow,
         cell: EditableCell,
       },
     };
+
+    const configColumns = [{
+      title: 'Nombre del Plan de Marketing',
+      dataIndex: 'name',
+        
+    }, {
+      title: 'Grupo de estudiantes',
+      dataIndex: 'lastname',
+      
+    },  {
+        title: 'Empresario asignado',
+        dataIndex: 'empresario_asignado',
+        
+      }, {
+      title: 'Operaciones',
+      dataIndex: 'operacion',
+      
+      render: (text, record) => {
+        return (
+          this.state.dataSource.length >= 1
+            ? (
+              <Popconfirm title="¿Eliminar?" onConfirm={() => this.onDelete(record.id)}>
+                <a href="javascript:;">Eliminar</a>
+              </Popconfirm>
+            ) : null
+        );
+      },
+    }];
+
     const columns = this.columns.map((col) => {
       if (!col.editable) {
         return col;
@@ -224,7 +227,7 @@ class TablaDatosPlan extends Component {
         }),
       };
     });
-    //onClick={this.handleApp} le metodo para agregar
+    
     return (
       <div>
         <Table rowKey="id"
