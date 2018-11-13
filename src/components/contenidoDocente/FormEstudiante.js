@@ -19,26 +19,16 @@ const CollectionCreateForm = Form.create()(
 
         constructor() {
             super();
-
         }
-
-        /* handleChange = (e) => {
-             this.setState({ [e.target.name]: e.target.value });
-         }*/
 
         handleSubmit = (e) => {
             e.preventDefault();
-
             this.props.form.validateFields((err, values) => {
-
                 if (!err) {
-
                 }
             });
-
-
-
         }
+
         render() {
 
             const { visible, onCancel, onCreate, form } = this.props;
@@ -116,13 +106,8 @@ class FormEstudiante extends Component {
     };
 
     componentDidMount() {
-        /*setInterval(() => {
-          this.setState(() => {
-            console.log('setting state');
-            
-          });
-        }, 1000); */
-        axios.get(`${HOST}/api/student`)
+        
+            axios.get(`${HOST}/api/student`)
             .then(res => {
                 const studentList = res.data;
                 this.setState({ studentList });

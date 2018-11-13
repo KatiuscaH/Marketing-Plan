@@ -114,55 +114,11 @@ class EditableCell extends Component {
 class EditableTable extends Component {
   constructor(props) {
     super(props);
-    
-
-
   }
 
 
   state = { dataSource: [] };
-/*
-  componentDidMount() {
-    axios.get(`${HOST}/api/student`)
-      .then(res => {
-        const dataSource = res.data;
-        this.setState({ dataSource });
-      }).catch(err => {
-        console.log(err.res)
-      })
-  }
-*/
-
-  componentDidMount() {
-    /*setInterval(() => {
-      this.setState(() => {
-        console.log('setting state');
-        axios.get(`${HOST}/api/student`)
-          .then(res => {
-            const dataSource = res.data;
-            this.setState({ dataSource });
-          }).catch(err => {
-            console.log(err.res)
-          })
-      });
-    }, 1000); */
-  }
-
-
-  handleAdd = () => {
-    const { count, dataSource } = this.state;
-    const newData = {
-      key: count,
-      name: `Edward King ${count}`,
-      age: 32,
-      address: `London, Park Lane no. ${count}`,
-    };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
-  }
-
+  
   handleSave = (row) => {
     console.log("Updated:", row);
     axios.put(AC_ESTUDIANTES.replace(":id", row.id), row)

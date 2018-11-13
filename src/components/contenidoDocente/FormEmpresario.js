@@ -7,7 +7,7 @@ import {
     Select
 } from 'antd';
 import TablaEmpresario from './TablaEmpresario';
-import {LISTAR_EMPRESARIO, HOST} from '../../config';
+import {LISTAR_EMPRESARIO, ELIMINAR_EDITAR_EMPRESARIO} from '../../config';
 import axios from 'axios';
 
 
@@ -34,7 +34,7 @@ const CollectionCreateForm = Form.create()(
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
-                    <Form layout="vertical">
+                    <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Nombre">
                             {getFieldDecorator('name', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
@@ -91,11 +91,22 @@ const CollectionCreateForm = Form.create()(
 
 
 
-class FormEstudiante extends Component {
+class FormEmpresario extends Component {
     state = {
         visible: false,
+        empresarioList: []
     };
-
+///////////
+    componentDidMount(){
+        axios.get(LISTAR_EMPRESARIO)
+        .then(res => {
+            const empresarioList = res.data;
+            this.setState({empresarioList});
+        }).catch(err => {
+            console.log(err.res)
+        })
+    }
+///////////
     showModal = () => {
         this.setState({ visible: true });
     }
@@ -116,14 +127,27 @@ class FormEstudiante extends Component {
             })
             console.log('Received values of form: ', values);
             form.resetFields();
-            this.setState({ visible: false });
+            this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
         });
     }
 
     saveFormRef = (formRef) => {
         this.formRef = formRef;
     }
+
+
+    handleDelete = (key) => {
+        axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key))
+        .then((result) => {
+            this.setState({ empresarioList: this.state.empresarioList.filter(item => item.id !== key)});
+
+        })        
+    }
+
     render() {
+
+        const { empresarioList } = this.state;
+
         return (
             <div>
                 <div style={{ paddingBottom: '30px' }}>
@@ -136,11 +160,11 @@ class FormEstudiante extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                <TablaEmpresario />
+                <TablaEmpresario dataSource={empresarioList} onDelete={this.handleDelete} />
             </div>
         );
     }
 }
  
 
-export default FormEstudiante;
+export default FormEmpresario;
