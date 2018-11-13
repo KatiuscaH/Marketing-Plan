@@ -6,7 +6,6 @@ import {
     Modal,
     Select as AntdSelect
 } from 'antd';
-import Select from 'react-select'
 import { LISTAR_EMPRESARIO } from '../../config';
 import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
@@ -71,7 +70,7 @@ const CollectionCreateForm = Form.create()(
                             {getFieldDecorator('empresario_id', {
                                 
                                 rules: [{
-                                    required: true, message: 'Por favor ingrese el empresario asignado',
+                                    required: true, message: 'Por favor seleccione el empresario asignado',
                                 }],
                                 
                             })(<AntdSelect>
