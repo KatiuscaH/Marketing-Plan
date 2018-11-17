@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Table, Input,  Popconfirm, Form } from 'antd';
+import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
 
 import axios from 'axios';
 
@@ -186,15 +187,15 @@ class TablaDatosPlan extends Component {
 
     const configColumns = [{
       title: 'Nombre del Plan de Marketing',
-      dataIndex: 'name',
+      dataIndex: 'plan',
         
     }, {
       title: 'Grupo de estudiantes',
-      dataIndex: 'lastname',
+      dataIndex: 'estudiantes',
       
     },  {
         title: 'Empresario asignado',
-        dataIndex: 'empresario_asignado',
+        dataIndex: 'empresario_id',
         
       }, {
       title: 'Operaciones',
@@ -202,7 +203,7 @@ class TablaDatosPlan extends Component {
       
       render: (text, record) => {
         return (
-          this.state.dataSource.length >= 1
+          this.props.dataSource.length >= 1
             ? (
               <Popconfirm title="¿Eliminar?" onConfirm={() => this.onDelete(record.id)}>
                 <a href="javascript:;">Eliminar</a>
@@ -212,7 +213,7 @@ class TablaDatosPlan extends Component {
       },
     }];
 
-    const columns = this.columns.map((col) => {
+    const columns = configColumns.map((col) => {
       if (!col.editable) {
         return col;
       }

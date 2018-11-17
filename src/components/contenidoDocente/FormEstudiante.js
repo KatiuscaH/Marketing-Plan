@@ -8,7 +8,7 @@ import {
     Select
 } from 'antd';
 import TablaEstudiante from './TablaEstudiante';
-import { HOST, AC_ESTUDIANTES} from '../../config';
+import { AC_ESTUDIANTES, ADD_ESTUDIANTES} from '../../config';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -43,14 +43,14 @@ const CollectionCreateForm = Form.create()(
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Nombre">
-                            {getFieldDecorator('name', {
+                            {getFieldDecorator('nombre', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
                             })(
                                 <Input />
                             )}
                         </FormItem>
                         <FormItem label="Apellido">
-                            {getFieldDecorator('lastname', {
+                            {getFieldDecorator('apellido', {
                                 rules: [{ required: true, message: 'Por favor ingrese el apellido' }],
                             })(<Input />)}
                         </FormItem>
@@ -107,7 +107,7 @@ class FormEstudiante extends Component {
 
     componentDidMount() {
         
-            axios.get(`${HOST}/api/student`)
+            axios.get(ADD_ESTUDIANTES)
             .then(res => {
                 const studentList = res.data;
                 this.setState({ studentList });
@@ -131,7 +131,7 @@ class FormEstudiante extends Component {
                 return;
             }
 
-            axios.post('http://127.0.0.1:8080/api/student', values)
+            axios.post(ADD_ESTUDIANTES, values)
                 .then((result) => {
                     console.log(result.data);
                     console.log('Received : ', values);

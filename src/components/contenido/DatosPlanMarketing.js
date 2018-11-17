@@ -8,6 +8,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
+import { DATOS_INICIALES_PLAN, ELIMINAR_DATOS_INICIALES_PLAN, LISTAR_EMPRESARIO} from '../../config';
 
 const FormItem = Form.Item;
 const Option = AntdSelect.Option;
@@ -20,13 +21,13 @@ const CollectionCreateForm = Form.create()(
         componentDidMount() {
             this.setState(() => {
                 console.log('setting state');
-                axios.get(LISTAR_EMPRESARIO)
+                axios.get(LISTAR_EMPRESARIO, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                     .then(res => {
                         const dataSource = [];
                         res.data.forEach(element => {
                             dataSource.push({
                                 value: element.id,
-                                label: `${element.name} ${element.lastname}`,
+                                label: `${element.nombre} ${element.apellido}`,
                                 
                             })
                         });
@@ -54,14 +55,14 @@ const CollectionCreateForm = Form.create()(
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Nombre del Plan de Marketing">
-                            {getFieldDecorator('name_plan', {
+                            {getFieldDecorator('plan', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
                             })(
                                 <Input placeholder="Nombre plan de marketing" />
                             )}
                         </FormItem>
                         <FormItem label="Grupo de estudiantes">
-                            {getFieldDecorator('grupo_estudiantes', {
+                            {getFieldDecorator('estudiantes', {
                                 rules: [{ required: true, message: 'Por favor ingrese los nombres' }],
                             })(<Input placeholder="Nombres separados por coma" />)}
                         </FormItem>
@@ -91,21 +92,21 @@ const CollectionCreateForm = Form.create()(
 class DatosPlanMarketing extends Component {
     state = {
         visible: false,
-        datosPlanList: []
+        datosPlanList: [],
+        
     };
-/*
-AQUI VA EL GET DE LOS DATOS DEL PLAN
+
     componentDidMount() {
         
-        axios.get(`${HOST}/api/student`)
+        axios.get(DATOS_INICIALES_PLAN, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
         .then(res => {
-            const studentList = res.data;
-            this.setState({ studentList });
+            const datosPlanList = res.data;
+            this.setState({ datosPlanList });
         }).catch(err => {
             console.log(err.res)
         })
 }
-*/
+
 
     showModal = () => {
         this.setState({ visible: true });
@@ -121,16 +122,16 @@ AQUI VA EL GET DE LOS DATOS DEL PLAN
             if (err) {
                 return;
             }
-/*
-AQUI VA EL POST PARA AGREGAR LOS DATOS!
-            axios.post('http://127.0.0.1:8080/api/student', values)
+
+
+            axios.post(DATOS_INICIALES_PLAN, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
                 console.log(result.data);
                 console.log('Received : ', values);
                 console.log('Received  form: ', values);
                 form.resetFields();
-                this.setState({ visible: false, studentList: [...this.state.studentList, result.data] });
-            })*/
+                this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] });
+            })
             console.log('Received : ', values);
             console.log('Received  form: ', values);
             form.resetFields();
@@ -143,7 +144,7 @@ AQUI VA EL POST PARA AGREGAR LOS DATOS!
     }
 
     handleDelete = (key) => {
-        axios.delete(/*ENDPOINT_ELIMINAR_DATOS.*/replace(":id", key))
+        axios.delete(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
         .then((result) => {
             this.setState({ datosPlanList: this.state.datosPlanList.filter(item => item.id !== key)});
         })

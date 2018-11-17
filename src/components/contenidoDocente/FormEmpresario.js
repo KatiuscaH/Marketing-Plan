@@ -36,14 +36,14 @@ const CollectionCreateForm = Form.create()(
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Nombre">
-                            {getFieldDecorator('name', {
+                            {getFieldDecorator('nombre', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
                             })(
                                 <Input />
                             )}
                         </FormItem>
                         <FormItem label="Apellido">
-                            {getFieldDecorator('lastname', {
+                            {getFieldDecorator('apellido', {
                                 rules: [{ required: true, message: 'Por favor ingrese el apellido' }],
                             })(<Input />)}
                         </FormItem>
@@ -121,13 +121,14 @@ class FormEmpresario extends Component {
             if (err) {
                 return;
             }
-            axios.post('http://127.0.0.1:8080/api/empresario',  values)
+            axios.post(LISTAR_EMPRESARIO,  values)
             .then((result) => {
                 console.log(result.data);
+                console.log('Received values of form: ', values);
+                form.resetFields();
+                this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
             })
-            console.log('Received values of form: ', values);
-            form.resetFields();
-            this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
+            
         });
     }
 

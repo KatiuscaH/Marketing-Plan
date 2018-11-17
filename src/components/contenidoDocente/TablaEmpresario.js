@@ -145,18 +145,18 @@ class EditableTable extends Component {
 
     const configColumns = [{
       title: 'Nombre',
-      dataIndex: 'name',
+      dataIndex: 'nombre',
       editable: true,
       
       
     }, {
       title: 'Apellido',
-      dataIndex: 'lastname',
+      dataIndex: 'apellido',
       editable: true,
     }, {
       title: 'Correo',
       dataIndex: 'email',
-      editable: true,
+      
     }, {
         title: 'Año',
         dataIndex: 'year',
@@ -171,7 +171,7 @@ class EditableTable extends Component {
       
       render: (text, record) => {
         return (
-          this.state.dataSource.length >= 1
+          this.props.dataSource.length >= 1
             ? (
               <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
                 <a href="javascript:;">Eliminar</a>
@@ -180,7 +180,7 @@ class EditableTable extends Component {
         );
       },
     }];
-    const columns = this.columns.map((col) => {
+    const columns = configColumns.map((col) => {
       if (!col.editable) {
         return col;
       }

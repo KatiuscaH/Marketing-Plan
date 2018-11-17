@@ -147,17 +147,17 @@ class EditableTable extends Component {
     };
     const configColumns = [{
       title: 'Nombre',
-      dataIndex: 'name',
+      dataIndex: 'nombre',
       editable: true,
 
     }, {
       title: 'Apellido',
-      dataIndex: 'lastname',
+      dataIndex: 'apellido',
       editable: true,
     }, {
       title: 'Correo',
       dataIndex: 'email',
-      editable: true,
+      
     }, {
       title: 'Año',
       dataIndex: 'year',

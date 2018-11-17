@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ME } from '../config';
 export default class AuthService {
     constructor(domain) {
-        this.domain = domain || 'http://localhost:8080' //APi server dominio
+        this.domain = domain || 'http://marketing-back.test' //APi server dominio
         this.fetch = this.fetch.bind(this)
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)
@@ -11,12 +11,13 @@ export default class AuthService {
 
     login(email, password) {
         // Get a token
-        return this.fetch(`${this.domain}/api/login`, {
+        return this.fetch(`${this.domain}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify({
                 email,
                 password
-            })
+            }),
+            
         }).then(res => {
             this.setToken(res.token)
             axios.post(ME, null, {
@@ -65,6 +66,7 @@ export default class AuthService {
     logout() {
         // Clear user token and profile data from localStorage
         localStorage.removeItem('id_token');
+        localStorage.removeItem('user');
     }
 
     getProfile() {
