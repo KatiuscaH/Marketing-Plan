@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import debounce from 'lodash/debounce';
 import './editorDraft.css'
 import { Button } from 'antd';
 
@@ -44,13 +45,47 @@ class EditorDraft extends Component {
     }
     //OnChange
     onEditorStateChange = (editorState) => {
+        const contentState = editorState.getCurrentContent();
+        this.saveContent(contentState);
         this.setState({
             editorState,
         });
 
     };
 
-    render() {
+    saveContent = debounce((content)=>{
+        fetch('/contenido',{
+            method: 'POST',
+            body: JSON.stringify({
+                content: convertToRaw(content),
+            }),
+            header : new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('id_token')}`
+            })
+        })
+    },1000);
+
+
+    componentDidMount() {
+        fetch('/content').then(val => val.json())
+            .then(rawContent => {
+                if (rawContent) {
+                    this.setState({ editorState: EditorState.createWithContent(convertFromRaw(rawContent)) })
+                } else {
+                    this.setState({ editorState: EditorState.createEmpty() });
+                }
+            });
+    }
+
+
+    render() {  
+
+        if (!this.state.editorState) {
+            return (
+                <h3>Loading...</h3>
+            );
+        }
 
         return (
             <div>
