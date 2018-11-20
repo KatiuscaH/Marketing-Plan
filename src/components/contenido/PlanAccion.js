@@ -32,7 +32,7 @@ const CollectionCreateForm = Form.create()(
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
-                    <Form layout="vertical">
+                    <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Objetivo estratégico">
                             {getFieldDecorator('obj_estrate', {
                                 rules: [{ required: true, message: 'Por favor ingrese el objetivo estratégico' }],
@@ -75,7 +75,7 @@ const CollectionCreateForm = Form.create()(
                                 }],
                             })(<TextArea autosize />)}
                         </FormItem>
-                        
+
                     </Form>
                 </Modal>
             );
@@ -88,7 +88,21 @@ const CollectionCreateForm = Form.create()(
 class PlanAccion extends Component {
     state = {
         visible: false,
+        planList: []
     };
+
+    ////GET
+    /*
+        componentDidMount() {
+            axios.get(ADD_ESTUDIANTES)
+            .then(res => {
+                const studentList = res.data;
+                this.setState({ studentList });
+            }).catch(err => {
+                console.log(err.res)
+            })
+    }
+    */
 
     showModal = () => {
         this.setState({ visible: true });
@@ -107,17 +121,29 @@ class PlanAccion extends Component {
             /*  axios.post('http://127.0.0.1:8080/api/empresario',  values)
               .then((result) => {
                   console.log(result.data);
-              })*/
-            console.log('Received values of form: ', values);
+                  console.log('Received values of form: ', values);
             form.resetFields();
-            this.setState({ visible: false });
+            this.setState({ visible: false, planList: [...this.state.planList, result.data] });
+              })*/
+
         });
     }
 
     saveFormRef = (formRef) => {
         this.formRef = formRef;
     }
+//////delete
+/*
+    handleDelete = (key) => {
+        axios.delete(AC_ESTUDIANTES.replace(":id", key))
+            .then((result) => {
+
+                this.setState({ planList: this.state.planList.filter(item => item.id !== key) });
+            })
+    }
+*/
     render() {
+        const { planList } = this.state
         return (
             <div>
 
@@ -132,7 +158,7 @@ class PlanAccion extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                <TablaPlanAccion />
+                <TablaPlanAccion dataSource={planList} onDelete={this.handleDelete}/>
             </div>
         );
     }

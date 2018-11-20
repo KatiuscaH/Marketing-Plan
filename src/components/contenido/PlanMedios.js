@@ -32,7 +32,7 @@ const CollectionCreateForm = Form.create()(
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
-                    <Form layout="vertical">
+                    <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Tipo de publicidad">
                             {getFieldDecorator('tipo_publicidad', {
                                 rules: [{ required: true, message: 'Por favor ingrese el tipo de publicidad' }],
@@ -94,8 +94,22 @@ const CollectionCreateForm = Form.create()(
 class PlanMedios extends Component {
     state = {
         visible: false,
+        planMediosList: []
     };
 
+
+    ////////get
+    /*
+    componentDidMount() {
+         axios.get(ADD_ESTUDIANTES)
+        .then(res => {
+            const studentList = res.data;
+            this.setState({ studentList });
+        }).catch(err => {
+            console.log(err.res)
+        })
+}
+*/
     showModal = () => {
         this.setState({ visible: true });
     }
@@ -103,6 +117,8 @@ class PlanMedios extends Component {
     handleCancel = () => {
         this.setState({ visible: false });
     }
+
+    ////////post
 
     handleCreate = () => {
         const form = this.formRef.props.form;
@@ -112,18 +128,29 @@ class PlanMedios extends Component {
             }
             /*  axios.post('http://127.0.0.1:8080/api/empresario',  values)
               .then((result) => {
-                  console.log(result.data);
-              })*/
+             console.log(result.data);
             console.log('Received values of form: ', values);
             form.resetFields();
             this.setState({ visible: false });
+              })*/
         });
     }
 
     saveFormRef = (formRef) => {
         this.formRef = formRef;
     }
+//////////delete
+/*
+    handleDelete = (key) => {
+        axios.delete(AC_ESTUDIANTES.replace(":id", key))
+            .then((result) => {
+
+                this.setState({ planMediosList: this.state.planMediosList.filter(item => item.id !== key) });
+            })
+    }
+*/
     render() {
+        const { planMediosList } = this.state
         return (
             <div>
 
@@ -138,7 +165,7 @@ class PlanMedios extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                <TablaPlanMedios />
+                <TablaPlanMedios dataSource={planMediosList} onDelete={this.handleDelete}/>
             </div>
         );
     }

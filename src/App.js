@@ -8,20 +8,9 @@ import Sider from 'antd/lib/layout/Sider';
 
 
 class App extends Component {
-    //TRATAR DE RENDERIZAR SEGUN EL TIPO DE USER 
-    /*state = {
-        rol: this.rol,
-    }*/
+   
 
     render() {
-        /*
-        <Router>
-           <Switch>
-
-                <Route exact path="/login" component={Login} />
-           </Switch>
-        </Router>  
-                    */
         let rol = JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).rol;
 
         console.log(rol)
@@ -29,19 +18,19 @@ class App extends Component {
         if (rol == 0){
             return(
                 <div>
-
-                    <Route component={SiderDocente}/>
-                    {/*<Route component={props => <SiderDocente timestamp={new Date().toString()} {...props} />} /> */}
+                   <Route component={(props) => 
+                   <SiderDocente timestamp={new Date().toString()} {...props} />}
+                    /> 
                 </div>
             )
         }
          if(rol == 1){
                 return(
                     <div>
-                        <Route component={SiderEstudiante} />
-                        {/*  <Route component={(props) => (
+                        
+                        <Route component={(props) => (
                         <SiderEstudiante timestamp={new Date().toString()} {...props} />
-                    )} />*/}
+                    )} />
                     </div>
                 )
             }
@@ -50,11 +39,11 @@ class App extends Component {
             return(
                 
                 <div>
-                    <Route component={SiderEstudiante} />
-                    {/* 
+                    
+                    
                     <Route component={(props) => (
                     <SiderEstudiante timestamp={new Date().toString()} {...props} />
-                )} />*/}
+                )} />
                 </div> 
             )
             }

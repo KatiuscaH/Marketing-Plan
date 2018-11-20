@@ -31,7 +31,7 @@ const CollectionCreateForm = Form.create()(
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
-                    <Form layout="vertical">
+                    <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Número del objetivo">
                             {getFieldDecorator('name_objetivo', {
                                 rules: [{ required: true, message: 'Por favor ingrese el número' }],
@@ -44,7 +44,7 @@ const CollectionCreateForm = Form.create()(
                                 rules: [{
                                     required: true, message: 'Por favor ingrese la descripción del objetivo',
                                 }],
-                            })(<TextArea autosize />)}
+                            })(<TextArea rows={4} autosize />)}
                         </FormItem>
                        
                     </Form>
@@ -59,7 +59,20 @@ const CollectionCreateForm = Form.create()(
 class FormObjetivoPlazos extends Component {
     state = {
         visible: false,
+        objetivoList: []
     };
+///////GET PARA LOS OBJETIVOS!
+/*
+    componentDidMount(){
+        axios.get(ADD_ESTUDIANTES)
+            .then(res => {
+                const objetivoList = res.data;
+                this.setState({ objetivoList });
+            }).catch(err => {
+                console.log(err.res)
+            })
+    }
+*/
 
     showModal = () => {
         this.setState({ visible: true });
@@ -69,6 +82,7 @@ class FormObjetivoPlazos extends Component {
         this.setState({ visible: false });
     }
 
+    ///////////////POSTS
     handleCreate = () => {
         const form = this.formRef.props.form;
         form.validateFields((err, values) => {
@@ -77,18 +91,31 @@ class FormObjetivoPlazos extends Component {
             }
           /*  axios.post('http://127.0.0.1:8080/api/empresario',  values)
             .then((result) => {
-                console.log(result.data);
-            })*/
+            console.log(result.data);
             console.log('Received values of form: ', values);
             form.resetFields();
-            this.setState({ visible: false });
+            this.setState({ visible: false, objetivoList: [...this.state.objetivoList, result.data] });
+            })*/
         });
     }
 
     saveFormRef = (formRef) => {
         this.formRef = formRef;
     }
+
+////////////DELETE
+/*
+    handleDelete = (key) => {
+        axios.delete(AC_ESTUDIANTES.replace(":id", key))
+            .then((result) => {
+
+                this.setState({ objetivoList: this.state.objetivoList.filter(item => item.id !== key) });
+            })
+    }
+*/
+
     render() {
+        const { objetivoList } = this.state
         return (
             <div>
                 <div style={{ paddingBottom: '30px' }}>
@@ -101,7 +128,7 @@ class FormObjetivoPlazos extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                <TablaObjetivosPlazos />
+                <TablaObjetivosPlazos dataSource={objetivoList} onDelete={this.handleDelete} />
             </div>
         );
     }

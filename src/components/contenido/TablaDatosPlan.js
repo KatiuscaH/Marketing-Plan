@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { Table, Input,  Popconfirm, Form } from 'antd';
+import React, { Component } from 'react';
+import { Table, Input, Popconfirm, Form } from 'antd';
 import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
 
 import axios from 'axios';
@@ -93,14 +93,14 @@ class EditableCell extends Component {
                     )}
                   </FormItem>
                 ) : (
-                  <div
-                    className="editable-cell-value-wrap"
-                    style={{ paddingRight: 24 }}
-                    onClick={this.toggleEdit}
-                  >
-                    {restProps.children}
-                  </div>
-                )
+                    <div
+                      className="editable-cell-value-wrap"
+                      style={{ paddingRight: 24 }}
+                      onClick={this.toggleEdit}
+                    >
+                      {restProps.children}
+                    </div>
+                  )
               );
             }}
           </EditableContext.Consumer>
@@ -115,56 +115,15 @@ class TablaDatosPlan extends Component {
     super(props);
   }
 
-
-   state = { dataSource: [{
-     name: 'Bostwana',
-     lastname: 'John doe, John doe, Jane doe, Jane doe',
-     year: 'John Snow'
-   }] }
-   
-  
-
-  //fetch
-  /*
-  componentDidMount() {
-    axios.get('http://127.0.0.1:8080/api/empresario')
-      .then(res => {
-        const dataSource = res.data;
-        this.setState({ dataSource });
-      }).catch(err => {
-        console.log(err.res)
-      })
-  }*/
-
-  handleDelete = (key) => {
-    axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key))
-    .then((result) => {
-      console.log(result.data);
-    })
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
-  }
-
-  handleAdd = () => {
-    const { count, dataSource } = this.state;
-    const newData = {
-      key: count,
-      name: `Edward King ${count}`,
-      age: 32,
-      address: `London, Park Lane no. ${count}`,
-    };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
-  }
-
+  state = { dataSource: [] }
+////put
+/*
   handleSave = (row) => {
     console.log("Updated:", row);
     axios.put(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", row.id), row)
-    .then((result)=>{
-      console.log(result.data);
-    })
+      .then((result) => {
+        console.log(result.data);
+      })
 
     const newData = [...this.state.dataSource];
     const index = newData.findIndex(item => row.id === item.id);
@@ -175,7 +134,7 @@ class TablaDatosPlan extends Component {
     });
     this.setState({ dataSource: newData });
   }
-
+*/
   render() {
     const { dataSource, onDelete } = this.props;
     const components = {
@@ -188,24 +147,24 @@ class TablaDatosPlan extends Component {
     const configColumns = [{
       title: 'Nombre del Plan de Marketing',
       dataIndex: 'plan',
-        
+
     }, {
       title: 'Grupo de estudiantes',
       dataIndex: 'estudiantes',
-      
-    },  {
-        title: 'Empresario asignado',
-        dataIndex: 'empresario_id',
-        
-      }, {
+
+    }, {
+      title: 'Empresario asignado',
+      dataIndex: 'empresario_id',
+
+    }, {
       title: 'Operaciones',
       dataIndex: 'operacion',
-      
+
       render: (text, record) => {
         return (
           this.props.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => this.onDelete(record.id)}>
+              <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null
@@ -228,7 +187,7 @@ class TablaDatosPlan extends Component {
         }),
       };
     });
-    
+
     return (
       <div>
         <Table rowKey="id"
@@ -236,7 +195,7 @@ class TablaDatosPlan extends Component {
           rowClassName={() => 'editable-row'}
           bordered
           dataSource={dataSource}
-          columns={columns} 
+          columns={columns}
         />
       </div>
     );
