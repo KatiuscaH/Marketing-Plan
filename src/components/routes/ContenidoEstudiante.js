@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import PresentacionEmpresa from './PresentacionEmpresa';
-import Historia from './Historia';
-import AnalisisPes from './AnalisisPes';
-import AnalisisPorter from './AnalisisPorter';
-import CuatroP from './CuatroP';
-import MatrizBcg from './MatrizBcg';
-import AnalisisClientes from './AnalisisClientes';
-import Competencia from './Competencia';
-import Proveedores from './Proveedores';
-import MatrizDofa from './MatrizDofa';
-import MatrizMefi from './MatrizMefi';
-import ObjetivosPlazos from './ObjetivosPlazos';
-import PlanMedios from './PlanMedios';
-import PlanAccion from './PlanAccion';
-import Anexos from './Anexos';
-import MatrizAnsoff from './MatrizAnsoff';
-import DatosPlanMarketing from './DatosPlanMarketing';
+import PresentacionEmpresa from '../contenido/PresentacionEmpresa';
+import Historia from '../contenido/Historia';
+import AnalisisPes from '../contenido/AnalisisPes';
+import AnalisisPorter from '../contenido/AnalisisPorter';
+import CuatroP from '../contenido/CuatroP';
+import MatrizBcg from '../contenido/MatrizBcg';
+import AnalisisClientes from '../contenido/AnalisisClientes';
+import Competencia from '../contenido/Competencia';
+import Proveedores from '../contenido/Proveedores';
+import MatrizDofa from '../contenido/MatrizDofa';
+import MatrizMefi from '../contenido/MatrizMefi';
+import ObjetivosPlazos from '../contenido/ObjetivosPlazos';
+import PlanMedios from '../contenido/PlanMedios';
+import PlanAccion from '../contenido/PlanAccion';
+import Anexos from '../contenido/Anexos';
+import MatrizAnsoff from '../contenido/MatrizAnsoff';
+import DatosPlanMarketing from '../contenido/DatosPlanMarketing';
 
 class ContenidoEstudiante extends Component {
     render() {

@@ -31,6 +31,7 @@ class AnalisisClientes extends Component {
         //     method: 'POST',
         //     body: JSON.stringify({
         //         content: convertToRaw(this.state.editorState),
+        
         //     }),
         //     header: new Headers({
         //         'Content-Type': 'application/json',

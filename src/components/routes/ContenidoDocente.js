@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
 
-import GestionEstudiantes from './GestionEstudiantes';
-import GestionEmpresarios from './GestionEmpresarios';
-import ProgresoEstudiante from './ProgresoEstudiante';
-import ProgresoEmpresario from './ProgresoEmpresario';
-import Retroalimentacion from './Retroalimentacion';
+import GestionEstudiantes from '../contenidoDocente/GestionEstudiantes';
+import GestionEmpresarios from '../contenidoDocente/GestionEmpresarios';
+import ProgresoEstudiante from '../contenidoDocente/ProgresoEstudiante';
+import ProgresoEmpresario from '../contenidoDocente/ProgresoEmpresario';
+import Retroalimentacion from '../contenidoDocente/Retroalimentacion';
 
 
 class ContenidoDocente extends Component {
