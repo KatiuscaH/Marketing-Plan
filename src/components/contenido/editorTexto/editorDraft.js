@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
-import debounce from 'lodash/debounce';
+import { EditorState } from 'draft-js';
 import './editorDraft.css'
-import { Button } from 'antd';
 
 
 function uploadImageCallBack(file) {
@@ -27,13 +25,6 @@ function uploadImageCallBack(file) {
     );
 }
 
-
-function BotonGuardar(e) {
-    console.log("Clic Boton: ", e)
-
-}
-
-
 class EditorDraft extends Component {
 
     constructor(props) {
@@ -43,43 +34,22 @@ class EditorDraft extends Component {
         }
 
     }
-    //OnChange
+    componentDidMount = ()  => {
+        this.setState({
+            editorState: this.props.content,
+        });
+    }
+
     onEditorStateChange = (editorState) => {
-        const contentState = editorState.getCurrentContent();
-        this.saveContent(contentState);
         this.setState({
             editorState,
         });
+        this.props.onEditorStateChange(editorState);
 
     };
 
-    saveContent = debounce((content)=>{
-        fetch('/contenido',{
-            method: 'POST',
-            body: JSON.stringify({
-                content: convertToRaw(content),
-            }),
-            header : new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('id_token')}`
-            })
-        })
-    },1000);
 
-
-    componentDidMount() {
-        fetch('/content').then(val => val.json())
-            .then(rawContent => {
-                if (rawContent) {
-                    this.setState({ editorState: EditorState.createWithContent(convertFromRaw(rawContent)) })
-                } else {
-                    this.setState({ editorState: EditorState.createEmpty() });
-                }
-            });
-    }
-
-
-    render() {  
+    render() {
 
         if (!this.state.editorState) {
             return (
@@ -89,8 +59,6 @@ class EditorDraft extends Component {
 
         return (
             <div>
-                
-
                 <Editor
                     editorState={this.state.editorState}
                     wrapperClassName="wrapper-class"
@@ -105,7 +73,6 @@ class EditorDraft extends Component {
                             dropdownClassName: undefined,
 
                         },
-
                         list: { inDropdown: true },
                         textAlign: { inDropdown: true },
                         link: { inDropdown: true },
@@ -117,9 +84,6 @@ class EditorDraft extends Component {
                     }}
                     onEditorStateChange={this.onEditorStateChange}
                 />
-                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-                    <Button type="primary" icon="save" onClick={BotonGuardar}>Guardar</Button>
-                </div>
             </div>
 
         )
@@ -128,38 +92,3 @@ class EditorDraft extends Component {
 }
 
 export default EditorDraft;
-
-
-/*
-
-
-                <Editor
-                    editorState={this.state.editorState}
-                    wrapperClassName="wrapper-class"
-                    editorClassName="editor-class"
-                    toolbarClassName="toolbar-class"
-                    toolbar={{
-                        options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'image'],
-                        inline: {
-                            inDropdown: false,
-                            className: undefined,
-                            component: undefined,
-                            dropdownClassName: undefined,
-
-                        },
-
-                        list: { inDropdown: true },
-                        textAlign: { inDropdown: true },
-                        link: { inDropdown: true },
-                        history: { inDropdown: true },
-                        image: {
-                            uploadCallback: uploadImageCallBack,
-                            alt: { present: true, mandatory: false },
-                        },
-                    }}
-                    onEditorStateChange={this.onEditorStateChange}
-                />
-                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-                    <Button type="primary" icon="save" onClick={BotonGuardar}>Guardar</Button>
-                </div>
-*/
