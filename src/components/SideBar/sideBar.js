@@ -3,7 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
 import NavBar from '../NavBar/navBar';
 import MenuEstudiante from '../MenuEstudiante/Menu';
-import ContenidoEstudiante from '../contenido/ContenidoEstudiante';
+import ContenidoEstudiante from '../routes/ContenidoEstudiante';
 import { Route } from "react-router-dom";
 
 

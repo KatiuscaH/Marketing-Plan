@@ -3,8 +3,7 @@ import { Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 
 import SiderDocente from '../src/components/SideBar/sideBarDocente';
 import SiderEstudiante from '../src/components/SideBar/sideBar';
-import Login from './components/login/Login';
-import Sider from 'antd/lib/layout/Sider';
+import inicioEmpresario from '../src/components/contenidoEmpresario/inicioEmpresario';
 
 
 class App extends Component {
@@ -35,14 +34,14 @@ class App extends Component {
                 )
             }
        
-        if(rol == 2){//EMPRESARIO aqui falta la vista de empresario
+        if(rol == 2){
             return(
                 
                 <div>
                     
                     
                     <Route component={(props) => (
-                    <SiderEstudiante timestamp={new Date().toString()} {...props} />
+                    <inicioEmpresario timestamp={new Date().toString()} {...props} />
                 )} />
                 </div> 
             )

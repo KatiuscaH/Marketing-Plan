@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 class MenuDocente extends Component {
 

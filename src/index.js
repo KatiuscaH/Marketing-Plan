@@ -7,6 +7,7 @@ import Login from '../src/components/login/Login';
 import App from './App';
 import ProtectedRoute from './components/routes/ProtectedRoute';
 import AnalisisClientes from './components/contenido/AnalisisClientes';
+import inicioEmpresario from './components/contenidoEmpresario/inicioEmpresario';
 
 /*
 <Route exact path="/login" component={Login} />
@@ -17,7 +18,7 @@ ReactDOM.render(
 
     <Router>
         <Switch>
-            <Route path="/analisis-clientes" component={AnalisisClientes}/>
+            <Route component={inicioEmpresario}/>
         </Switch>
     </Router>,
 

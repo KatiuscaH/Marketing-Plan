@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
 import NavBar from '../NavBar/navBar';
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import MenuDocente from '../contenidoDocente/MenuDocente';
-import ContenidoDocente from '../contenidoDocente/ContenidoDocente';
+import ContenidoDocente from '../routes/ContenidoDocente';
 const { Header, Sider, Content } = Layout;
 
 class SiderDocente extends Component {
