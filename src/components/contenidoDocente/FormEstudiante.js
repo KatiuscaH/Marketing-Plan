@@ -8,7 +8,7 @@ import {
     Select
 } from 'antd';
 import TablaEstudiante from './TablaEstudiante';
-import { AC_ESTUDIANTES, ADD_ESTUDIANTES} from '../../config';
+import { AC_ESTUDIANTES, ADD_ESTUDIANTES } from '../../config';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -106,8 +106,8 @@ class FormEstudiante extends Component {
     };
 
     componentDidMount() {
-        
-            axios.get(ADD_ESTUDIANTES,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+
+        axios.get(ADD_ESTUDIANTES, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const studentList = res.data;
                 this.setState({ studentList });
@@ -131,7 +131,7 @@ class FormEstudiante extends Component {
                 return;
             }
 
-            axios.post(ADD_ESTUDIANTES, values,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            axios.post(ADD_ESTUDIANTES, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
                     console.log(result.data);
                     console.log('Received : ', values);
@@ -148,22 +148,35 @@ class FormEstudiante extends Component {
 
 
     handleDelete = (key) => {
-        axios.delete(AC_ESTUDIANTES.replace(":id", key),{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+        axios.delete(AC_ESTUDIANTES.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
 
                 this.setState({ studentList: this.state.studentList.filter(item => item.id !== key) });
             })
     }
 
+    actualizar = () => {
+        axios.get(ADD_ESTUDIANTES, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then(res => {
+                const studentList = res.data;
+                this.setState({ studentList });
+            }).catch(err => {
+                console.log(err.res)
+            })
+    }
+    
     render() {
         const { studentList } = this.state
 
         return (
-            <div>
-                <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal} >Agregar estudiante</Button>
-                </div>
+            <div >
+                <div style={{ display: 'inline-block' }}>
+                    <div style={{ paddingBottom: '30px', margin: '10px' }}>
+                        <Button type="primary" onClick={this.showModal} >Agregar estudiante</Button>
+                        <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
+                    </div>
 
+                </div>
                 <CollectionCreateForm
                     wrappedComponentRef={this.saveFormRef}
                     visible={this.state.visible}

@@ -8,18 +8,21 @@ import './navBar.css';
 const Auth = new AuthService();
 
 
-const UserList = ['Lucy', 'Tom', 'Edward'];
-const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
+const userList = [
+   'Luc'];
+const colorList = ['#f56a00'];
 
 class NavBar extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user: UserList[0],
+
+      userList: userList[0],
       color: colorList[0],
     };
   }
+
 
   handleLogout() {
     Auth.logout()
@@ -37,7 +40,7 @@ class NavBar extends Component {
       <div className="ajustes">
 
         <Avatar style={{ backgroundColor: this.state.color, verticalAlign: 'middle' }} size="large" >
-          {this.state.user}
+          {this.state.userList}
         </Avatar>
 
         <Dropdown overlay={menu} trigger={['click']}>
