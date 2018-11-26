@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Input, Popconfirm, Form } from 'antd';
-import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
+import { DATOS_INICIALES_PLAN } from '../../config';
 
 import axios from 'axios';
 
@@ -115,12 +115,12 @@ class TablaDatosPlan extends Component {
     super(props);
   }
 
-  state = { dataSource: [] }
-////put
-/*
+  state = { dataSource: [] };
+
+
   handleSave = (row) => {
     console.log("Updated:", row);
-    axios.put(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", row.id), row)
+    axios.put(DATOS_INICIALES_PLAN.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then((result) => {
         console.log(result.data);
       })
@@ -134,7 +134,7 @@ class TablaDatosPlan extends Component {
     });
     this.setState({ dataSource: newData });
   }
-*/
+
   render() {
     const { dataSource, onDelete } = this.props;
     const components = {

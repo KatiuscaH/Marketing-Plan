@@ -92,7 +92,7 @@ const CollectionCreateForm = Form.create()(
 class DatosPlanMarketing extends Component {
     state = {
         visible: false,
-        datosPlanList: [],
+        datosPlanList: []
         
     };
 
@@ -123,19 +123,14 @@ class DatosPlanMarketing extends Component {
                 return;
             }
 
-
             axios.post(DATOS_INICIALES_PLAN, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
                 console.log(result.data);
-                console.log('Received : ', values);
-                console.log('Received  form: ', values);
                 form.resetFields();
                 this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] });
+               
             })
-            console.log('Received : ', values);
-            console.log('Received  form: ', values);
-            form.resetFields();
-            this.setState({ visible: false });
+         
         });
     }
 
@@ -152,21 +147,20 @@ class DatosPlanMarketing extends Component {
 
 
     render() {
-        const { datosPlanList } = this.state
+        const { datosPlanList } = this.state;
         return (
             <div>
                 <h1>Datos iniciales del Plan de Marketing</h1>
+                <div style={{ paddingBottom: '30px' }}>
+                    <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
+                </div>
                 <CollectionCreateForm
                     wrappedComponentRef={this.saveFormRef}
                     visible={this.state.visible}
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-
-                <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
-                </div>
-                <TablaDatosPlan dataSource={datosPlanList} onDelete={this.handleDelete}/>
+                 <TablaDatosPlan dataSource={datosPlanList} onDelete={this.handleDelete}/>
             </div>
         );
     }

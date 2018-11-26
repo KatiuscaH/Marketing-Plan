@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import SiderDocente from '../src/components/SideBar/sideBarDocente';
 import SiderEstudiante from '../src/components/SideBar/sideBar';
@@ -7,48 +7,47 @@ import inicioEmpresario from '../src/components/contenidoEmpresario/inicioEmpres
 
 
 class App extends Component {
-   
+
 
     render() {
         let rol = JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).rol;
 
         console.log(rol)
-        
-        if (rol == 0){
-            return(
-                <div>
-                   <Route component={(props) => 
-                   <SiderDocente timestamp={new Date().toString()} {...props} />}
-                    /> 
-                </div>
+
+        if (rol == 0) {
+            return (
+                <Switch>
+                    <Route component={(props) => (
+                        <SiderDocente
+                  /* timestamp={new Date().toString()}*/ {...props} />)}
+                    />
+                </Switch>
             )
         }
-         if(rol == 1){
-                return(
-                    <div>
-                        
-                        <Route component={(props) => (
-                        <SiderEstudiante timestamp={new Date().toString()} {...props} />
-                    )} />
-                    </div>
-                )
-            }
-       
-        if(rol == 2){
-            return(
-                
-                <div>
-                    
-                    
+        if (rol == 1) {
+            return (
+                <Switch>
                     <Route component={(props) => (
-                    <inicioEmpresario timestamp={new Date().toString()} {...props} />
-                )} />
-                </div> 
+                        <SiderEstudiante /*timestamp={new Date().toString()}*/ {...props} />
+                    )} />
+                </Switch>
             )
-            }
+        }
 
-            return <span>asdsadas</span>
-        
+        if (rol == 2) {
+            return (
+
+                <Switch>
+                    <Route component={(props) => (
+                        <inicioEmpresario /*timestamp={new Date().toString()}*/ {...props} />
+                    )} />
+                </Switch>
+               
+            )
+        }
+
+        return <span>asdsadas</span>
+
     }
 }
 
