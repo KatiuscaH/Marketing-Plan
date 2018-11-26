@@ -98,7 +98,7 @@ class FormEmpresario extends Component {
     };
 ///////////
     componentDidMount(){
-        axios.get(LISTAR_EMPRESARIO)
+        axios.get(LISTAR_EMPRESARIO,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
         .then(res => {
             const empresarioList = res.data;
             this.setState({empresarioList});
@@ -121,7 +121,7 @@ class FormEmpresario extends Component {
             if (err) {
                 return;
             }
-            axios.post(LISTAR_EMPRESARIO,  values)
+            axios.post(LISTAR_EMPRESARIO,  values,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
                 console.log(result.data);
                 console.log('Received values of form: ', values);
@@ -138,7 +138,7 @@ class FormEmpresario extends Component {
 
 
     handleDelete = (key) => {
-        axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key))
+        axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key),{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
         .then((result) => {
             this.setState({ empresarioList: this.state.empresarioList.filter(item => item.id !== key)});
 

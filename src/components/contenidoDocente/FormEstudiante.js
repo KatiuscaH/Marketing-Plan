@@ -107,7 +107,7 @@ class FormEstudiante extends Component {
 
     componentDidMount() {
         
-            axios.get(ADD_ESTUDIANTES)
+            axios.get(ADD_ESTUDIANTES,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const studentList = res.data;
                 this.setState({ studentList });
@@ -131,7 +131,7 @@ class FormEstudiante extends Component {
                 return;
             }
 
-            axios.post(ADD_ESTUDIANTES, values)
+            axios.post(ADD_ESTUDIANTES, values,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
                     console.log(result.data);
                     console.log('Received : ', values);
@@ -148,7 +148,7 @@ class FormEstudiante extends Component {
 
 
     handleDelete = (key) => {
-        axios.delete(AC_ESTUDIANTES.replace(":id", key))
+        axios.delete(AC_ESTUDIANTES.replace(":id", key),{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
 
                 this.setState({ studentList: this.state.studentList.filter(item => item.id !== key) });

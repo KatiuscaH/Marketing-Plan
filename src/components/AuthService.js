@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ME } from '../config';
 export default class AuthService {
     constructor(domain) {
-        this.domain = domain || 'http://marketing-back.test' //APi server dominio
+        this.domain = domain || 'http://marketing.test' //APi server dominio
         this.fetch = this.fetch.bind(this)
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)

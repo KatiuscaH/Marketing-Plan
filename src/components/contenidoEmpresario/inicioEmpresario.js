@@ -7,10 +7,10 @@ import { Button,Row, Col } from 'antd';
 class inicioEmpresario extends Component {
     render() {
         return (
-            <div>
+            <div style={{display:"flex", flexDirection:"column"}}>
             <Row align="middle" type="flex" justify="center">
-              <div style={{width:300, height:300}} >
-                  <Button block size="large">Ver plan de Marketing</Button>
+              <div  >
+                  <Button size="large">Ver plan de Marketing</Button>
               </div>
             </Row>
             <Row align="middle" type="flex" justify="center">
