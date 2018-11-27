@@ -7,7 +7,7 @@ import {
     Select
 } from 'antd';
 import TablaEmpresario from './TablaEmpresario';
-import {LISTAR_EMPRESARIO, ELIMINAR_EDITAR_EMPRESARIO} from '../../config';
+import { LISTAR_EMPRESARIO, ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
 import axios from 'axios';
 
 
@@ -23,7 +23,7 @@ const CollectionCreateForm = Form.create()(
             function handleChange(value) {
                 console.log(`Valor: ${value}`);
             }
-            
+
             const { visible, onCancel, onCreate, form } = this.props;
             const { getFieldDecorator } = form;
             return (
@@ -81,7 +81,7 @@ const CollectionCreateForm = Form.create()(
 
                                 </Select>)}
                             </FormItem>
-                            </div>
+                        </div>
                     </Form>
                 </Modal>
             );
@@ -96,17 +96,17 @@ class FormEmpresario extends Component {
         visible: false,
         empresarioList: []
     };
-///////////
-    componentDidMount(){
-        axios.get(LISTAR_EMPRESARIO,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-        .then(res => {
-            const empresarioList = res.data;
-            this.setState({empresarioList});
-        }).catch(err => {
-            console.log(err.res)
-        })
+    ///////////
+    componentDidMount() {
+        axios.get(LISTAR_EMPRESARIO, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then(res => {
+                const empresarioList = res.data;
+                this.setState({ empresarioList });
+            }).catch(err => {
+                console.log(err.res)
+            })
     }
-///////////
+    ///////////
     showModal = () => {
         this.setState({ visible: true });
     }
@@ -121,14 +121,14 @@ class FormEmpresario extends Component {
             if (err) {
                 return;
             }
-            axios.post(LISTAR_EMPRESARIO,  values,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-            .then((result) => {
-                console.log(result.data);
-                console.log('Received values of form: ', values);
-                form.resetFields();
-                this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
-            })
-            
+            axios.post(LISTAR_EMPRESARIO, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+                .then((result) => {
+                    console.log(result.data);
+                    console.log('Received values of form: ', values);
+                    form.resetFields();
+                    this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
+                })
+
         });
     }
 
@@ -138,11 +138,22 @@ class FormEmpresario extends Component {
 
 
     handleDelete = (key) => {
-        axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key),{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-        .then((result) => {
-            this.setState({ empresarioList: this.state.empresarioList.filter(item => item.id !== key)});
+        axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then((result) => {
+                this.setState({ empresarioList: this.state.empresarioList.filter(item => item.id !== key) });
 
-        })        
+            })
+    }
+
+    actualizar = () => {
+        axios.get(LISTAR_EMPRESARIO, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then(res => {
+                const empresarioList = res.data;
+                this.setState({ empresarioList });
+            }).catch(err => {
+                console.log(err.res)
+            })
+
     }
 
     render() {
@@ -151,8 +162,12 @@ class FormEmpresario extends Component {
 
         return (
             <div>
-                <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Agregar empresario</Button>
+                <div style={{ display: 'inline-block' }}>
+                    <div style={{ paddingBottom: '30px', margin: '10px' }}>
+                        <Button type="primary" onClick={this.showModal} >Agregar empresario</Button>
+                        <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
+                    </div>
+
                 </div>
 
                 <CollectionCreateForm
@@ -166,6 +181,6 @@ class FormEmpresario extends Component {
         );
     }
 }
- 
+
 
 export default FormEmpresario;
