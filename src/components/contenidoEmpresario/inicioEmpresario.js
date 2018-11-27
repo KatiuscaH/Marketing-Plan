@@ -4,7 +4,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 import { Button,Row, Col } from 'antd';
 
 
-class inicioEmpresario extends Component {
+class InicioEmpresario extends Component {
     render() {
         return (
             <div style={{display:"flex", flexDirection:"column"}}>
@@ -29,4 +29,4 @@ class inicioEmpresario extends Component {
     }
 }
 
-export default inicioEmpresario;
+export default InicioEmpresario;

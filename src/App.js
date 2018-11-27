@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 
 import SiderDocente from '../src/components/SideBar/sideBarDocente';
 import SiderEstudiante from '../src/components/SideBar/sideBar';
-import inicioEmpresario from '../src/components/contenidoEmpresario/inicioEmpresario';
+import InicioEmpresario from '../src/components/contenidoEmpresario/inicioEmpresario';
 
 
 class App extends Component {
@@ -14,40 +14,26 @@ class App extends Component {
 
         console.log(rol)
 
-        if (rol == 0) {
-            return (
-                <Switch>
-                    <Route component={(props) => (
-                        <SiderDocente
-                  /* timestamp={new Date().toString()}*/ {...props} />)}
-                    />
-                </Switch>
-            )
+        switch (rol) {
+            case 0:
+                return <Route path="/" component={(props) => (
+                    <SiderDocente
+               timestamp={new Date().toString()} {...props} />)}
+                />
+            case 1:
+                return <Route path="/" component={(props) => (
+                    <SiderEstudiante
+               timestamp={new Date().toString()} {...props} />)}
+                />
+            case 2:
+                return <Route path="/" component={(props) => (
+                    <InicioEmpresario
+               timestamp={new Date().toString()} {...props} />)}
+                />
+
+            default:
+                break;
         }
-        if (rol == 1) {
-            return (
-                <Switch>
-                    <Route component={(props) => (
-                        <SiderEstudiante /*timestamp={new Date().toString()}*/ {...props} />
-                    )} />
-                </Switch>
-            )
-        }
-
-        if (rol == 2) {
-            return (
-
-                <Switch>
-                    <Route component={(props) => (
-                        <inicioEmpresario /*timestamp={new Date().toString()}*/ {...props} />
-                    )} />
-                </Switch>
-               
-            )
-        }
-
-        return <span>asdsadas</span>
-
     }
 }
 

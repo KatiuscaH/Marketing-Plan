@@ -70,7 +70,7 @@ class SiderDocente extends Component {
 
             <Switch>
               
-              <Route component={ContenidoDocente} />
+              <Route path="/" component={ContenidoDocente} />
             </Switch>
 
           </Content>

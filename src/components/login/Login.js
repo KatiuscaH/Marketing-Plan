@@ -3,6 +3,7 @@ import { Form, Icon, Input, Button } from 'antd';
 import './Login.css';
 import logoudc from '../../../src/logoudc.png';
 import AuthService from '../AuthService';
+import { withRouter } from 'react-router-dom';
 
 const FormItem = Form.Item;
 
@@ -18,26 +19,24 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        //console.log('Received values of form: ', {values});
         this.Auth.login(values.email, values.password)//Pendiente aqui
           .then(res => {
-            this.props.history.replace('/');
-            //localStorage.setItem('rol', 1);
+            //this.props.history.replace('/');
+
+            if (this.Auth.loggedIn()) {
+              this.props.history.replace('/');
+            }
+
           })
           .catch(err => {
             console.log("Error aqui ", err)
             alert(err);
           })
       }
+
+
     });
   }
-
-  componentWillMount() {
-    if (this.Auth.loggedIn()) {
-      this.props.history.replace('/');
-    }
-  }
-
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -50,7 +49,7 @@ class Login extends Component {
 
         <FormItem>
           {getFieldDecorator('email', {
-            rules: [{type: 'email', required: true, message: 'Por favor ingrese el correo' }],
+            rules: [{ type: 'email', required: true, message: 'Por favor ingrese el correo' }],
           })(
             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Usuario" />
           )}

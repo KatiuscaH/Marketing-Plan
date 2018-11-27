@@ -4,13 +4,15 @@ import AuthService from '../AuthService';
 import withAuth from '../withAuth';
 import { withRouter } from 'react-router';
 import './navBar.css';
+import axios from 'axios';
+import { LISTAR_EMPRESARIO } from '../../config';
 
 const Auth = new AuthService();
 
 
-const userList = [
-   'Luc'];
+const userList = ['Luc'];
 const colorList = ['#f56a00'];
+const a = JSON.stringify(localStorage.getItem('nombre'));
 
 class NavBar extends Component {
 
@@ -23,7 +25,6 @@ class NavBar extends Component {
     };
   }
 
-
   handleLogout() {
     Auth.logout()
     this.props.history.replace('/login');
@@ -35,6 +36,8 @@ class NavBar extends Component {
         <Menu.Item key="1"><Icon type="poweroff" />Cerrar sesión</Menu.Item>
       </Menu>
     );
+
+
 
     return (
       <div className="ajustes">

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch  } from "react-router-dom";
 import registerServiceWorker from './registerServiceWorker';
 
 import Login from '../src/components/login/Login';
@@ -19,7 +19,7 @@ ReactDOM.render(
     <Router>
         <Switch>
         <Route exact path="/login" component={Login} />
-            <ProtectedRoute path="/" component={App} />
+        <ProtectedRoute path="/" component={App} />
         </Switch>
     </Router>,
 
