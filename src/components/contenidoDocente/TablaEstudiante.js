@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Spin, Popconfirm, Form } from 'antd';
+import { Table, Input, Popconfirm, Form } from 'antd';
 import axios from 'axios';
 import { AC_ESTUDIANTES } from '../../config';
 
