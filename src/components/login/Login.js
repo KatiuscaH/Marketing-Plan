@@ -3,7 +3,6 @@ import { Form, Icon, Input, Button } from 'antd';
 import './Login.css';
 import logoudc from '../../../src/logoudc.png';
 import AuthService from '../AuthService';
-import { withRouter } from 'react-router-dom';
 
 const FormItem = Form.Item;
 
@@ -14,27 +13,23 @@ class Login extends Component {
     //this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.Auth.login(values.email, values.password)//Pendiente aqui
+        this.Auth.login(values.email, values.password)
           .then(res => {
             //this.props.history.replace('/');
 
             if (this.Auth.loggedIn()) {
               this.props.history.replace('/');
             }
-
           })
           .catch(err => {
             console.log("Error aqui ", err)
             alert(err);
           })
       }
-
-
     });
   }
 
