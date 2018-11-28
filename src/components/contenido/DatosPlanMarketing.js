@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
-import { DATOS_INICIALES_PLAN, ELIMINAR_DATOS_INICIALES_PLAN, LISTAR_EMPRESARIO} from '../../config';
+import { DATOS_INICIALES_PLAN, ELIMINAR_DATOS_INICIALES_PLAN, LISTAR_EMPRESARIO } from '../../config';
 
 const FormItem = Form.Item;
 const Option = AntdSelect.Option;
@@ -20,7 +20,6 @@ const CollectionCreateForm = Form.create()(
 
         componentDidMount() {
             this.setState(() => {
-                console.log('setting state');
                 axios.get(LISTAR_EMPRESARIO, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                     .then(res => {
                         const dataSource = [];
@@ -28,10 +27,12 @@ const CollectionCreateForm = Form.create()(
                             dataSource.push({
                                 value: element.id,
                                 label: `${element.nombre} ${element.apellido}`,
-                                
+
                             })
                         });
                         this.setState({ dataSource });
+                        console.log(dataSource);
+                        
                     }).catch(err => {
                         console.log(err.res)
                     })
@@ -68,14 +69,14 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                         <FormItem label="Empresario asignado">
                             {getFieldDecorator('empresario_id', {
-                                
                                 rules: [{
                                     required: true, message: 'Por favor seleccione el empresario asignado',
                                 }],
-                                
-                            })(<AntdSelect>
-                                {this.state.dataSource.map(item => (<Option key={item.value} value={item.value}>{item.label}</Option>))}
-                            </AntdSelect>)}
+                            })(
+                                <AntdSelect>
+                                    {this.state.dataSource.map(item => (<Option key={item.value} value={item.value}>{item.label}</Option>))}
+                                </AntdSelect>
+                                 )}
                         </FormItem>
                     </Form>
                 </Modal>
@@ -93,20 +94,21 @@ class DatosPlanMarketing extends Component {
     state = {
         visible: false,
         datosPlanList: []
-        
+
     };
+/////GET QUE DAÑA EL FORM :V
+  /*  
+ componentDidMount() {
 
-    componentDidMount() {
-        
         axios.get(DATOS_INICIALES_PLAN, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-        .then(res => {
-            const datosPlanList = res.data;
-            this.setState({ datosPlanList });
-        }).catch(err => {
-            console.log(err.res)
-        })
-}
-
+            .then(res => {
+                const datosPlanList = res.data;
+                this.setState({ datosPlanList });
+            }).catch(err => {
+                console.log(err.res)
+            })
+    }
+*/
 
     showModal = () => {
         this.setState({ visible: true });
@@ -124,13 +126,13 @@ class DatosPlanMarketing extends Component {
             }
 
             axios.post(DATOS_INICIALES_PLAN, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-            .then((result) => {
-                console.log(result.data);
-                form.resetFields();
-                this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] });
-               
-            })
-         
+                .then((result) => {
+                    console.log(result.data);
+                    form.resetFields();
+                    this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] });
+
+                })
+
         });
     }
 
@@ -140,9 +142,9 @@ class DatosPlanMarketing extends Component {
 
     handleDelete = (key) => {
         axios.delete(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-        .then((result) => {
-            this.setState({ datosPlanList: this.state.datosPlanList.filter(item => item.id !== key)});
-        })
+            .then((result) => {
+                this.setState({ datosPlanList: this.state.datosPlanList.filter(item => item.id !== key) });
+            })
     }
 
 
@@ -160,7 +162,7 @@ class DatosPlanMarketing extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                 <TablaDatosPlan dataSource={datosPlanList} onDelete={this.handleDelete}/>
+                <TablaDatosPlan dataSource={datosPlanList} onDelete={this.handleDelete} />
             </div>
         );
     }

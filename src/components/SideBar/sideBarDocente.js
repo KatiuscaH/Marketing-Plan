@@ -37,7 +37,7 @@ class SiderDocente extends Component {
          collapsed={this.state.collapsed}
          width = '250px'*/
         >
-          <div className="logo"></div>
+          <div className="logoo"></div>
 
           <Menu theme="dark" mode="inline" >
 

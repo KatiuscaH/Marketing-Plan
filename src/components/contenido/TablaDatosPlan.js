@@ -111,12 +111,8 @@ class EditableCell extends Component {
 }
 
 class TablaDatosPlan extends Component {
-  constructor(props) {
-    super(props);
-  }
 
-  state = { dataSource: [] };
-
+   state = { dataSource: [] };
 
   handleSave = (row) => {
     console.log("Updated:", row);
