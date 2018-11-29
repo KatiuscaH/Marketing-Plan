@@ -6,6 +6,8 @@ const ELIMINAR_EDITAR_EMPRESARIO = `${HOST}/api/empresario/:id`
 const ME = `${HOST}/api/auth/me`
 const DATOS_INICIALES_PLAN = `${HOST}/api/marketing`
 const ELIMINAR_DATOS_INICIALES_PLAN = `${HOST}/api/marketing/:id`
+const ADD_ANALISIS_CLIENTES = `${HOST}/api/marketing/:id/clientes`
+
 export {
     HOST,
     AC_ESTUDIANTES,
@@ -14,5 +16,6 @@ export {
     ELIMINAR_EDITAR_EMPRESARIO,
     ME,
     DATOS_INICIALES_PLAN,
-    ELIMINAR_DATOS_INICIALES_PLAN
+    ELIMINAR_DATOS_INICIALES_PLAN,
+    ADD_ANALISIS_CLIENTES
 };

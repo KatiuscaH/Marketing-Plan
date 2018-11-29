@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
-import { DATOS_INICIALES_PLAN, ELIMINAR_DATOS_INICIALES_PLAN, LISTAR_EMPRESARIO } from '../../config';
+import { DATOS_INICIALES_PLAN, ELIMINAR_DATOS_INICIALES_PLAN, LISTAR_EMPRESARIO, ME } from '../../config';
 
 const FormItem = Form.Item;
 const Option = AntdSelect.Option;
@@ -97,18 +97,29 @@ class DatosPlanMarketing extends Component {
 
     };
 /////GET QUE DAÑA EL FORM :V
-  /*  
+ ////revisar y coger el id del marketing para poder mostrarlo en la tabla  
+ 
  componentDidMount() {
-
-        axios.get(DATOS_INICIALES_PLAN, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-            .then(res => {
-                const datosPlanList = res.data;
-                this.setState({ datosPlanList });
+    const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
+    console.log({campo})
+        axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` }})
+            .then(({data}) => {
+                console.log({data});
+                let { nombre, apellido} = data.empresario
+                let empresario = `${nombre} ${apellido}`;
+                let datos = {
+                    plan: data.plan,
+                    estudiantes: data.estudiantes,
+                    empresario_id: empresario,
+                    id: campo,
+                }
+                console.log({datos})
+                this.setState({ datosPlanList: [datos] });
             }).catch(err => {
-                console.log(err.res)
+                console.log({catch: err.res})
             })
     }
-*/
+///////////////////////
 
     showModal = () => {
         this.setState({ visible: true });
@@ -124,13 +135,14 @@ class DatosPlanMarketing extends Component {
             if (err) {
                 return;
             }
-
             axios.post(DATOS_INICIALES_PLAN, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
                     console.log(result.data);
                     form.resetFields();
                     this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] });
-
+                    let ls = JSON.parse(localStorage.getItem('user'));
+                    ls.marketing_id = result.data.id;
+                    localStorage.setItem('user', JSON.stringify(ls));
                 })
 
         });
@@ -149,7 +161,6 @@ class DatosPlanMarketing extends Component {
 
 
     render() {
-        const { datosPlanList } = this.state;
         return (
             <div>
                 <h1>Datos iniciales del Plan de Marketing</h1>
@@ -162,7 +173,7 @@ class DatosPlanMarketing extends Component {
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
                 />
-                <TablaDatosPlan dataSource={datosPlanList} onDelete={this.handleDelete} />
+                <TablaDatosPlan dataSource={this.state.datosPlanList} onDelete={this.handleDelete} />
             </div>
         );
     }

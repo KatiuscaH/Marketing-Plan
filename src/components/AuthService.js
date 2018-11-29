@@ -20,7 +20,7 @@ export default class AuthService {
             
         }).then(res => {
             this.setToken(res.token)
-            axios.post(ME, null, {
+            axios.get(ME, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.getToken()}`

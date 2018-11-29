@@ -60,7 +60,8 @@ class EditorDraft extends Component {
         return (
             <div>
                 <Editor
-                    editorState={this.state.editorState}
+                    editorState={this.props.content}
+                    onChange={this.props.onChange}
                     wrapperClassName="wrapper-class"
                     editorClassName="editor-class"
                     toolbarClassName="toolbar-class"
