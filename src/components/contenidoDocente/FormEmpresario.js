@@ -5,7 +5,8 @@ import {
     Form,
     Input,
     Select,
-    Spin
+    Spin,
+    message
 } from 'antd';
 import TablaEmpresario from './TablaEmpresario';
 import { LISTAR_EMPRESARIO, ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
@@ -129,6 +130,8 @@ class FormEmpresario extends Component {
                     console.log('Received values of form: ', values);
                     form.resetFields();
                     this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
+                }).catch(err => {
+                    message.error("Ya existe un empresario con el correo ingresado")
                 })
 
         });

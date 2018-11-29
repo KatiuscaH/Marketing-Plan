@@ -6,7 +6,8 @@ import {
     Form,
     Input,
     Select,
-    Spin
+    Spin,
+    message
 } from 'antd';
 import TablaEstudiante from './TablaEstudiante';
 import { AC_ESTUDIANTES, ADD_ESTUDIANTES } from '../../config';
@@ -140,6 +141,9 @@ class FormEstudiante extends Component {
                     console.log('Received  form: ', values);
                     form.resetFields();
                     this.setState({ visible: false, studentList: [...this.state.studentList, result.data] });
+                }).catch(err => {
+                    console.log("Error de corre: ", err)
+                    message.error("Ya existe un estudiante con el correo ingresado")
                 })
         });
     }

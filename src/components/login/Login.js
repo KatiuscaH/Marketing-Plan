@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 import './Login.css';
 import logoudc from '../../../src/logoudc.png';
 import AuthService from '../AuthService';
@@ -27,7 +27,7 @@ class Login extends Component {
           })
           .catch(err => {
             console.log("Error aqui ", err)
-            alert(err);
+            message.error('Usuario y/o Contraseña inválidas');
           })
       }
     });
