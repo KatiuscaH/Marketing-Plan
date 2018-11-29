@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Popconfirm, Form } from 'antd';
+import { Table, Input, Popconfirm, Form, Spin } from 'antd';
 import axios from 'axios';
 import { AC_ESTUDIANTES } from '../../config';
 
@@ -202,7 +202,9 @@ class EditableTable extends Component {
 
 
     });
-
+if(!this.state.dataSource){
+  return <Spin/>
+}else{
     return (
       <div>
         <Table rowKey="id"
@@ -214,6 +216,7 @@ class EditableTable extends Component {
         />
       </div>
     );
+  }
   }
 }
 

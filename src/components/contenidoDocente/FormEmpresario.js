@@ -4,7 +4,8 @@ import {
     Modal,
     Form,
     Input,
-    Select
+    Select,
+    Spin
 } from 'antd';
 import TablaEmpresario from './TablaEmpresario';
 import { LISTAR_EMPRESARIO, ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
@@ -94,14 +95,15 @@ const CollectionCreateForm = Form.create()(
 class FormEmpresario extends Component {
     state = {
         visible: false,
-        empresarioList: []
+        empresarioList: [],
+        cargando: false
     };
     ///////////
     componentDidMount() {
         axios.get(LISTAR_EMPRESARIO, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const empresarioList = res.data;
-                this.setState({ empresarioList });
+                this.setState({ empresarioList, cargando: true });
             }).catch(err => {
                 console.log(err.res)
             })
@@ -159,26 +161,29 @@ class FormEmpresario extends Component {
     render() {
 
         const { empresarioList } = this.state;
-
-        return (
-            <div>
-                <div style={{ display: 'inline-block' }}>
-                    <div style={{ paddingBottom: '30px', margin: '10px' }}>
-                        <Button type="primary" onClick={this.showModal} >Agregar empresario</Button>
-                        <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
-                    </div>
-
+if(!this.state.cargando){
+    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}><Spin size="large"/></div>
+}else{
+    return (
+        <div>
+            <div style={{ display: 'inline-block' }}>
+                <div style={{ paddingBottom: '30px', margin: '10px' }}>
+                    <Button type="primary" onClick={this.showModal} >Agregar empresario</Button>
+                    <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
                 </div>
 
-                <CollectionCreateForm
-                    wrappedComponentRef={this.saveFormRef}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    onCreate={this.handleCreate}
-                />
-                <TablaEmpresario dataSource={empresarioList} onDelete={this.handleDelete} />
             </div>
-        );
+
+            <CollectionCreateForm
+                wrappedComponentRef={this.saveFormRef}
+                visible={this.state.visible}
+                onCancel={this.handleCancel}
+                onCreate={this.handleCreate}
+            />
+            <TablaEmpresario dataSource={empresarioList} onDelete={this.handleDelete} />
+        </div>
+    );
+}
     }
 }
 

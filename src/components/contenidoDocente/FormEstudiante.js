@@ -5,7 +5,8 @@ import {
     Modal,
     Form,
     Input,
-    Select
+    Select,
+    Spin
 } from 'antd';
 import TablaEstudiante from './TablaEstudiante';
 import { AC_ESTUDIANTES, ADD_ESTUDIANTES } from '../../config';
@@ -102,7 +103,8 @@ const CollectionCreateForm = Form.create()(
 class FormEstudiante extends Component {
     state = {
         visible: false,
-        studentList: []
+        studentList: [],
+        cargando: false
     };
 
     componentDidMount() {
@@ -110,7 +112,7 @@ class FormEstudiante extends Component {
         axios.get(ADD_ESTUDIANTES, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const studentList = res.data;
-                this.setState({ studentList });
+                this.setState({ studentList , cargando: true});
             }).catch(err => {
                 console.log(err.res)
             })
@@ -166,26 +168,33 @@ class FormEstudiante extends Component {
     }
     
     render() {
+        
         const { studentList } = this.state
-
-        return (
-            <div >
-                <div style={{ display: 'inline-block' }}>
-                    <div style={{ paddingBottom: '30px', margin: '10px' }}>
-                        <Button type="primary" onClick={this.showModal} >Agregar estudiante</Button>
-                        <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
+        if(!this.state.cargando){
+            return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}><Spin size="large"/></div>
+        }else{
+            return (
+                <div >
+                    <div style={{ display: 'inline-block' }}>
+                        <div style={{ paddingBottom: '30px', margin: '10px' }}>
+                            <Button type="primary" onClick={this.showModal} >Agregar estudiante</Button>
+                            <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
+                        </div>
+    
                     </div>
-
+                    <CollectionCreateForm
+                        wrappedComponentRef={this.saveFormRef}
+                        visible={this.state.visible}
+                        onCancel={this.handleCancel}
+                        onCreate={this.handleCreate}
+                    />
+                    <TablaEstudiante dataSource={studentList} onDelete={this.handleDelete} />
                 </div>
-                <CollectionCreateForm
-                    wrappedComponentRef={this.saveFormRef}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    onCreate={this.handleCreate}
-                />
-                <TablaEstudiante dataSource={studentList} onDelete={this.handleDelete} />
-            </div>
-        );
+            );
+        }
+          
+        
+       
     }
 }
 
