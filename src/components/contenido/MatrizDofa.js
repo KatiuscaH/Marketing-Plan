@@ -22,8 +22,8 @@ class MatrizDofa extends Component {
         axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo),
             { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(({ data }) => {
-                if (data.clientes) {
-                    this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.clientes))) })
+                if (data.dofa) {
+                    this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.dofa))) })
                 } else {
                     this.setState({ editorState: EditorState.createEmpty() });
                 }
@@ -36,7 +36,7 @@ class MatrizDofa extends Component {
     save = () => {
         const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
         axios.put(ADD_DOFA.replace(":id", campo),
-            { clientes: JSON.stringify(this.state.convertedContent) },
+            { dofa: JSON.stringify(this.state.convertedContent) },
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('id_token')}`
@@ -56,7 +56,7 @@ class MatrizDofa extends Component {
     render() {
         return (
             <div>
-                <h1 style={{ textAlign: 'center' }}>Identificación de clientes actuales</h1>
+                <h1 style={{ textAlign: 'center' }}>Matríz DOFA</h1>
                 <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
                 <div style={{ display: "flex", flexDirection: "row-reverse" }}>
                     <Button type="primary" icon="save" onClick={this.save}>Guardar</Button>
