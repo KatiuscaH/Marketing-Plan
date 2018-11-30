@@ -4,7 +4,8 @@ import {
     Form,
     Input,
     Modal,
-    Select as AntdSelect
+    Select as AntdSelect,
+    Spin
 } from 'antd';
 import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
@@ -93,11 +94,10 @@ const CollectionCreateForm = Form.create()(
 class DatosPlanMarketing extends Component {
     state = {
         visible: false,
-        datosPlanList: []
+        datosPlanList: [],
+        cargando: false
 
     };
-/////GET QUE DAÑA EL FORM :V
- ////revisar y coger el id del marketing para poder mostrarlo en la tabla  
  
  componentDidMount() {
     const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
@@ -114,12 +114,12 @@ class DatosPlanMarketing extends Component {
                     id: campo,
                 }
                 console.log({datos})
-                this.setState({ datosPlanList: [datos] });
+                this.setState({ datosPlanList: [datos], cargando: true });
             }).catch(err => {
                 console.log({catch: err.res})
             })
     }
-///////////////////////
+
 
     showModal = () => {
         this.setState({ visible: true });
@@ -161,21 +161,32 @@ class DatosPlanMarketing extends Component {
 
 
     render() {
-        return (
-            <div>
-                <h1>Datos iniciales del Plan de Marketing</h1>
-                <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
-                </div>
-                <CollectionCreateForm
-                    wrappedComponentRef={this.saveFormRef}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    onCreate={this.handleCreate}
-                />
-                <TablaDatosPlan dataSource={this.state.datosPlanList} onDelete={this.handleDelete} />
+        
+        if(!this.state.cargando){
+
+            return <div> <h1>Datos iniciales del Plan de Marketing</h1>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
+                        <Spin size="large"/>
             </div>
-        );
+            </div>
+        }else{
+            return (
+                <div>
+                    <h1>Datos iniciales del Plan de Marketing</h1>
+                    <div style={{ paddingBottom: '30px' }}>
+                        <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
+                    </div>
+                    <CollectionCreateForm
+                        wrappedComponentRef={this.saveFormRef}
+                        visible={this.state.visible}
+                        onCancel={this.handleCancel}
+                        onCreate={this.handleCreate}
+                    />
+                    <TablaDatosPlan dataSource={this.state.datosPlanList} onDelete={this.handleDelete} />
+                </div>
+            );
+        }
+      
     }
 }
 

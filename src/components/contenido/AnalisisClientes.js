@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EditorDraft from './editorTexto/editorDraft';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Button } from 'antd';
-import { ADD_ANALISIS_CLIENTES } from '../../config';
+import { ADD_ANALISIS_CLIENTES, ELIMINAR_DATOS_INICIALES_PLAN } from '../../config';
 import axios from 'axios';
 
 class AnalisisClientes extends Component {
@@ -20,38 +20,29 @@ class AnalisisClientes extends Component {
 
     componentDidMount() {
         const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
-        // axios.(ADD_ANALISIS_CLIENTES.replace(":id", campo)).then(val => val.json())
-        //     .then(rawContent => {
-        //         if (rawContent) {
-        //             this.setState({ editorState: EditorState.createWithContent(convertFromRaw(rawContent)) })
-        //         } else {
-        //             this.setState({ editorState: EditorState.createEmpty() });
-        //         }
-        //     });
+        axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo),
+            { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then(({ data }) => {
+                if (data.clientes) {
+                    this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.clientes))) })
+                } else {
+                    this.setState({ editorState: EditorState.createEmpty() });
+                }
+
+            }).catch(err => {
+                console.log("Error del editor", err)
+            })
     }
 
     save = () => {
         const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
-        /* fetch(ADD_ANALISIS_CLIENTES.replace(":id", campo), {
-             method: 'PUT',
-             body: JSON.stringify({
-                 content: convertToRaw(this.state.editorState),
- 
-             }),
-             header: new Headers({
-                 'Content-Type': 'application/json',
-                 'Authorization': `Bearer ${localStorage.getItem('id_token')}`
-             })
-         })
- */
-        axios.put(ADD_ANALISIS_CLIENTES.replace(":id", campo), {
-            headers: { 
-                Authorization: `Bearer ${localStorage.getItem('id_token')}`
-            }, 
-            body: JSON.stringify({
-                content: this.state.convertedContent,
-            }),
-        });
+        axios.put(ADD_ANALISIS_CLIENTES.replace(":id", campo),
+            { clientes: JSON.stringify(this.state.convertedContent) },
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('id_token')}`
+                },
+            });
     }
 
     onChangeEditor = (v) => {
