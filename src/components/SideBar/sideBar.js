@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Menu, Icon } from 'antd';
 import './sideBar.css';
+import logoudc2 from '../../../src/logoudc2.png';
 import NavBar from '../NavBar/navBar';
 import MenuEstudiante from '../MenuEstudiante/Menu';
 import ContenidoEstudiante from '../routes/ContenidoEstudiante';
@@ -38,7 +39,9 @@ class SiderDemo extends Component {
          collapsed={this.state.collapsed}
          width = '250px'*/
         >
-          <div className="logoo"></div>
+          <div className="logoo">
+            <img src={logoudc2}/>
+          </div>
 
           <Menu theme="dark" mode="inline" >
             <MenuEstudiante />

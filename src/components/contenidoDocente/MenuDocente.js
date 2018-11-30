@@ -20,9 +20,8 @@ class MenuDocente extends Component {
                 
                 <Menu
                     onClick={handleClick}
-                    mode="inline"//inline - vertical
-                    /* openKeys={this.state.openKeys}
-                     onOpenChange={this.onOpenChange}*/
+                    mode="inline"
+                    defaultOpenKeys={['sub1', 'sub2','sub3']}
                     theme="dark"
                 >
                     <SubMenu key="sub1" title={<span><Icon type="user" theme="outlined" /><span>Gestionar Usuarios</span></span>}>
