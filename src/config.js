@@ -7,6 +7,17 @@ const ME = `${HOST}/api/auth/me`
 const DATOS_INICIALES_PLAN = `${HOST}/api/marketing`
 const ELIMINAR_DATOS_INICIALES_PLAN = `${HOST}/api/marketing/:id`
 const ADD_ANALISIS_CLIENTES = `${HOST}/api/marketing/:id/clientes`
+const ADD_ANSOFF = `${HOST}/api/marketing/:id/ansoff`
+const ADD_BCG = `${HOST}/api/marketing/:id/bcg`
+const ADD_COATROP = `${HOST}/api/marketing/:id/coatrop`
+const ADD_COMPETENCIA = `${HOST}/api/marketing/:id/competencia`
+const ADD_DOFA = `${HOST}/api/marketing/:id/dofa`
+const ADD_HISTORIA = `${HOST}/api/marketing/:id/historia`
+const ADD_MEFI = `${HOST}/api/marketing/:id/mefi`
+const ADD_PEST = `${HOST}/api/marketing/:id/pest`
+const ADD_PORTER = `${HOST}/api/marketing/:id/porter`
+const ADD_PRESENTACION = `${HOST}/api/marketing/:id/presentacion`
+const ADD_PROVEEDORES = `${HOST}/api/marketing/:id/proveedores`
 
 export {
     HOST,
@@ -17,5 +28,16 @@ export {
     ME,
     DATOS_INICIALES_PLAN,
     ELIMINAR_DATOS_INICIALES_PLAN,
-    ADD_ANALISIS_CLIENTES
+    ADD_ANALISIS_CLIENTES,
+    ADD_ANSOFF,
+    ADD_BCG,
+    ADD_COATROP,
+    ADD_COMPETENCIA,
+    ADD_DOFA,
+    ADD_HISTORIA,
+    ADD_MEFI,
+    ADD_PEST,
+    ADD_PORTER,
+    ADD_PRESENTACION,
+    ADD_PROVEEDORES
 };

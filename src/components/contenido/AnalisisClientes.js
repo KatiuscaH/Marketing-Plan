@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EditorDraft from './editorTexto/editorDraft';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, convertFromRaw } from 'draft-js';
 import { Button } from 'antd';
 import { ADD_ANALISIS_CLIENTES, ELIMINAR_DATOS_INICIALES_PLAN } from '../../config';
 import axios from 'axios';

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EditorDraft from './editorTexto/editorDraft';
+
 class AnalisisPes extends Component {
     render() {
         return (
