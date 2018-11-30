@@ -56,7 +56,7 @@ class MatrizBcg extends Component {
     render() {
         return (
             <div>
-                <h1 style={{ textAlign: 'center' }}>IMatríz BCG</h1>
+                <h1 style={{ textAlign: 'center' }}>Matríz BCG</h1>
                 <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
                 <div style={{ display: "flex", flexDirection: "row-reverse" }}>
                     <Button type="primary" icon="save" onClick={this.save}>Guardar</Button>

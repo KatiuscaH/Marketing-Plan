@@ -4,23 +4,18 @@ import AuthService from '../AuthService';
 import withAuth from '../withAuth';
 import { withRouter } from 'react-router';
 import './navBar.css';
-import axios from 'axios';
-import { LISTAR_EMPRESARIO } from '../../config';
 
 const Auth = new AuthService();
 
-
-const userList = ['Luc'];
 const colorList = ['#f56a00'];
-const a = JSON.stringify(localStorage.getItem('nombre'));
+const a = JSON.parse(localStorage.getItem("user")).nombre;
 
 class NavBar extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-
-      userList: userList[0],
+      userList: a,
       color: colorList[0],
     };
   }
@@ -42,7 +37,7 @@ class NavBar extends Component {
     return (
       <div className="ajustes">
 
-        <Avatar style={{ backgroundColor: this.state.color, verticalAlign: 'middle' }} size="large" >
+        <Avatar style={{ backgroundColor: this.state.color, verticalAlign: 'middle' }} size="large"  >
           {this.state.userList}
         </Avatar>
 
