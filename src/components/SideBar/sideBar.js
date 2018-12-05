@@ -71,7 +71,7 @@ class SiderDemo extends Component {
           <Content
             className="content" style={{ margin: '24px 16px', padding: 24, background: '#fff' }}>
 
-            <Route path="/" component={ContenidoEstudiante}></Route>
+            <Route  component={ContenidoEstudiante}></Route>
 
           </Content>
 

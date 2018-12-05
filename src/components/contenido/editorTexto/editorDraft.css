@@ -1,13 +1,12 @@
 .DraftEditor-root{
   box-sizing: border-box;
-    border: 1px solid #ddd;
+   /* border: 1px solid #ddd;*/
     cursor: text;
     padding: 16px;
-    border-radius: 2px;
+    /*border-radius: 2px;
     margin-bottom: 2em;
-   /*box-shadow: inset 0px 1px 8px -3px #ABABAB;*/
     box-shadow: rgba(118, 143, 255, 0.1) 0px 16px 24px 0px;
-    background: #fefefe;
+    background: #fefefe;*/
     margin-top: 15px;
     text-align: justify; 
 }
@@ -851,7 +850,20 @@
   background: #f1f1f1;
   border-radius: 3px;
   padding: 1px 10px;
-}/**
+}
+
+.rdw-storybook-editor {
+  border: 1px solid #F1F1F1;
+  padding: 5px;
+  border-radius: 2px;
+  height: 455px;
+  margin-bottom: 2em;
+   /*box-shadow: inset 0px 1px 8px -3px #ABABAB;*/
+   box-shadow: rgba(118, 143, 255, 0.1) 0px 16px 24px 0px;
+   background: #fefefe;
+}
+
+/**
  * Draft v0.9.1
  *
  * Copyright (c) 2013-present, Facebook, Inc.

@@ -58,12 +58,12 @@ class EditorDraft extends Component {
         }
 
         return (
-            <div>
+            <div className="home-editor">
                 <Editor
                     editorState={this.props.content}
                     onChange={this.props.onChange}
                     wrapperClassName="wrapper-class"
-                    editorClassName="editor-class"
+                    editorClassName="rdw-storybook-editor"
                     toolbarClassName="toolbar-class"
                     toolbar={{
                         options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'image'],
@@ -74,8 +74,8 @@ class EditorDraft extends Component {
                             dropdownClassName: undefined,
 
                         },
-                        list: { inDropdown: true },
-                        textAlign: { inDropdown: true },
+                        list: { inDropdown: false },
+                        textAlign: { inDropdown: false },
                         link: { inDropdown: true },
                         history: { inDropdown: true },
                         image: {

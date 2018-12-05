@@ -8,7 +8,11 @@ import './navBar.css';
 const Auth = new AuthService();
 
 const colorList = ['#f56a00'];
-const a = JSON.parse(localStorage.getItem("user")).nombre;
+let a;
+if (localStorage.getItem('user')) {
+  a = JSON.parse(localStorage.getItem("user")).nombre;
+};
+console.log(a)
 
 class NavBar extends Component {
 
@@ -32,21 +36,20 @@ class NavBar extends Component {
       </Menu>
     );
 
-
-
     return (
       <div className="ajustes">
 
-        <Avatar style={{ backgroundColor: this.state.color, verticalAlign: 'middle' }} size="large"  >
+        <Avatar style={{ backgroundColor: this.state.color, verticalAlign: 'middle', cursor: "pointer" }} size="large"  >
           {this.state.userList}
         </Avatar>
-
-        <Dropdown overlay={menu} trigger={['click']}>
-          <Button style={{ marginLeft: 8 }}>
+        <Dropdown overlay={menu} trigger={['hover']}>
+          <a style={{ marginLeft: 8 }} className=".ant-layout-header">
             Ajustes <Icon type="down" />
-          </Button>
+          </a>
         </Dropdown>
+
       </div>
+
     );
   }
 
@@ -54,5 +57,4 @@ class NavBar extends Component {
 }
 
 export default withRouter(withAuth(NavBar));
-
 
