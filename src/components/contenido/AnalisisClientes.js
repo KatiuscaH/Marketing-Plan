@@ -10,6 +10,7 @@ class AnalisisClientes extends Component {
     state = {
         editorState: EditorState.createEmpty(),
         convertedContent: {},
+        iconLoading: false
     }
 
     //OnChange
@@ -36,13 +37,15 @@ class AnalisisClientes extends Component {
 
     save = () => {
         const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
+        this.setState({ iconLoading: true })
         axios.put(ADD_ANALISIS_CLIENTES.replace(":id", campo),
             { clientes: JSON.stringify(this.state.convertedContent) },
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('id_token')}`
-                },
-            });
+            { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then((res => {
+                this.setState({ iconLoading: false })
+            })
+
+            )
     }
 
     onChangeEditor = (v) => {
@@ -60,7 +63,7 @@ class AnalisisClientes extends Component {
                 <h1 style={{ textAlign: 'center' }}>Identificación de clientes actuales</h1>
                 <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
                 <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-                    <Button type="primary" icon="save" onClick={this.save}>Guardar</Button>
+                    <Button type="primary" icon="save" onClick={this.save} loading={this.state.iconLoading}>Guardar</Button>
                 </div>
             </div>
         );

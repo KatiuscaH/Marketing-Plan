@@ -51,12 +51,6 @@ class EditorDraft extends Component {
 
     render() {
 
-        if (!this.state.editorState) {
-            return (
-                <h3>Loading...</h3>
-            );
-        }
-
         return (
             <div className="home-editor">
                 <Editor
