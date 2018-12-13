@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EditorDraft from './editorTexto/editorDraft';
 import { EditorState, convertFromRaw } from 'draft-js';
-import { Button, Spin } from 'antd';
+import { Button, Spin, message } from 'antd';
 import { ADD_DOFA, ELIMINAR_DATOS_INICIALES_PLAN } from '../../config';
 import axios from 'axios';
 
@@ -46,7 +46,11 @@ class MatrizDofa extends Component {
                 this.setState({ iconLoading: false })
             })
 
-            )
+            ).catch(err => {
+                console.log(err)
+                message.error("Error de guardado. Intente nuevamente")
+                this.setState({ iconLoading: false })
+            })
     }
 
     onChangeEditor = (v) => {
