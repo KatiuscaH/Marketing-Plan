@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Table, Input,  Popconfirm, Form } from 'antd';
-import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
+import { ADD_PLAN_MEDIOS } from '../../config';
 import axios from 'axios';
 
 const FormItem = Form.Item;
@@ -147,22 +147,21 @@ class TablaPlanMedios extends Component {
     };
     const configColumns = [{
       title: 'Publicidad',
-      dataIndex: 'tipo_publicidad',
-
+      dataIndex: 'publicidad',
       width: 100
     }, {
       title: 'Caracteristica',
-      dataIndex: 'caracteristica',
+      dataIndex: 'caracteristicas',
       width: 100
       
     },  {
         title: 'Ubicación o punto de entrega de publicidad',
-        dataIndex: 'entrega',
+        dataIndex: 'ubicacion',
         width: 100
         
       }, {
         title: 'Fecha de realización de la publicidad',
-        dataIndex: 'fecha',
+        dataIndex: 'realizacion',
         width: 100
       },{
         title: 'Duración de la campaña',
@@ -170,7 +169,7 @@ class TablaPlanMedios extends Component {
         width: 100
       },{
         title: 'Número por publicidad',
-        dataIndex: 'num_publi',
+        dataIndex: 'numero',
         width: 100
       },{
         title: 'Costo total',

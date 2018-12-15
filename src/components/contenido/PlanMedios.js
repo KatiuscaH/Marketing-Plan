@@ -6,6 +6,7 @@ import {
     Input,
 } from 'antd';
 import TablaPlanMedios from './TablaPlanMedios';
+import { ADD_PLAN_MEDIOS, ELIMINAR_PLAN_MEDIOS } from '../../config';
 import axios from 'axios';
 
 
@@ -33,29 +34,27 @@ const CollectionCreateForm = Form.create()(
                     onOk={onCreate}
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
-                        <FormItem label="Tipo de publicidad">
-                            {getFieldDecorator('tipo_publicidad', {
+                    <FormItem label="Tipo de publicidad">
+                            {getFieldDecorator('tipopublicidad', {
                                 rules: [{ required: true, message: 'Por favor ingrese el tipo de publicidad' }],
-                            })(
-                                <Input />
-                            )}
+                            })(<TextArea autosize />)}
                         </FormItem>
                         <FormItem label="Característica">
-                            {getFieldDecorator('caracteristica', {
+                            {getFieldDecorator('caracteristicas', {
                                 rules: [{
                                     required: true, message: 'Por favor ingrese la característica',
                                 }],
                             })(<TextArea autosize />)}
                         </FormItem>
                         <FormItem label="Ubicación o punto de entrega de publicidad">
-                            {getFieldDecorator('entrega', {
+                            {getFieldDecorator('ubicacion', {
                                 rules: [{
                                     required: true, message: 'Por favor ingrese los datos',
                                 }],
                             })(<TextArea autosize />)}
                         </FormItem>
                         <FormItem label="Fecha de realización de la publicidad">
-                            {getFieldDecorator('fecha', {
+                            {getFieldDecorator('realizacion', {
                                 rules: [{
                                     required: true, message: 'Por favor ingrese la fecha',
                                 }],
@@ -69,7 +68,7 @@ const CollectionCreateForm = Form.create()(
                             })(<Input />)}
                         </FormItem>
                         <FormItem label="Número por publicidad">
-                            {getFieldDecorator('num_publi', {
+                            {getFieldDecorator('numero', {
                                 rules: [{
                                     required: true, message: 'Por favor ingrese el número por publicidad',
                                 }],
@@ -82,6 +81,7 @@ const CollectionCreateForm = Form.create()(
                                 }],
                             })(<TextArea autosize />)}
                         </FormItem>
+                        
                     </Form>
                 </Modal>
             );
@@ -98,18 +98,16 @@ class PlanMedios extends Component {
     };
 
 
-    ////////get
-    /*
     componentDidMount() {
-         axios.get(ADD_ESTUDIANTES)
-        .then(res => {
-            const studentList = res.data;
-            this.setState({ studentList });
-        }).catch(err => {
-            console.log(err.res)
-        })
-}
-*/
+        axios.get(ADD_PLAN_MEDIOS, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then(res => {
+                const planMediosList = res.data;
+                this.setState({ planMediosList, cargando: true });
+            }).catch(err => {
+                console.log(err.res)
+            })
+    }
+
     showModal = () => {
         this.setState({ visible: true });
     }
@@ -126,13 +124,16 @@ class PlanMedios extends Component {
             if (err) {
                 return;
             }
-            /*  axios.post('http://127.0.0.1:8080/api/empresario',  values)
-              .then((result) => {
-             console.log(result.data);
-            console.log('Received values of form: ', values);
-            form.resetFields();
-            this.setState({ visible: false });
-              })*/
+            axios.post(ADD_PLAN_MEDIOS, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+                .then((result) => {
+                    console.log(result.data);
+                    console.log('Received values of form: ', values);
+                    form.resetFields();
+                    this.setState({ visible: false, planMediosList: [...this.state.planMediosList, result.data] });
+                }).catch(err => {
+                    //message.error("error")
+                })
+
         });
     }
 
@@ -140,15 +141,17 @@ class PlanMedios extends Component {
         this.formRef = formRef;
     }
 //////////delete
-/*
-    handleDelete = (key) => {
-        axios.delete(AC_ESTUDIANTES.replace(":id", key))
-            .then((result) => {
 
+    handleDelete = (key) => {
+        console.log(key);
+        axios.delete(ELIMINAR_PLAN_MEDIOS.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+            .then((result) => {
+                console.log(result)
                 this.setState({ planMediosList: this.state.planMediosList.filter(item => item.id !== key) });
             })
-    }
-*/
+     }
+
+
     render() {
         const { planMediosList } = this.state
         return (

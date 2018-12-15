@@ -98,7 +98,7 @@ class DatosPlanMarketing extends Component {
         cargando: false
 
     };
- 
+ ////componer aqui lo del campo
  componentDidMount() {
     const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
     console.log({campo})
@@ -119,7 +119,7 @@ class DatosPlanMarketing extends Component {
                 console.log({catch: err.res})
             })
     }
-
+/////
 
     showModal = () => {
         this.setState({ visible: true });
