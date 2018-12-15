@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Input, Popconfirm, Form } from 'antd';
-import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
+import { ELIMINAR_OBJETIVOS } from '../../config';
 import axios from 'axios';
 
 const FormItem = Form.Item;
@@ -115,11 +115,10 @@ class TablaObjetivosPlan extends Component {
   }
 
   state = { dataSource: [] }
+
   ////////PUT
-  /*
-    handleSave = (row) => {
-      console.log("Updated:", row);
-      axios.put(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", row.id), row)
+      handleSave = (row) => {
+      axios.put(ELIMINAR_OBJETIVOS.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then((result)=>{
         console.log(result.data);
       })
@@ -133,7 +132,7 @@ class TablaObjetivosPlan extends Component {
       });
       this.setState({ dataSource: newData });
     }
-    */
+    
 
   render() {
     const { dataSource, onDelete } = this.props;
@@ -144,17 +143,18 @@ class TablaObjetivosPlan extends Component {
       },
     };
 
-    const configColumns = [{
-      title: 'Número de objetivo',
-      dataIndex: 'name',
-
-    }, {
+    const configColumns = [
+      {
       title: 'Descripción del objetivo',
-      dataIndex: 'lastname',
+      dataIndex: 'nombre',
+      editable: true,
+      width: 200
 
     }, {
       title: 'Operaciones',
       dataIndex: 'operacion',
+      editable: true,
+      width: 50,
 
       render: (text, record) => {
         return (

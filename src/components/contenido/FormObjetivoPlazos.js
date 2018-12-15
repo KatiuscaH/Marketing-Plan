@@ -6,6 +6,7 @@ import {
     Input
 } from 'antd';
 import TablaObjetivosPlazos from './TablaObjetivosPlazos';
+import { ADD_OBJETIVOS, ELIMINAR_OBJETIVOS } from '../../config';
 import axios from 'axios';
 
 const FormItem = Form.Item;
@@ -20,7 +21,7 @@ const CollectionCreateForm = Form.create()(
             function handleChange(value) {
                 console.log(`Valor: ${value}`);
             }
-            
+
             const { visible, onCancel, onCreate, form } = this.props;
             const { getFieldDecorator } = form;
             return (
@@ -32,21 +33,14 @@ const CollectionCreateForm = Form.create()(
                     onOk={onCreate}
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
-                        <FormItem label="Número del objetivo">
-                            {getFieldDecorator('name_objetivo', {
-                                rules: [{ required: true, message: 'Por favor ingrese el número' }],
-                            })(
-                                <Input />
-                            )}
-                        </FormItem>
                         <FormItem label="Descripción del objetivo">
-                            {getFieldDecorator('descrip_obj', {
+                            {getFieldDecorator('nombre', {
                                 rules: [{
                                     required: true, message: 'Por favor ingrese la descripción del objetivo',
                                 }],
-                            })(<TextArea rows={4} autosize />)}
+                            })(<TextArea rows={15}  />)}
                         </FormItem>
-                       
+
                     </Form>
                 </Modal>
             );
@@ -61,18 +55,16 @@ class FormObjetivoPlazos extends Component {
         visible: false,
         objetivoList: []
     };
-///////GET PARA LOS OBJETIVOS!
-/*
-    componentDidMount(){
-        axios.get(ADD_ESTUDIANTES)
+
+    componentDidMount() {
+        axios.get(ADD_OBJETIVOS, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const objetivoList = res.data;
-                this.setState({ objetivoList });
+                this.setState({ objetivoList, cargando: true });
             }).catch(err => {
                 console.log(err.res)
             })
     }
-*/
 
     showModal = () => {
         this.setState({ visible: true });
@@ -89,13 +81,16 @@ class FormObjetivoPlazos extends Component {
             if (err) {
                 return;
             }
-          /*  axios.post('http://127.0.0.1:8080/api/empresario',  values)
-            .then((result) => {
-            console.log(result.data);
-            console.log('Received values of form: ', values);
-            form.resetFields();
-            this.setState({ visible: false, objetivoList: [...this.state.objetivoList, result.data] });
-            })*/
+            axios.post(ADD_OBJETIVOS, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+                .then((result) => {
+                    console.log(result.data);
+                    console.log('Received values of form: ', values);
+                    form.resetFields();
+                    this.setState({ visible: false, objetivoList: [...this.state.objetivoList, result.data] });
+                }).catch(err => {
+                   // message.error("err")
+                })
+
         });
     }
 
@@ -103,16 +98,13 @@ class FormObjetivoPlazos extends Component {
         this.formRef = formRef;
     }
 
-////////////DELETE
-/*
     handleDelete = (key) => {
-        axios.delete(AC_ESTUDIANTES.replace(":id", key))
+        axios.delete(ELIMINAR_OBJETIVOS.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
-
                 this.setState({ objetivoList: this.state.objetivoList.filter(item => item.id !== key) });
+
             })
     }
-*/
 
     render() {
         const { objetivoList } = this.state
@@ -133,6 +125,6 @@ class FormObjetivoPlazos extends Component {
         );
     }
 }
- 
+
 
 export default FormObjetivoPlazos;

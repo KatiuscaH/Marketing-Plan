@@ -20,6 +20,8 @@ const ADD_PRESENTACION = `${HOST}/api/marketing/:id/presentacion`
 const ADD_PROVEEDORES = `${HOST}/api/marketing/:id/proveedores`
 const ADD_PLAN_MEDIOS = `${HOST}/api/medios`
 const ELIMINAR_PLAN_MEDIOS = `${HOST}/api/medios/:id`
+const ADD_OBJETIVOS = `${HOST}/api/objetivos`
+const ELIMINAR_OBJETIVOS = `${HOST}/api/objetivos/:id`
 
 export {
     HOST,
@@ -43,5 +45,7 @@ export {
     ADD_PRESENTACION,
     ADD_PROVEEDORES,
     ADD_PLAN_MEDIOS,
-    ELIMINAR_PLAN_MEDIOS
+    ELIMINAR_PLAN_MEDIOS,
+    ADD_OBJETIVOS,
+    ELIMINAR_OBJETIVOS
 };

@@ -4,17 +4,43 @@ import {
     Modal,
     Form,
     Input,
+    Select
 } from 'antd';
 import TablaPlanAccion from './TablaPlanAccion';
+import { ADD_OBJETIVOS } from '../../config';
 import axios from 'axios';
 
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
+const Option = Select.Option;
 
 const CollectionCreateForm = Form.create()(
 
     class extends React.Component {
+        state = {dataSource: []}
+
+        componentDidMount() {
+            this.setState(() => {
+                axios.get(ADD_OBJETIVOS, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+                    .then(res => {
+                        const dataSource = [];
+                        res.data.forEach(element => {
+                            dataSource.push({
+                                value: element.id,
+                                label: `${element.nombre}`,
+
+                            })
+                        });
+                        this.setState({ dataSource });
+                        console.log(dataSource);
+                        
+                    }).catch(err => {
+                        console.log(err.res)
+                    })
+            });
+        }
+
         render() {
 
             function handleChange(value) {
@@ -34,10 +60,12 @@ const CollectionCreateForm = Form.create()(
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Objetivo estratégico">
-                            {getFieldDecorator('obj_estrate', {
+                            {getFieldDecorator('obj', {
                                 rules: [{ required: true, message: 'Por favor ingrese el objetivo estratégico' }],
                             })(
-                                <TextArea autosize />
+                                <Select>
+                                    {this.state.dataSource.map(item=>(<Option key={item.value} value={item.value}>{item.label}</Option>))}
+                                </Select>
                             )}
                         </FormItem>
                         <FormItem label="Tácticas (Corto Plazo)">
@@ -45,7 +73,7 @@ const CollectionCreateForm = Form.create()(
                                 rules: [{
                                     required: true, message: 'Por favor ingrese la táctica',
                                 }],
-                            })(<TextArea autosize />)}
+                            })(<TextArea row={10} />)}
                         </FormItem>
                         <FormItem label="Responsable">
                             {getFieldDecorator('responsable', {
@@ -73,7 +101,7 @@ const CollectionCreateForm = Form.create()(
                                 rules: [{
                                     required: true, message: 'Por favor ingrese el indicador de logro',
                                 }],
-                            })(<TextArea autosize />)}
+                            })(<TextArea row={10} />)}
                         </FormItem>
 
                     </Form>
