@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Table, Input, Popconfirm, Form } from 'antd';
-import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
-import axios from 'axios';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -115,26 +113,7 @@ class TablaPlanAccion extends Component {
   }
 
   state = { dataSource: [] }
-  /////// actualizar
-  /*
-    handleSave = (row) => {
-      console.log("Updated:", row);
-      axios.put(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", row.id), row)
-      .then((result)=>{
-        console.log(result.data);
-      })
-  
-      const newData = [...this.state.dataSource];
-      const index = newData.findIndex(item => row.id === item.id);
-      const item = newData[index];
-      newData.splice(index, 1, {
-        ...item,
-        ...row,
-      });
-      this.setState({ dataSource: newData });
-    }
-  */
-
+ 
   render() {
     const { dataSource, onDelete } = this.props;
     const components = {
@@ -146,12 +125,12 @@ class TablaPlanAccion extends Component {
 
     const configColumns = [{
       title: 'Objetivo estratégico',
-      dataIndex: 'obj_estrate',
+      dataIndex: 'objetivo_id',
 
       width: 100
     }, {
       title: 'Tácticas (Corto Plazo)',
-      dataIndex: 'tacticas',
+      dataIndex: 'tactica',
       width: 100
 
     }, {

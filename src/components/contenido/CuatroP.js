@@ -68,7 +68,7 @@ class CuatroP extends Component {
             <div>
                 {
                     cargando ? <div>
-                    <h1 style={{ textAlign: 'center' }}>Presentación de la empresa</h1>
+                    <h1 style={{ textAlign: 'center' }}>Cuatro P</h1>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
                         <Spin size="large" />
                     </div>

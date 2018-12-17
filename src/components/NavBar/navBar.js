@@ -8,11 +8,12 @@ import './navBar.css';
 const Auth = new AuthService();
 
 const colorList = ['#f56a00'];
-let a;
-if (localStorage.getItem('user')) {
+let a ;
+if (JSON.parse(localStorage.getItem("user"))) {
   a = JSON.parse(localStorage.getItem("user")).nombre;
 };
 console.log(a)
+
 
 class NavBar extends Component {
 

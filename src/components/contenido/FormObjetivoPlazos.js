@@ -3,7 +3,8 @@ import {
     Button,
     Modal,
     Form,
-    Input
+    Input,
+    Spin
 } from 'antd';
 import TablaObjetivosPlazos from './TablaObjetivosPlazos';
 import { ADD_OBJETIVOS, ELIMINAR_OBJETIVOS } from '../../config';
@@ -38,7 +39,7 @@ const CollectionCreateForm = Form.create()(
                                 rules: [{
                                     required: true, message: 'Por favor ingrese la descripción del objetivo',
                                 }],
-                            })(<TextArea rows={15}  />)}
+                            })(<TextArea rows={15} />)}
                         </FormItem>
 
                     </Form>
@@ -53,7 +54,8 @@ const CollectionCreateForm = Form.create()(
 class FormObjetivoPlazos extends Component {
     state = {
         visible: false,
-        objetivoList: []
+        objetivoList: [],
+        cargando: false
     };
 
     componentDidMount() {
@@ -88,7 +90,7 @@ class FormObjetivoPlazos extends Component {
                     form.resetFields();
                     this.setState({ visible: false, objetivoList: [...this.state.objetivoList, result.data] });
                 }).catch(err => {
-                   // message.error("err")
+                    // message.error("err")
                 })
 
         });
@@ -108,21 +110,34 @@ class FormObjetivoPlazos extends Component {
 
     render() {
         const { objetivoList } = this.state
-        return (
-            <div>
-                <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Agregar Objetivo</Button>
-                </div>
 
-                <CollectionCreateForm
-                    wrappedComponentRef={this.saveFormRef}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    onCreate={this.handleCreate}
-                />
-                <TablaObjetivosPlazos dataSource={objetivoList} onDelete={this.handleDelete} />
+        if (!this.state.cargando) {
+            return <div> 
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
+                    <Spin size="large" />
+                </div>
             </div>
-        );
+        } else {
+            return (
+
+                <div>
+                    <div>
+                        <div style={{ paddingBottom: '30px' }}>
+                            <Button type="primary" onClick={this.showModal}>Agregar Objetivo</Button>
+                        </div>
+
+                        <CollectionCreateForm
+                            wrappedComponentRef={this.saveFormRef}
+                            visible={this.state.visible}
+                            onCancel={this.handleCancel}
+                            onCreate={this.handleCreate}
+                        />
+                        <TablaObjetivosPlazos dataSource={objetivoList} onDelete={this.handleDelete} />
+                    </div>
+                </div>
+            );
+        }
+
     }
 }
 

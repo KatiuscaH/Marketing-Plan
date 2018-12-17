@@ -102,7 +102,7 @@ class PlanMedios extends Component {
         axios.get(ADD_PLAN_MEDIOS, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const planMediosList = res.data;
-                this.setState({ planMediosList, cargando: true });
+                this.setState({ planMediosList});
             }).catch(err => {
                 console.log(err.res)
             })

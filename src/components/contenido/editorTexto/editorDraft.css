@@ -856,7 +856,7 @@
   border: 1px solid #F1F1F1;
   padding: 5px;
   border-radius: 2px;
-  height: 455px;
+  height: 100vh;/*455px*/
   margin-bottom: 2em;
    /*box-shadow: inset 0px 1px 8px -3px #ABABAB;*/
    box-shadow: rgba(118, 143, 255, 0.1) 0px 16px 24px 0px;

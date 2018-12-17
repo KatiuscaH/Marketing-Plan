@@ -33,7 +33,7 @@ const CollectionCreateForm = Form.create()(
                         });
                         this.setState({ dataSource });
                         console.log(dataSource);
-                        
+
                     }).catch(err => {
                         console.log(err.res)
                     })
@@ -77,7 +77,7 @@ const CollectionCreateForm = Form.create()(
                                 <AntdSelect>
                                     {this.state.dataSource.map(item => (<Option key={item.value} value={item.value}>{item.label}</Option>))}
                                 </AntdSelect>
-                                 )}
+                            )}
                         </FormItem>
                     </Form>
                 </Modal>
@@ -95,31 +95,39 @@ class DatosPlanMarketing extends Component {
     state = {
         visible: false,
         datosPlanList: [],
-        cargando: false
+        cargando: false,
+        campoS: false
 
     };
- ////componer aqui lo del campo
- componentDidMount() {
-    const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
-    console.log({campo})
-        axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` }})
-            .then(({data}) => {
-                console.log({data});
-                let { nombre, apellido} = data.empresario
-                let empresario = `${nombre} ${apellido}`;
-                let datos = {
-                    plan: data.plan,
-                    estudiantes: data.estudiantes,
-                    empresario_id: empresario,
-                    id: campo,
-                }
-                console.log({datos})
-                this.setState({ datosPlanList: [datos], cargando: true });
-            }).catch(err => {
-                console.log({catch: err.res})
-            })
+    ////componer aqui lo del campo
+    componentDidMount() {
+        const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
+        if (campo == null) {
+            this.setState({ campoS: true })
+        }else{
+            console.log({ campo })
+            axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+                .then(({ data }) => {
+                    console.log({ data });
+                    let { nombre, apellido } = data.empresario
+                    let empresario = `${nombre} ${apellido}`;
+                    let datos = {
+                        plan: data.plan,
+                        estudiantes: data.estudiantes,
+                        empresario_id: empresario,
+                        id: campo,
+                    }
+                    console.log({ datos })
+                    this.setState({ datosPlanList: [datos], cargando: true });
+                }).catch(err => {
+                    console.log({ catch: err.res })
+                })
+
+        }
+
+
     }
-/////
+    /////
 
     showModal = () => {
         this.setState({ visible: true });
@@ -161,32 +169,34 @@ class DatosPlanMarketing extends Component {
 
 
     render() {
-        
-        if(!this.state.cargando){
 
+       /* if (!this.state.cargando) {
             return <div> <h1>Datos iniciales del Plan de Marketing</h1>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
-                        <Spin size="large"/>
-            </div>
-            </div>
-        }else{
-            return (
-                <div>
-                    <h1>Datos iniciales del Plan de Marketing</h1>
-                    <div style={{ paddingBottom: '30px' }}>
-                        <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
-                    </div>
-                    <CollectionCreateForm
-                        wrappedComponentRef={this.saveFormRef}
-                        visible={this.state.visible}
-                        onCancel={this.handleCancel}
-                        onCreate={this.handleCreate}
-                    />
-                    <TablaDatosPlan dataSource={this.state.datosPlanList} onDelete={this.handleDelete} />
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
+                    <Spin size="large" />
                 </div>
-            );
-        }
-      
+            </div>
+        } else {*/
+            if(this.state.campoS!==null ){
+                return (
+                    <div>
+                        <h1>Datos iniciales del Plan de Marketing</h1>
+                        <div style={{ paddingBottom: '30px' }}>
+                            <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
+                        </div>
+                        <CollectionCreateForm
+                            wrappedComponentRef={this.saveFormRef}
+                            visible={this.state.visible}
+                            onCancel={this.handleCancel}
+                            onCreate={this.handleCreate}
+                        />
+                        <TablaDatosPlan dataSource={this.state.datosPlanList} onDelete={this.handleDelete} />
+                    </div>
+                );
+
+         }
+      // }
+
     }
 }
 

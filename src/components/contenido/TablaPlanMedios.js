@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { Table, Input,  Popconfirm, Form } from 'antd';
-import { ADD_PLAN_MEDIOS } from '../../config';
-import axios from 'axios';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -115,27 +113,6 @@ class TablaPlanMedios extends Component {
     }
    
   state = { dataSource: [] }
-
-  ////////put
-  /*
-  handleSave = (row) => {
-    console.log("Updated:", row);
-    axios.put(AC_ESTUDIANTES.replace(":id", row.id), row)
-      .then((result) => {
-        console.log(result.data);
-      })
-
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex(item => row.id === item.id);
-    const item = newData[index];
-    newData.splice(index, 1, {
-      ...item,
-      ...row,
-    });
-    this.setState({ dataSource: newData });
-  }
-*/
-  
 
   render() {
     const { dataSource, onDelete } = this.props;

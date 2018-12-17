@@ -7,7 +7,7 @@ import {
     Select
 } from 'antd';
 import TablaPlanAccion from './TablaPlanAccion';
-import { ADD_OBJETIVOS } from '../../config';
+import { ADD_PLAN_ACCION, ELIMINAR_PLAN_ACCION,ADD_OBJETIVOS } from '../../config';
 import axios from 'axios';
 
 
@@ -60,7 +60,7 @@ const CollectionCreateForm = Form.create()(
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
                         <FormItem label="Objetivo estratégico">
-                            {getFieldDecorator('obj', {
+                            {getFieldDecorator('objetivo_id', {
                                 rules: [{ required: true, message: 'Por favor ingrese el objetivo estratégico' }],
                             })(
                                 <Select>
@@ -69,7 +69,7 @@ const CollectionCreateForm = Form.create()(
                             )}
                         </FormItem>
                         <FormItem label="Tácticas (Corto Plazo)">
-                            {getFieldDecorator('tacticas', {
+                            {getFieldDecorator('tactica', {
                                 rules: [{
                                     required: true, message: 'Por favor ingrese la táctica',
                                 }],
@@ -120,17 +120,16 @@ class PlanAccion extends Component {
     };
 
     ////GET
-    /*
-        componentDidMount() {
-            axios.get(ADD_ESTUDIANTES)
+    componentDidMount() {
+
+        axios.get(ADD_PLAN_ACCION, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
-                const studentList = res.data;
-                this.setState({ studentList });
+                const planList = res.data;
+                this.setState({ planList });
             }).catch(err => {
                 console.log(err.res)
             })
     }
-    */
 
     showModal = () => {
         this.setState({ visible: true });
@@ -146,14 +145,18 @@ class PlanAccion extends Component {
             if (err) {
                 return;
             }
-            /*  axios.post('http://127.0.0.1:8080/api/empresario',  values)
-              .then((result) => {
-                  console.log(result.data);
-                  console.log('Received values of form: ', values);
-            form.resetFields();
-            this.setState({ visible: false, planList: [...this.state.planList, result.data] });
-              })*/
 
+            axios.post(ADD_PLAN_ACCION, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+                .then((result) => {
+                    console.log(result.data);
+                    console.log('Received : ', values);
+                    console.log('Received  form: ', values);
+                    form.resetFields();
+                    this.setState({ visible: false, planList: [...this.state.planList, result.data] });
+                }).catch(err => {
+                    console.log("Error de corre: ", err)
+                    //message.error("Ya existe un estudiante con el correo ingresado")
+                })
         });
     }
 
@@ -161,15 +164,14 @@ class PlanAccion extends Component {
         this.formRef = formRef;
     }
 //////delete
-/*
-    handleDelete = (key) => {
-        axios.delete(AC_ESTUDIANTES.replace(":id", key))
-            .then((result) => {
 
-                this.setState({ planList: this.state.planList.filter(item => item.id !== key) });
-            })
-    }
-*/
+handleDelete = (key) => {
+    axios.delete(ELIMINAR_PLAN_ACCION.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+        .then((result) => {
+
+            this.setState({ planList: this.state.planList.filter(item => item.id !== key) });
+        })
+}
     render() {
         const { planList } = this.state
         return (

@@ -76,7 +76,7 @@ class AnalisisClientes extends Component {
                     </div> : <div>
                             <h1 style={{ textAlign: 'center' }}>Identificación de clientes actuales</h1>
                             <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
-                            <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+                            <div style={{ display: "flex", flexDirection: "row-reverse"}}>
                                 <Button type="primary" icon="save" onClick={this.save} loading={this.state.iconLoading}>Guardar</Button>
                             </div>
                         </div>

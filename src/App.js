@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import SiderDocente from '../src/components/SideBar/sideBarDocente';
 import SiderEstudiante from '../src/components/SideBar/sideBar';
