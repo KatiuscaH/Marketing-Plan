@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Upload, Icon, message } from 'antd';
+import {ADD_ANEXOS} from '../../config';
 
 const Dragger = Upload.Dragger;
 
@@ -8,16 +9,18 @@ class Anexos extends Component {
         const props = {
             name: 'file',
             multiple: true,
-            action: '//jsonplaceholder.typicode.com/posts/',
+            action: ADD_ANEXOS ,
+            headers:  { Authorization: `Bearer ${localStorage.getItem('id_token')}`  },
+            multiple: true,
             onChange(info) {
                 const status = info.file.status;
                 if (status !== 'uploading') {
                     console.log(info.file, info.fileList);
                 }
                 if (status === 'done') {
-                    message.success(`${info.file.name} file uploaded successfully.`);
+                    message.success(`${info.file.name} archivo subido satisfactoriamente.`);
                 } else if (status === 'error') {
-                    message.error(`${info.file.name} file upload failed.`);
+                    message.error(`${info.file.name} archivo fallido.`);
                 }
             },
         };
