@@ -27,3 +27,7 @@
  position: 'fixed' ;
   overflow-y:'overlay' ;
 }
+
+.ant-layout-sider-zero-width-trigger{
+  top: 15px;
+}

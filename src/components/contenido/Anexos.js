@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Upload, Icon, message } from 'antd';
-import EditorDraft from './editorTexto/editorDraft';
 
 const Dragger = Upload.Dragger;
 

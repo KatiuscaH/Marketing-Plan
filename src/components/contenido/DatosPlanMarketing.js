@@ -191,9 +191,9 @@ class DatosPlanMarketing extends Component {
                             onCreate={this.handleCreate}
                         />
                         <TablaDatosPlan dataSource={this.state.datosPlanList} onDelete={this.handleDelete} />
+
                     </div>
                 );
-
          }
       // }
 
