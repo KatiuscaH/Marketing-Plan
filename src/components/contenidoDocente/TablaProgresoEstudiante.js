@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table, Button } from 'antd';
 import axios from 'axios';
 import { VER_PLANES_MARKETING } from '../../config';
+import VerPlanesMarketing from '../contenidoDocente/VerPlanesMarketing';
 
 const columns = [{
     title: 'Nombre',
@@ -20,7 +21,7 @@ const columns = [{
     key: 'operacion',
     render: (text, record) => (
         <div>
-            <Button type="primary" style={{marginRight: '10px'}} href="https://google.com">
+            <Button type="primary" style={{marginRight: '10px'}} href="">
                 Ver Plan
             </Button>
             <Button type="primary" href="https://google.com">
@@ -48,7 +49,8 @@ class TablaProgresoEstudiante extends Component {
     render() {
         return (
             <div>
-                <Table columns={columns} dataSource={this.state.datas} bordered></Table>
+                <Table rowKey="id" columns={columns} dataSource={this.state.datas} bordered></Table>
+                
             </div>
         )
     }
