@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import { Upload, Icon, message } from 'antd';
 import {ADD_ANEXOS} from '../../config';
+import axios from 'axios';
 
 const Dragger = Upload.Dragger;
 
 class Anexos extends Component {
+    state = {
+        fileList:[]
+    }
+    
+            handleUpload = () => {
+                const { fileList } = this.state;
+                const formData = new FormData();
+                axios.get(ADD_ANEXOS, {headers:{Authorization: `Bearer ${localStorage.getItem('id_token')}` }})
+                fileList.forEach((file) => {
+                  formData.append('files[]', file);
+                });
+                        }
+            
     render() {
+
         const props = {
             name: 'file',
             multiple: true,
             action: ADD_ANEXOS ,
             headers:  { Authorization: `Bearer ${localStorage.getItem('id_token')}`  },
             multiple: true,
+            
             onChange(info) {
                 const status = info.file.status;
                 if (status !== 'uploading') {
