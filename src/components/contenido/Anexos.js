@@ -66,7 +66,6 @@ class Anexos extends Component {
         };
 
 
-        const fileList = this.state
 
         return (
             <div>
@@ -78,11 +77,11 @@ class Anexos extends Component {
                     <p className="ant-upload-text">Haga clic o arrastre el archivo a esta área para subir</p>
                     <p className="ant-upload-hint">Soporte para una carga única o masiva.</p>
                 </Dragger>
-
+<br/>
                 <List
                     bordered
-                    dataSource={fileList}
-                    renderItem={item => (<List.Item>{item.nombre}</List.Item>)}
+                    dataSource={this.state.fileList}
+                    renderItem={item => (<List.Item>{item.label}</List.Item>)}
                 />
             </div>
         );
