@@ -25,7 +25,7 @@ const ELIMINAR_OBJETIVOS = `${HOST}/api/objetivos/:id`
 const ADD_PLAN_ACCION = `${HOST}/api/estrategias`
 const ELIMINAR_PLAN_ACCION = `${HOST}/api/estrategias/:id`
 const ADD_ANEXOS = `${HOST}/api/files`
-
+const VER_PLANES_MARKETING = `${HOST}/api/admin/marketing`
 
 export {
     HOST,
@@ -54,5 +54,6 @@ export {
     ELIMINAR_OBJETIVOS,
     ADD_PLAN_ACCION,
     ELIMINAR_PLAN_ACCION,
-    ADD_ANEXOS
+    ADD_ANEXOS,
+    VER_PLANES_MARKETING
 };

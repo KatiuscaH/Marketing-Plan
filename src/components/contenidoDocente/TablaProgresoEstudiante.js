@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'antd';
+import axios from 'axios';
+import { VER_PLANES_MARKETING } from '../../config';
+import VerPlanesMarketing from '../contenidoDocente/VerPlanesMarketing';
 
 const columns = [{
     title: 'Nombre',
@@ -11,14 +14,14 @@ const columns = [{
 
 }, {
     title: 'Empresario asignado',
-    dataIndex: 'emp_asignado',
+    dataIndex: 'empresario',
 
 }, , {
     title: 'Operación',
     key: 'operacion',
     render: (text, record) => (
         <div>
-            <Button type="primary" style={{marginRight: '10px'}} href="https://google.com">
+            <Button type="primary" style={{marginRight: '10px'}} href="">
                 Ver Plan
             </Button>
             <Button type="primary" href="https://google.com">
@@ -29,28 +32,25 @@ const columns = [{
 }
 ];
 
-const data = [{
-    key: '1',
-    nombre: 'John Brown',
-    grupo: 'Juan 1. Juan 2 Juan 3',
-    emp_asignado: 'Pepito Perez'
-}, {
-    key: '2',
-    nombre: 'John Brown',
-    grupo: 'Juan 1. Juan 2 Juan 3',
-    emp_asignado: 'Pepito Perez'
-}, {
-    key: '3',
-    nombre: 'John Brown',
-    grupo: 'Juan 1. Juan 2 Juan 3',
-    emp_asignado: 'Pepito Perez'
-}];
 
 class TablaProgresoEstudiante extends Component {
+    state = {
+        datas: []
+    }
+    componentDidMount(){
+        axios.get(VER_PLANES_MARKETING,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+        .then(res=>{
+            const datas = res.data
+            this.setState({datas});
+        }).catch(err=>{
+            console.log(err.res)
+        })
+    }
     render() {
         return (
             <div>
-                <Table columns={columns} dataSource={data} bordered></Table>
+                <Table rowKey="id" columns={columns} dataSource={this.state.datas} bordered></Table>
+                
             </div>
         )
     }
