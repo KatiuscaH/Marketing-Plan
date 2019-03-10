@@ -50,12 +50,12 @@ class Login extends Component {
     return (
       <div>
          <Header style={{ position: 'fixed', zIndex: 1, width: '100%', color: '#0000', }}>
-      <span style={{color: 'white', fontSize:'2em', paddingTop:'2px'}}>Plan de Marketing</span>
+      <span style={{color: 'white', fontSize:'2em', paddingTop:'2px'}}>SoftMark-UDC</span>
     </Header>
         <section class="intro">
           <div class="inner">
             <div class="content">
-              <h1>¡BIENVENIDO A<span style={{ color: "#CB4900" }}> PLANES DE MARKETING!</span></h1>
+              <h1>¡BIENVENIDO A<span style={{ color: "#CB4900" }}> SoftMark-UDC!</span></h1>
               <Form onSubmit={this.handleSubmit} className="login-form">
                 <div className="logo">
                   <img alt="logo" src={logoudc2} />
@@ -84,7 +84,7 @@ class Login extends Component {
           </div>
         </section>
         <section className="definicion">
-          <h2>¿QUÉ ES PLAN DE MARKETING?</h2>
+          <h2>¿QUÉ ES SoftMark-UDC?</h2>
           <p>Es una plataforma desarrollada como proyecto de grado para crear de manera interactiva los planes de marketing en la asignatura Gerencia de Mercados de Administracion de empresas.</p>
           <div className="card">
             <div style={{ width: '400px' }} >
@@ -106,7 +106,7 @@ class Login extends Component {
           </div>
         </section>
         <section className="roles">
-        <h2>ROLES EN PLAN DE MARKETING</h2>
+        <h2>ROLES EN SoftMark-UDC</h2>
           <div className="card">
             <div style={{ width: '400px' }} >
               <img className="imgDef" src={docente} />

@@ -177,7 +177,7 @@ handleDelete = (key) => {
         return (
             <div>
 
-                <h1 style={{ textAlign: 'center' }}>Plan de Acción</h1>
+                <h1 style={{ textAlign: 'center', color: 'black'  }}>Plan de Acción</h1>
                 <div style={{ paddingBottom: '30px' }}>
                     <Button type="primary" onClick={this.showModal}>Agregar Plan de Acción</Button>
                 </div>

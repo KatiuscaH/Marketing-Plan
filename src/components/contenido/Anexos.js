@@ -69,13 +69,12 @@ class Anexos extends Component {
 
         return (
             <div>
-                <h1 style={{ textAlign: 'center' }}>Anexos</h1>
+                <h1 style={{ textAlign: 'center' , color: 'black' }}>Anexos</h1>
                 <Dragger {...props}>
                     <p className="ant-upload-drag-icon">
                         <Icon type="inbox" />
                     </p>
                     <p className="ant-upload-text">Haga clic o arrastre el archivo a esta área para subir</p>
-                    <p className="ant-upload-hint">Soporte para una carga única o masiva.</p>
                 </Dragger>
 <br/>
                 <List

@@ -68,12 +68,12 @@ class CuatroP extends Component {
             <div>
                 {
                     cargando ? <div>
-                    <h1 style={{ textAlign: 'center' }}>Cuatro P</h1>
+                    <h1 style={{ textAlign: 'center', color: 'black'  }}>Cuatro P</h1>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
                         <Spin size="large" />
                     </div>
                 </div> : <div>
-                        <h1 style={{ textAlign: 'center' }}>Cuatro P</h1>
+                        <h1 style={{ textAlign: 'center', color: 'black'  }}>Cuatro P</h1>
                         <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
                         <div style={{ display: "flex", flexDirection: "row-reverse" }}>
                             <Button type="primary" icon="save" onClick={this.save} loading={this.state.iconLoading}>Guardar</Button>

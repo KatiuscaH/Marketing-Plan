@@ -180,7 +180,7 @@ class DatosPlanMarketing extends Component {
             if(this.state.campoS!==null ){
                 return (
                     <div>
-                        <h1>Datos iniciales del Plan de Marketing</h1>
+                        <h1 style={{color: 'black'}}>Datos iniciales del Plan de Marketing</h1>
                         <div style={{ paddingBottom: '30px' }}>
                             <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
                         </div>

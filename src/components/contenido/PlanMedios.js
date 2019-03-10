@@ -157,7 +157,7 @@ class PlanMedios extends Component {
         return (
             <div>
 
-                <h1 style={{ textAlign: 'center' }}>Plan de Medios</h1>
+                <h1 style={{ textAlign: 'center', color: 'black'  }}>Plan de Medios</h1>
                 <div style={{ paddingBottom: '30px' }}>
                     <Button type="primary" onClick={this.showModal}>Agregar Plan de Medios</Button>
                 </div>

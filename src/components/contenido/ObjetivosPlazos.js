@@ -4,7 +4,7 @@ class ObjetivoAPlazos extends Component {
     render() {
         return (
             <div>
-                <h1 style={{ textAlign: 'center' }}>Objetivos a largo plazo</h1>
+                <h1 style={{ textAlign: 'center', color: 'black'  }}>Objetivos a largo plazo</h1>
                 <FormObjetivoPlazos/>
             </div>
         );
