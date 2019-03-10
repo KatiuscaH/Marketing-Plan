@@ -66,10 +66,21 @@ html, body{
 }
 
 @media screen and (max-width: 768px){
-  .H1{
-    font-size: 150%;
-    margin-top: 40px;
+    .H1{
+      font-size: 150%;
+      margin-top: 40px;
+      color: transparent;
+    }
+    .spaan{
+      color: transparent;
+    }
+  .logoapp{
+    padding-bottom: 10%;
   }
+}
+
+.spaan{
+  color: "#CB4900";
 }
 
  .H2{
@@ -118,4 +129,8 @@ html, body{
 
 h4, h5{
   color: white;
+}
+
+.ant-layout-header {
+  background: transparent;
 }

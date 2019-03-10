@@ -9,7 +9,7 @@ import objetivo from '../../../src/objetivo.svg';
 import docente from '../../../src/docente.svg';
 import estudiante from '../../../src/estudiante.svg';
 import empresario from '../../../src/empresario.svg';
-import photo from '../../../src/photo.jpg'
+import softmarkudc from './softmark.png'
 import AuthService from '../AuthService';
 
 const FormItem = Form.Item;
@@ -49,13 +49,17 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-         <Header style={{ position: 'fixed', zIndex: 1, width: '100%', color: '#0000', }}>
-      <span style={{color: 'white', fontSize:'2em', paddingTop:'2px'}}>SoftMark-UDC</span>
-    </Header>
+          <Header style={{ position: 'absolute', zIndex: 1, width: '100%', }}>
+          <div>
+      <img className="logoapp" src={softmarkudc}/>
+    </div>
+    </Header> 
+   
         <section class="intro">
           <div class="inner">
-            <div class="content">
-              <h1 className="H1">¡BIENVENIDO A<span style={{ color: "#CB4900" }}> SoftMark-UDC!</span></h1>
+     
+            <div className="content">
+              <h1 className="H1">¡BIENVENIDO A<span className="spaan"> SoftMark-UDC!</span></h1>
               <Form onSubmit={this.handleSubmit} className="login-form">
                 <div className="logo">
                   <img alt="logo" src={logoudc2} />
