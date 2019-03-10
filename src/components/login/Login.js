@@ -90,39 +90,39 @@ class Login extends Component {
             <div style={{ width: '400px' }} >
               <img className="imgDef" src={marketing} />
               <h3 className="H3">Marketing</h3>
-              <p>El Marketing, traducido al español como Mercadotecnia, “es una actividad, un conjunto de instituciones y procesos de creación, comunicación, entrega e intercambio de ofertas que tienen valor para consumidores, clientes, socios y sociedad en general” (American Marketing Association).</p>
+              <p className="P">El Marketing, traducido al español como Mercadotecnia, “es una actividad, un conjunto de instituciones y procesos de creación, comunicación, entrega e intercambio de ofertas que tienen valor para consumidores, clientes, socios y sociedad en general” (American Marketing Association).</p>
             </div>
             <div style={{ width: '400px' }} >
               <img className="imgDef" src={planDeMarketing} />
-              <h3>Plan de Marketing</h3>
-              <p>
+              <h3 className="H3">Plan de Marketing</h3>
+              <p className="P">
                 El plan de marketing, definido como un documento escrito que contiene el análisis de la situación de la empresa, los objetivos, la implementación de estrategias para cumplir los objetivos y los resultados esperados. Este instrumento, es primordial para el éxito de los productos o servicios ofrecidos, puesto que con él se determina el mercado al que se pretende ingresar o mantenerse.</p>
             </div>
             <div style={{ width: '400px' }} >
             <img className="imgDef" src={objetivo} />
-            <h3>Objetivo</h3>
-                <p>Este tiene como propósito, identificar y satisfacer las necesidades humanas y sociales, es decir, diseñar de manera excelente el producto o servicio a ofrecer para que el cliente se sienta identificado con este y acceda a comprarlo sin sentir presión alguna.</p>
+            <h3 className="H3">Objetivo</h3>
+                <p className="P">Este tiene como propósito, identificar y satisfacer las necesidades humanas y sociales, es decir, diseñar de manera excelente el producto o servicio a ofrecer para que el cliente se sienta identificado con este y acceda a comprarlo sin sentir presión alguna.</p>
             </div>
           </div>
         </section>
         <section className="roles">
-        <h2>ROLES EN SoftMark-UDC</h2>
+        <h2 className="H2">ROLES EN SoftMark-UDC</h2>
           <div className="card">
             <div style={{ width: '400px' }} >
               <img className="imgDef" src={docente} />
-              <h3>Administrador</h3>
-              <p>El administrador de este sitio es el responsable de llevar un control de las personas que harán uso de la plataforma. Debe asegurarse que la información sea la correcta y esté actualizada. En este caso, el Administrador será el docente encargado de la asignatura.</p>
+              <h3 className="H3">Administrador</h3>
+              <p className="P">El administrador de este sitio es el responsable de llevar un control de las personas que harán uso de la plataforma. Debe asegurarse que la información sea la correcta y esté actualizada. En este caso, el Administrador será el docente encargado de la asignatura.</p>
             </div>
             <div style={{ width: '400px' }} >
               <img className="imgDef" src={estudiante} />
-              <h3>Estudiantes</h3>
-              <p>
+              <h3 className="H3">Estudiantes</h3>
+              <p className="P">
               El estudiante es el responsable de crear los planes de marketing según lo especificado en la clase por el docente y llevar actualizado los requerimientos que este le pida.</p>
             </div>
             <div style={{ width: '400px' }} >
             <img className="imgDef" src={empresario} />
-            <h3>Empresario</h3>
-                <p>El empresario podrá ver el avance del plan de marketing realizado por el estudiante y supervisado por el docente, además de las estrategias creadas para este y actualizar el estado de cumplimiento de los objetivos creados para su empresa.</p>
+            <h3 className="H3">Empresario</h3>
+                <p className="P">El empresario podrá ver el avance del plan de marketing realizado por el estudiante y supervisado por el docente, además de las estrategias creadas para este y actualizar el estado de cumplimiento de los objetivos creados para su empresa.</p>
             </div>
           </div>
         </section>
