@@ -55,7 +55,7 @@ class Login extends Component {
         <section class="intro">
           <div class="inner">
             <div class="content">
-              <h1>¡BIENVENIDO A<span style={{ color: "#CB4900" }}> SoftMark-UDC!</span></h1>
+              <h1 className="H1">¡BIENVENIDO A<span style={{ color: "#CB4900" }}> SoftMark-UDC!</span></h1>
               <Form onSubmit={this.handleSubmit} className="login-form">
                 <div className="logo">
                   <img alt="logo" src={logoudc2} />
@@ -84,12 +84,12 @@ class Login extends Component {
           </div>
         </section>
         <section className="definicion">
-          <h2>¿QUÉ ES SoftMark-UDC?</h2>
-          <p>Es una plataforma desarrollada como proyecto de grado para crear de manera interactiva los planes de marketing en la asignatura Gerencia de Mercados de Administracion de empresas.</p>
+          <h2 className="H2">¿QUÉ ES SoftMark-UDC?</h2>
+          <p className="P">Es una plataforma desarrollada como proyecto de grado para crear de manera interactiva los planes de marketing en la asignatura Gerencia de Mercados de Administracion de empresas.</p>
           <div className="card">
             <div style={{ width: '400px' }} >
               <img className="imgDef" src={marketing} />
-              <h3>Marketing</h3>
+              <h3 className="H3">Marketing</h3>
               <p>El Marketing, traducido al español como Mercadotecnia, “es una actividad, un conjunto de instituciones y procesos de creación, comunicación, entrega e intercambio de ofertas que tienen valor para consumidores, clientes, socios y sociedad en general” (American Marketing Association).</p>
             </div>
             <div style={{ width: '400px' }} >
