@@ -12,8 +12,7 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userList: a,
-      color: colorList[0],
+
     };
   }
 
