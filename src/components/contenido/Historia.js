@@ -25,6 +25,7 @@ class Historia extends Component {
         axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo),
             { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(({ data }) => {
+                console.log('hist', data.historia)
                 if (data.historia) {
                     this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.historia))) })
                 } else {

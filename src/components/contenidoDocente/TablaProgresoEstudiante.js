@@ -15,6 +15,7 @@ class TablaProgresoEstudiante extends Component {
         super(props);
         this.state = {
             datas: [],
+            datas2: {presentacion:null}
         }
         this.columns = [{
             title: 'Nombre',
@@ -71,7 +72,7 @@ class TablaProgresoEstudiante extends Component {
         return (
             <div>
                 <Table rowKey="id" columns={this.columns} dataSource={this.state.datas} bordered></Table>
-                <MostrarProgresoEstudiante  />
+                <MostrarProgresoEstudiante propiedad={this.state.datas2} />
             </div>
         )
     }

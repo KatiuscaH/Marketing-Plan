@@ -47,8 +47,8 @@ class MostrarProgresoEstudiante extends Component {
       return (
           <div>
             <h1>Plan de marketing - Progreso</h1>
-               <Apresentacion/>
-               <Ahistoria/>
+               <Apresentacion data={this.props.propiedad.presentacion}/>
+               {/* <Ahistoria/>
                <Apest/>
                <Aporter/>
                <AcuatroP/>
@@ -58,7 +58,7 @@ class MostrarProgresoEstudiante extends Component {
                <Abcg/>
                <Adofa/>
                <Amefimefe/>
-               <Aansoff/>
+               <Aansoff/> */}
 
           </div>
       )

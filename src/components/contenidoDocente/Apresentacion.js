@@ -6,62 +6,43 @@ import { EditorState, convertFromRaw } from 'draft-js';
 
 class Apresentacion extends Component {
   state = {
-      editorState: EditorState.createEmpty(),
+      editorState : EditorState.createEmpty(),
   }
 
-// * Presentacion
-componentDidMount(){
-  const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
-  axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo),{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-  .then(res=>{
-    const {presentacion,historia,pest,porter,coatrop,clientes,competencia,proveedores,bcg,dofa,mefi,ansoff} = res.data;
-     this.setState({datas: res.data});
-     if (res.data.presentacion) {
-      this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse( res.data.presentacion))) })
-  } else {
-      this.setState({ editorState: EditorState.createEmpty() });
+  componentDidMount(){
+    console.log('datas: ', this.props.data)
+    if(this.props.data){
+      this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( this.props.data)))})
+    }
   }
-  }).catch(err=>{
-      console.log(err.res);
-  })
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps);
+    if(nextProps.data){
+
+      this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
+    }
 }
 
-onChangeEditor = (v) => {
-  console.log("onChangeEditor", v);
-  this.setState({
-      convertedContent: v
-  })
-}
-
-onEditorStateChange = (editorState) => {
-  console.log("onEditorStateChange", { editorState });
-  this.setState({ editorState });
-};
-
-// * Historia
-// * Analisis PEST
- //* Porter
- //* Cuatro P
- //* Clientes actuales
-// * Competencia
- //* Proveedores
-// * BCG
-// * Dofa
- //* Mefi-mefe
-// * Ansoff
-// * Objetivos
-// * Plan de medios
- //* Plan de accion
- //* Anexos-->No es editor
- 
-
+  onChangeEditor = (v) => {
+    console.log("onChangeEditor", v);
+    this.setState({
+        convertedContent: v
+    })
+  }
+  
+  onEditorStateChange = (editorState) => {
+    console.log("onEditorStateChange", { editorState });
+    this.setState({ editorState });
+  };
 
   render() {
-    console.log('state',this.state.datas);
+    console.log('props',this.props)
+    console.log('stategggggg',this.state.editorState);
       return (
           <div>
             <h1>Presentacion de la historia</h1>
-               <EditorDraft readOnly={true} onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
+               <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
           </div>
       )
   }
