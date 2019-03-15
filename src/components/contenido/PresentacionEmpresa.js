@@ -4,7 +4,7 @@ import { EditorState, convertFromRaw } from 'draft-js';
 import { Button, Spin, message } from 'antd';
 import { ADD_PRESENTACION, ELIMINAR_DATOS_INICIALES_PLAN } from '../../config';
 import axios from 'axios';
-
+import MostrarProgresoEstudiante from '../../components/contenidoDocente/MostrarProgresoEstudiante';
 class PresentacionEmpresa extends Component {
     state = {
         editorState: EditorState.createEmpty(),
@@ -66,6 +66,7 @@ class PresentacionEmpresa extends Component {
 
     render() {
         const { cargando } = this.state
+        console.log(this.state.editorState.getCurrentContent());
         return (
             <div>
 

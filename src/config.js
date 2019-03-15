@@ -1,11 +1,11 @@
-const HOST = "https://marketing-back.herokuapp.com/";//http://marketing-back.test:8080
+const HOST = "http://marketing-back.test:8080/";//https://marketing-back.herokuapp.com/
 const AC_ESTUDIANTES = `${HOST}/api/estudiante/:id`
 const ADD_ESTUDIANTES = `${HOST}/api/estudiante`
 const LISTAR_EMPRESARIO = `${HOST}/api/empresario`
 const ELIMINAR_EDITAR_EMPRESARIO = `${HOST}/api/empresario/:id`
 const ME = `${HOST}/api/auth/me`
 const DATOS_INICIALES_PLAN = `${HOST}/api/marketing`
-const ELIMINAR_DATOS_INICIALES_PLAN = `${HOST}/api/marketing/:id`
+const ELIMINAR_DATOS_INICIALES_PLAN = `${HOST}/api/marketing/:id`//el pa todos
 const ADD_ANALISIS_CLIENTES = `${HOST}/api/marketing/:id/clientes`
 const ADD_ANSOFF = `${HOST}/api/marketing/:id/ansoff`
 const ADD_BCG = `${HOST}/api/marketing/:id/bcg`
