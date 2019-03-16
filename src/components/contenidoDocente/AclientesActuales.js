@@ -6,65 +6,39 @@ import { EditorState, convertFromRaw } from 'draft-js';
 
 class AclientesActuales extends Component {
   state = {
-      editorState: EditorState.createEmpty(),
-  }
+    editorState : EditorState.createEmpty(),
+}
 
-// * Presentacion
 componentDidMount(){
-  const campo = JSON.parse(localStorage.getItem("user")).marketing_id;
-  axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo),{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-  .then(res=>{
-    const {presentacion,historia,pest,porter,coatrop,clientes,competencia,proveedores,bcg,dofa,mefi,ansoff} = res.data;
-     this.setState({datas: res.data});
-     if (res.data.clientes) {
-      this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse( res.data.clientes))) })
-  } else {
-      this.setState({ editorState: EditorState.createEmpty() });
+  if(this.props.data){
+    this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( this.props.data)))})
   }
-  }).catch(err=>{
-      console.log(err.res);
-  })
+}
+
+componentWillReceiveProps(nextProps) {
+  if(nextProps.data){
+    this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
+  }
 }
 
 onChangeEditor = (v) => {
-  console.log("onChangeEditor", v);
   this.setState({
       convertedContent: v
   })
 }
 
 onEditorStateChange = (editorState) => {
-  console.log("onEditorStateChange", { editorState });
   this.setState({ editorState });
 };
 
-// * Historia
-// * Analisis PEST
- //* Porter
- //* Cuatro P
- //* Clientes actuales
-// * Competencia
- //* Proveedores
-// * BCG
-// * Dofa
- //* Mefi-mefe
-// * Ansoff
-// * Objetivos
-// * Plan de medios
- //* Plan de accion
- //* Anexos-->No es editor
- 
-
-
-  render() {
-    console.log('state',this.state.datas);
-      return (
-          <div>
-            <h1>Identificación de clientes actuales</h1>
-               <EditorDraft readOnly={true} onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
-          </div>
-      )
-  }
+render() {
+    return (
+        <div>
+          <h1>Análisis de clientes actuales</h1>
+             <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
+        </div>
+    )
+}
 }
 
 export default AclientesActuales;

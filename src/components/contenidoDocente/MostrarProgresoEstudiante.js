@@ -48,17 +48,17 @@ class MostrarProgresoEstudiante extends Component {
           <div>
             <h1>Plan de marketing - Progreso</h1>
                <Apresentacion data={this.props.propiedad.presentacion}/>
-               {/* <Ahistoria/>
-               <Apest/>
-               <Aporter/>
-               <AcuatroP/>
-               <AclientesActuales/>
-               <Acompetencia/>
-               <Aporveedores/>
-               <Abcg/>
-               <Adofa/>
-               <Amefimefe/>
-               <Aansoff/> */}
+               <Ahistoria data={this.props.propiedad.historia}/>
+               <Apest data={this.props.propiedad.pest}/>
+               <Aporter data={this.props.propiedad.porter}/>
+               <AcuatroP data={this.props.propiedad.coatrop}/>
+               <AclientesActuales data={this.props.propiedad.clientes}/>
+               <Acompetencia data={this.props.propiedad.competencia}/>
+               <Aporveedores data={this.props.propiedad.proveedores}/>
+               <Abcg data={this.props.propiedad.bcg}/>
+               <Adofa data={this.props.propiedad.dofa}/>
+               <Amefimefe data={this.props.propiedad.mefi}/>
+               <Aansoff data={this.props.propiedad.ansoff}/>
 
           </div>
       )

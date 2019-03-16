@@ -19,7 +19,6 @@ class Apresentacion extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveProps', nextProps);
     if(nextProps.data){
-
       this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
     }
 }

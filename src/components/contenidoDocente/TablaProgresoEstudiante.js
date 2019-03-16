@@ -6,9 +6,6 @@ import VerPlanesMarketing from '../contenidoDocente/VerPlanesMarketing';
 import MostrarProgresoEstudiante from './MostrarProgresoEstudiante';
 import { createPublicKey } from 'crypto';
 
-
-
-
 class TablaProgresoEstudiante extends Component {
 
     constructor(props){
@@ -32,7 +29,6 @@ class TablaProgresoEstudiante extends Component {
         }, , {
             title: 'Operación',
             key: 'operacion',
-            // onClick: () => { clic('fhg'); },
             render: (text, record) => (
                 <div>
                     <Button onClick={()=>this.clic(record.id)} type="primary" style={{ marginRight: '10px' }} >
@@ -68,7 +64,6 @@ class TablaProgresoEstudiante extends Component {
 
 
     render() {
-        console.log('weje',this.state.datas2)
         return (
             <div>
                 <Table rowKey="id" columns={this.columns} dataSource={this.state.datas} bordered></Table>
