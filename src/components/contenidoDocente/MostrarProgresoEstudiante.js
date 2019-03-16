@@ -46,7 +46,6 @@ class MostrarProgresoEstudiante extends Component {
   
       return (
           <div>
-            <h1>Plan de marketing - Progreso</h1>
                <Apresentacion data={this.props.propiedad.presentacion}/>
                <Ahistoria data={this.props.propiedad.historia}/>
                <Apest data={this.props.propiedad.pest}/>

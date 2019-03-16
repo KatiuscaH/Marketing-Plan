@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {ELIMINAR_DATOS_INICIALES_PLAN} from '../../config';
-import EditorDraft from '../contenido/editorTexto/editorDraft';
+import EditorDraft from '../contenido/editorTexto/editorReadOnly';
 import { EditorState, convertFromRaw } from 'draft-js';
 
 class Apresentacion extends Component {

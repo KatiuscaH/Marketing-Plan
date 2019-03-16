@@ -67,6 +67,7 @@ class TablaProgresoEstudiante extends Component {
         return (
             <div>
                 <Table rowKey="id" columns={this.columns} dataSource={this.state.datas} bordered></Table>
+                <hr></hr>
                 <MostrarProgresoEstudiante propiedad={this.state.datas2} />
             </div>
         )
