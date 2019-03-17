@@ -36,7 +36,6 @@ onEditorStateChange = (editorState) => {
 };
 
 render() {
-  console.log('Render', this.state.editorState);
   
     return (
         <div>

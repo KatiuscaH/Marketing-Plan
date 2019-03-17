@@ -116,6 +116,10 @@ class TablaPlanAccion extends Component {
  
   render() {
     const { dataSource, onDelete } = this.props;
+    console.log({
+      dataSource
+    });
+    
     const components = {
       body: {
         row: EditableFormRow,
@@ -186,7 +190,8 @@ class TablaPlanAccion extends Component {
 
     return (
       <div>
-        <Table rowKey="id"
+        <Table 
+          rowKey="id"
           components={components}
           rowClassName={() => 'editable-row'}
           bordered

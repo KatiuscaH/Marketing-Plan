@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TablaPlanAccion from '../contenido/TablaPlanAccion';
-
+import TablaObjetivosPlan from '../contenido/TablaObjetivosPlazos';
+import TablaPlanMedios from '../contenido/TablaPlanMedios';
 class MostrarProgresoEstrategiasEstudiante extends Component {
   state = {
     datos:{}
@@ -13,11 +14,18 @@ class MostrarProgresoEstrategiasEstudiante extends Component {
   }
  
   render() {
+    console.log({
+      'propiedades': this.props.propiedades
+    });
+    
       return (
           <div>
-            
-               <TablaPlanAccion dataSource={this.props.propiedades.datos}/>
-
+            <h2>Estrategias</h2>
+               <TablaPlanAccion dataSource={this.props.propiedades.estrategias}/>
+            <h2>Objetivos</h2>
+                <TablaObjetivosPlan dataSource={this.props.propiedades.objetivos}/>
+            <h2>Plan de medios</h2>
+            <TablaPlanMedios dataSource={this.props.propiedades.medios}/>
           </div>
       )
   }

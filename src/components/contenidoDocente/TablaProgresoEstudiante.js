@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'antd';
 import axios from 'axios';
-import { VER_PLANES_MARKETING , ELIMINAR_DATOS_INICIALES_PLAN,ELIMINAR_PLAN_ACCION} from '../../config';
+import { VER_PLANES_MARKETING , ELIMINAR_DATOS_INICIALES_PLAN,LISTAR_ESTRATEGIAS} from '../../config';
 import VerPlanesMarketing from '../contenidoDocente/VerPlanesMarketing';
 import MostrarProgresoEstudiante from './MostrarProgresoEstudiante';
 import MostrarProgresoEstrategiasEstudiante from './MostrarProgresoEstrategiasEstudiante';
@@ -13,7 +13,7 @@ class TablaProgresoEstudiante extends Component {
         this.state = {
             datas: [],
             datas2: {presentacion:null},//Plan
-            datas3:{}//estrategias
+            datas3:[]//estrategias
         }
         this.columns = [{
             title: 'Nombre',
@@ -54,8 +54,9 @@ class TablaProgresoEstudiante extends Component {
     }
    
     clicEstrategias=(id)=>{
-        axios.get(ELIMINAR_PLAN_ACCION.replace(':id', id), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+        axios.get(LISTAR_ESTRATEGIAS.replace(':id', id), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
         .then(res => {
+             console.log('estrategias',res.data);
              
            this.setState({datas3: res.data})
         }).catch(err => {
@@ -75,12 +76,21 @@ class TablaProgresoEstudiante extends Component {
 
 
     render() {
+        console.log({
+            state: this.state
+        });
+        
         return (
             <div>
                 <Table rowKey="id" columns={this.columns} dataSource={this.state.datas} bordered></Table>
                 <hr></hr>
                 <MostrarProgresoEstudiante propiedad={this.state.datas2} />
+                <hr></hr>
+                
                 <MostrarProgresoEstrategiasEstudiante propiedades={this.state.datas3}/>
+                <hr></hr>
+                
+
             </div>
         )
     }
