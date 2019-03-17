@@ -38,7 +38,7 @@ class Login extends Component {
             }
           })
           .catch(err => {
-            console.log("Error aqui ", err)
+             
             message.error('Usuario y/o Contraseña inválidas');
           })
       }

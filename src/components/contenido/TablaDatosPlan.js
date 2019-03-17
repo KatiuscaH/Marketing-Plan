@@ -115,10 +115,10 @@ class TablaDatosPlan extends Component {
    state = { dataSource: [] };
 
   handleSave = (row) => {
-    console.log("Updated:", row);
+     
     axios.put(DATOS_INICIALES_PLAN.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then((result) => {
-        console.log(result.data);
+         
       })
 
     const newData = [...this.state.dataSource];

@@ -26,7 +26,7 @@ export default class AuthService {
                     'Authorization': `Bearer ${this.getToken()}`
                 }
             }).then(data => {
-                console.log(data)
+                 
                 localStorage.setItem('user', JSON.stringify(data.data));
             })
             return Promise.resolve(res);

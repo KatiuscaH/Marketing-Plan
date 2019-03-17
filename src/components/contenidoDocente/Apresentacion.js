@@ -10,37 +10,37 @@ class Apresentacion extends Component {
   }
 
   componentDidMount(){
-    console.log('datas: ', this.props.data)
+     
     if(this.props.data){
       this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( this.props.data)))})
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps);
+     
     if(nextProps.data){
       this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
     }
 }
 
   onChangeEditor = (v) => {
-    console.log("onChangeEditor", v);
+     
     this.setState({
         convertedContent: v
     })
   }
   
   onEditorStateChange = (editorState) => {
-    console.log("onEditorStateChange", { editorState });
+     
     this.setState({ editorState });
   };
 
   render() {
-    console.log('props',this.props)
-    console.log('stategggggg',this.state.editorState);
+     
+     
       return (
           <div>
-            <h1>Presentacion de la historia</h1>
+            <h1>Presentacion de la empresa</h1>
                <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
           </div>
       )

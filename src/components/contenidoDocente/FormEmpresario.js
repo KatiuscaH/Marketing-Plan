@@ -23,7 +23,7 @@ const CollectionCreateForm = Form.create()(
 
 
             function handleChange(value) {
-                console.log(`Valor: ${value}`);
+                 
             }
 
             const { visible, onCancel, onCreate, form } = this.props;
@@ -106,7 +106,7 @@ class FormEmpresario extends Component {
                 const empresarioList = res.data;
                 this.setState({ empresarioList, cargando: true });
             }).catch(err => {
-                console.log(err.res)
+                 
             })
     }
     ///////////
@@ -126,8 +126,8 @@ class FormEmpresario extends Component {
             }
             axios.post(LISTAR_EMPRESARIO, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                    console.log(result.data);
-                    console.log('Received values of form: ', values);
+                     
+                     
                     form.resetFields();
                     this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
                 }).catch(err => {
@@ -156,7 +156,7 @@ class FormEmpresario extends Component {
                 const empresarioList = res.data;
                 this.setState({ empresarioList });
             }).catch(err => {
-                console.log(err.res)
+                 
             })
 
     }

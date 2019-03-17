@@ -13,7 +13,7 @@ class EditorReadOnly extends Component {
         }
 
     }
-    componentDidMount = ()  => {
+    componentDidMount = () => {
         this.setState({
             editorState: this.props.content,
         });
@@ -33,12 +33,15 @@ class EditorReadOnly extends Component {
         return (
             <div className="home-editor">
                 <Editor
-      readOnly
-      toolbarHidden
-      toolbarClassName="rdw-storybook--toolbar"
-      wrapperClassName="rdw-storybook-wrapper"
-      editorClassName="rdw-storybook-editor"
-    />
+                readOnly
+                    editorState={this.props.content}
+                    onChange={this.props.onChange}
+                    wrapperClassName="wrapper-class"
+                    editorClassName="rdw-storybook-editor"
+                    toolbarClassName="toolbar-class"
+                    toolbarHidden={true}
+                    onEditorStateChange={this.onEditorStateChange}
+                />
             </div>
 
         )

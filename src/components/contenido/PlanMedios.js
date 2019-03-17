@@ -19,7 +19,7 @@ const CollectionCreateForm = Form.create()(
         render() {
 
             function handleChange(value) {
-                console.log(`Valor: ${value}`);
+                 
             }
 
             const { visible, onCancel, onCreate, form } = this.props;
@@ -104,7 +104,7 @@ class PlanMedios extends Component {
                 const planMediosList = res.data;
                 this.setState({ planMediosList});
             }).catch(err => {
-                console.log(err.res)
+                 
             })
     }
 
@@ -126,8 +126,8 @@ class PlanMedios extends Component {
             }
             axios.post(ADD_PLAN_MEDIOS, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                    console.log(result.data);
-                    console.log('Received values of form: ', values);
+                     
+                     
                     form.resetFields();
                     this.setState({ visible: false, planMediosList: [...this.state.planMediosList, result.data] });
                 }).catch(err => {
@@ -143,10 +143,10 @@ class PlanMedios extends Component {
 //////////delete
 
     handleDelete = (key) => {
-        console.log(key);
+         
         axios.delete(ELIMINAR_PLAN_MEDIOS.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
-                console.log(result)
+                 
                 this.setState({ planMediosList: this.state.planMediosList.filter(item => item.id !== key) });
             })
      }

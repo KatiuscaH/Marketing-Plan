@@ -48,15 +48,15 @@ class EditableCell extends Component {
   }
 
   save = () => {
-    console.log("asd")
+     
     const { record, handleSave } = this.props;
     this.form.validateFields((error, values) => {
       if (error) {
         return;
       }
       this.toggleEdit();
-      console.log(values)
-      console.log(record)
+       
+       
       handleSave({ ...record, ...values });
     });
   }
@@ -121,10 +121,10 @@ class EditableTable extends Component {
   state = { dataSource: [] };
   
   handleSave = (row) => {
-    console.log("Updated:", row);
+     
     axios.put(AC_ESTUDIANTES.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then((result) => {
-        console.log(result.data);
+         
       })
 
     const newData = [...this.state.dataSource];

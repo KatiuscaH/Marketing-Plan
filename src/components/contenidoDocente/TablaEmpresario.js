@@ -118,10 +118,10 @@ class EditableTable extends Component {
    state = { dataSource: [] };
   
   handleSave = (row) => {
-    console.log("Updated:", row);
+     
     axios.put(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
     .then((result)=>{
-      console.log(result.data);
+       
     })
 
     const newData = [...this.state.dataSource];

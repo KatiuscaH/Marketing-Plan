@@ -15,7 +15,7 @@ class Proveedores extends Component {
 
     //OnChange
     onEditorStateChange = (editorState) => {
-        console.log("onEditorStateChange", { editorState });
+         
         this.setState({ editorState });
     };
 
@@ -32,7 +32,7 @@ class Proveedores extends Component {
                 }
                 this.setState({ cargando: false })
             }).catch(err => {
-                console.log("Error del editor", err)
+                 
             })
     }
 
@@ -47,19 +47,19 @@ class Proveedores extends Component {
             })
 
             ).catch(err => {
-                console.log(err)
+                 
                 message.error("Error de guardado. Intente nuevamente")
                 this.setState({ iconLoading: false })
             })
     }
 
     onChangeEditor = (v) => {
-        console.log("onChangeEditor", v);
+         
         this.setState({
             convertedContent: v
         })
         // const contentState = v.getCurrentContent();
-        // console.log('content state', convertToRaw(v));
+        //  
     }
 
     render() {

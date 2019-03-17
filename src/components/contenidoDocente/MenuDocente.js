@@ -11,7 +11,7 @@ class MenuDocente extends Component {
     render() {
 
         function handleClick(e) {
-            console.log('click', e);
+             
         }
 
         return (

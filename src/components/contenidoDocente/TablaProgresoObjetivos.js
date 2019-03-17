@@ -17,7 +17,7 @@ componentDidMount(){
       const objetivoList = res.data;
       this.setState({ objetivoList });
   }).catch(err => {
-      console.log(err.res)
+       
   })
 }
 

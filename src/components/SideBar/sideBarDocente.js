@@ -27,8 +27,6 @@ class SiderDocente extends Component {
           className="sider"
           breakpoint="lg"
           collapsedWidth="0"
-          onBreakpoint={(broken) => { console.log(broken); }}
-          onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
           width='250px'>
 
           <div className="logoo">

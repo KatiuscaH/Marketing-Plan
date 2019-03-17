@@ -33,10 +33,10 @@ const CollectionCreateForm = Form.create()(
                             })
                         });
                         this.setState({ dataSource });
-                        console.log(dataSource);
+                         
                         
                     }).catch(err => {
-                        console.log(err.res)
+                         
                     })
             });
         }
@@ -44,7 +44,7 @@ const CollectionCreateForm = Form.create()(
         render() {
 
             function handleChange(value) {
-                console.log(`Valor: ${value}`);
+                 
             }
 
             const { visible, onCancel, onCreate, form } = this.props;
@@ -127,7 +127,7 @@ class PlanAccion extends Component {
                 const planList = res.data;
                 this.setState({ planList });
             }).catch(err => {
-                console.log(err.res)
+                 
             })
     }
 
@@ -148,13 +148,13 @@ class PlanAccion extends Component {
 
             axios.post(ADD_PLAN_ACCION, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                    console.log(result.data);
-                    console.log('Received : ', values);
-                    console.log('Received  form: ', values);
+                     
+                     
+                     
                     form.resetFields();
                     this.setState({ visible: false, planList: [...this.state.planList, result.data] });
                 }).catch(err => {
-                    console.log("Error de corre: ", err)
+                     
                     //message.error("Ya existe un estudiante con el correo ingresado")
                 })
         });

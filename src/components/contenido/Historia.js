@@ -15,7 +15,7 @@ class Historia extends Component {
 
     //OnChange
     onEditorStateChange = (editorState) => {
-        console.log("onEditorStateChange", { editorState });
+         
         this.setState({ editorState });
     };
 
@@ -25,7 +25,7 @@ class Historia extends Component {
         axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo),
             { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(({ data }) => {
-                console.log('hist', data.historia)
+                 
                 if (data.historia) {
                     this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.historia))) })
                 } else {
@@ -33,7 +33,7 @@ class Historia extends Component {
                 }
                 this.setState({ cargando: false })
             }).catch(err => {
-                console.log("Error del editor", err)
+                 
             })
     }
 
@@ -48,19 +48,19 @@ class Historia extends Component {
             })
 
             ).catch(err => {
-                console.log(err)
+                 
                 message.error("Error de guardado. Intente nuevamente")
                 this.setState({ iconLoading: false })
             })
     }
 
     onChangeEditor = (v) => {
-        console.log("onChangeEditor", v);
+         
         this.setState({
             convertedContent: v
         })
         // const contentState = v.getCurrentContent();
-        // console.log('content state', convertToRaw(v));
+        //  
     }
 
     render() {

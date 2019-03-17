@@ -10,15 +10,21 @@ class Ahistoria extends Component {
 }
 
 componentDidMount(){
-  console.log('datas: ', this.props.data)
+   
   if(this.props.data){
     this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( this.props.data)))})
   }
 }
 
-componentWillReceiveProps(nextProps) {
-  console.log('componentWillReceiveProps', nextProps);
+componentWillReceiveProps(nextProps) { 
+   
+  if(nextProps.data !== undefined && nextProps.data === null){
+     console.log('props',nextProps);
+     
+    this.setState({editorState: EditorState.createEmpty()})
+  } 
   if(nextProps.data){
+    console.log('data',nextProps);
     this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
   }
 }
@@ -34,6 +40,8 @@ onEditorStateChange = (editorState) => {
 };
 
 render() {
+  console.log('Render', this.state.editorState);
+  
     return (
         <div>
           <h1>Historia</h1>

@@ -32,17 +32,17 @@ const CollectionCreateForm = Form.create()(
                             })
                         });
                         this.setState({ dataSource });
-                        console.log(dataSource);
+                         
 
                     }).catch(err => {
-                        console.log(err.res)
+                         
                     })
             });
         }
 
         render() {
             function handleChange(value) {
-                console.log(`Valor: ${value}`);
+                 
             }
 
             const { visible, onCancel, onCreate, form } = this.props;
@@ -105,10 +105,10 @@ class DatosPlanMarketing extends Component {
         if (campo == null) {
             this.setState({ campoS: true })
         }else{
-            console.log({ campo })
+             
             axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", campo), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then(({ data }) => {
-                    console.log({ data });
+                     
                     let { nombre, apellido } = data.empresario
                     let empresario = `${nombre} ${apellido}`;
                     let datos = {
@@ -117,10 +117,10 @@ class DatosPlanMarketing extends Component {
                         empresario_id: empresario,
                         id: campo,
                     }
-                    console.log({ datos })
+                     
                     this.setState({ datosPlanList: [datos], cargando: true });
                 }).catch(err => {
-                    console.log({ catch: err.res })
+                     
                 })
 
         }
@@ -145,7 +145,7 @@ class DatosPlanMarketing extends Component {
             }
             axios.post(DATOS_INICIALES_PLAN, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                    console.log(result.data);
+                     
                     form.resetFields();
                     this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] });
                     let ls = JSON.parse(localStorage.getItem('user'));

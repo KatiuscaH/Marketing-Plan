@@ -28,9 +28,7 @@ class SiderDemo extends Component {
         <Sider
           className="sider"
           breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={(broken) => { console.log(broken); }}
-          onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
+          collapsedWidth="0" 
           width='270px'
         ><div className="scroll">
           <div className="logoo">

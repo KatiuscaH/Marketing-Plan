@@ -12,7 +12,7 @@ class App extends Component {
     render() {
         let rol = JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).rol;
 
-        console.log(rol)
+      
 
         switch (rol) {
             case 0:

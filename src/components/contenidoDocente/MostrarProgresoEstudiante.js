@@ -20,27 +20,6 @@ import Aansoff from './Aansoff';
 class MostrarProgresoEstudiante extends Component {
   state = {
   }
-
-//LLamando a todos los editores
-
-// * Presentacion
-
-
-// * Historia
-// * Analisis PEST
- //* Porter
- //* Cuatro P
- //* Clientes actuales
-// * Competencia
- //* Proveedores
-// * BCG
-// * Dofa
- //* Mefi-mefe
-// * Ansoff
-// * Objetivos
-// * Plan de medios
- //* Plan de accion
- //* Anexos-->No es editor
  
   render() {
   

@@ -115,7 +115,7 @@ class FormEstudiante extends Component {
                 const studentList = res.data;
                 this.setState({ studentList , cargando: true});
             }).catch(err => {
-                console.log(err.res)
+                 
             })
     }
 
@@ -136,13 +136,13 @@ class FormEstudiante extends Component {
 
             axios.post(ADD_ESTUDIANTES, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                    console.log(result.data);
-                    console.log('Received : ', values);
-                    console.log('Received  form: ', values);
+                     
+                     
+                     
                     form.resetFields();
                     this.setState({ visible: false, studentList: [...this.state.studentList, result.data] });
                 }).catch(err => {
-                    console.log("Error de corre: ", err)
+                     
                     message.error("Ya existe un estudiante con el correo ingresado")
                 })
         });
@@ -167,7 +167,7 @@ class FormEstudiante extends Component {
                 const studentList = res.data;
                 this.setState({ studentList });
             }).catch(err => {
-                console.log(err.res)
+                 
             })
     }
     

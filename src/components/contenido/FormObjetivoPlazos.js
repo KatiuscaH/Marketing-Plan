@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
 
 
             function handleChange(value) {
-                console.log(`Valor: ${value}`);
+                 
             }
 
             const { visible, onCancel, onCreate, form } = this.props;
@@ -64,7 +64,7 @@ class FormObjetivoPlazos extends Component {
                 const objetivoList = res.data;
                 this.setState({ objetivoList, cargando: true });
             }).catch(err => {
-                console.log(err.res)
+                 
             })
     }
 
@@ -85,8 +85,8 @@ class FormObjetivoPlazos extends Component {
             }
             axios.post(ADD_OBJETIVOS, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                    console.log(result.data);
-                    console.log('Received values of form: ', values);
+                     
+                     
                     form.resetFields();
                     this.setState({ visible: false, objetivoList: [...this.state.objetivoList, result.data] });
                 }).catch(err => {

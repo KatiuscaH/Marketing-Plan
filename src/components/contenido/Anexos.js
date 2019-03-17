@@ -36,9 +36,9 @@ class Anexos extends Component {
                         })
                 });
                 this.setState({ fileList})
-                console.log(fileList)
+                 
             }).catch(err => {
-                console.log(err.res)
+                 
             })
     }
 
@@ -55,7 +55,7 @@ class Anexos extends Component {
             onChange(info) {
                 const status = info.file.status;
                 if (status !== 'uploading') {
-                    console.log(info.file, info.fileList);
+                     
                 }
                 if (status === 'done') {
                     message.success(`${info.file.name} archivo subido satisfactoriamente.`);

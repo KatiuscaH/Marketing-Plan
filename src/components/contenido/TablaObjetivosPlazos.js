@@ -120,7 +120,7 @@ class TablaObjetivosPlan extends Component {
       handleSave = (row) => {
       axios.put(ELIMINAR_OBJETIVOS.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then((result)=>{
-        console.log(result.data);
+         
       })
   
       const newData = [...this.state.dataSource];
