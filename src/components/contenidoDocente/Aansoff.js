@@ -15,15 +15,12 @@ componentDidMount(){
   }
 }
 
-componentWillReceiveProps(nextProps) {
- 
-  
-  if(nextProps.data ){
-    
-    this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
-  }else{
-     
+componentWillReceiveProps(nextProps) { 
+  if(nextProps.data !== undefined && nextProps.data === null){
     this.setState({editorState: EditorState.createEmpty()})
+  } 
+  if(nextProps.data){
+    this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
   }
 }
 

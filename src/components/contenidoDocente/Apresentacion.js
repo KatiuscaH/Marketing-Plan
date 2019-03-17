@@ -16,13 +16,14 @@ class Apresentacion extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-     
+  componentWillReceiveProps(nextProps) { 
+    if(nextProps.data !== undefined && nextProps.data === null){
+      this.setState({editorState: EditorState.createEmpty()})
+    } 
     if(nextProps.data){
       this.setState({editorState:  EditorState.createWithContent(convertFromRaw(JSON.parse( nextProps.data)))})
     }
-}
-
+  }
   onChangeEditor = (v) => {
      
     this.setState({
