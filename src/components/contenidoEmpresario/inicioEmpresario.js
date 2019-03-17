@@ -7,42 +7,65 @@ import withAuth from '../withAuth';
 import '../login/Login.css';
 import './inicioEmpresario.css'
 import logoudc from '../../../src/logoudc.png';
+import VerPlanMarketing from './VerPlanMarketing';
+import ActualizarEstrategias from './ActualizarEstrategias';
 
 const Auth = new AuthService();
-
 class InicioEmpresario extends Component {
+
+    state = {
+        estadoPlanes: 1,
+
+    }
+
+    cambiaEstado=(estado)=>{
+        this.setState({estadoPlanes: estado})
+    }
 
     handleLogout() {
         Auth.logout()
         this.props.history.replace('/login');
     }
     render() {
-        return (
-            <div>
-                <div style={{display: "flex", flexDirection: "column", position: "absolute", top: "35%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px"}}>
-                    <img alt="logo" src={logoudc} />
-                </div>
 
-                <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "50%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
-                    <Row align="middle" type="flex" justify="center">
-                        <div style={{ padding: "10px" }} >
-                            <Button size="large" type="primary" style={{ width: '200px' }}>Ver plan de Marketing</Button>
-                        </div>
-                    </Row>
-                    <Row align="middle" type="flex" justify="center">
-                        <div style={{ padding: "10px" }}>
-                            <Button block size="large" type="primary" style={{ width: '200px' }}>Ver estrategias</Button>
-                        </div>
-                    </Row>
-                    <Row align="middle" type="flex" justify="center">
-                        <div style={{ padding: "10px" }}>
-                            <Button block size="large" type="danger" style={{ width: '200px' }} onClick={this.handleLogout.bind(this)}>Cerrar Sesión</Button>
-                        </div>
-                    </Row>
+        if (this.state.estadoPlanes === 1) {
 
+            return (
+                <div>
+                    <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "35%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
+                        <img alt="logo" src={logoudc} />
+                    </div>
+
+                    <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "50%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
+                        <Row align="middle" type="flex" justify="center">
+                            <div style={{ padding: "10px" }} >
+                                <Button onClick={()=>this.cambiaEstado(2)} size="large" type="primary" style={{ width: '200px' }}>Ver plan de Marketing</Button>
+                            </div>
+                        </Row>
+                        <Row align="middle" type="flex" justify="center">
+                            <div style={{ padding: "10px" }}>
+                                <Button onClick={()=>this.cambiaEstado(3)} block size="large" type="primary" style={{ width: '200px' }}>Ver estrategias</Button>
+                            </div>
+                        </Row>
+                        <Row align="middle" type="flex" justify="center">
+                            <div style={{ padding: "10px" }}>
+                                <Button block size="large" type="danger" style={{ width: '200px' }} onClick={this.handleLogout.bind(this)}>Cerrar Sesión</Button>
+                            </div>
+                        </Row>
+
+                    </div>
                 </div>
-            </div>
-        );
+            );
+
+        } else if(this.state.estadoPlanes === 2){
+            return(
+                <VerPlanMarketing estadoCambiado={this.cambiaEstado}/>
+            )
+        } else if(this.state.estadoPlanes === 3){
+            return(
+                <ActualizarEstrategias estadoCambiado={this.cambiaEstado}/>
+            )
+        }
     }
 }
 
