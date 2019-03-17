@@ -27,8 +27,10 @@ const ELIMINAR_PLAN_ACCION = `${HOST}/api/estrategias/:id`
 const LISTAR_ESTRATEGIAS = `${HOST}/api/admin/marketing/:id/estrategias`
 const ADD_ANEXOS = `${HOST}/api/files`
 const VER_PLANES_MARKETING = `${HOST}/api/admin/marketing`
+const ENVIAR_MAIL = `${HOST}/api/admin/mail`
 
 export {
+    ENVIAR_MAIL,
     HOST,
     AC_ESTUDIANTES,
     ADD_ESTUDIANTES,
