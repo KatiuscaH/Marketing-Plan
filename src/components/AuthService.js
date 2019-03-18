@@ -2,35 +2,34 @@ import decode from 'jwt-decode';
 import axios from 'axios';
 import { ME, HOST } from '../config';
 export default class AuthService {
-    constructor(domain) {
-        this.domain = domain || HOST //APi server dominio
+    constructor() {
+        this.domain = HOST //APi server dominio
         this.fetch = this.fetch.bind(this)
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)
     }
 
-    login(email, password) {
+    async login(email, password) {
         // Get a token
-        return this.fetch(`${this.domain}/api/auth/login`, {
+        let res = await this.fetch(`${this.domain}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify({
                 email,
                 password
             }),
-            
-        }).then(res => {
-            this.setToken(res.token)
-            axios.get(ME, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.getToken()}`
-                }
-            }).then(data => {
-                 
-                localStorage.setItem('user', JSON.stringify(data.data));
-            })
-            return Promise.resolve(res);
+
         })
+        this.setToken(res.token)
+        let data = await axios.get(ME, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getToken()}`
+            }
+        })
+
+        localStorage.setItem('user', JSON.stringify(data.data));
+        // return Promise.resolve(res);
+        return res;
     }
 
     loggedIn() {

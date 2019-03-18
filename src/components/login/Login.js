@@ -55,12 +55,12 @@ class Login extends Component {
     </div>
     </Header> 
    
-        <section class="intro">
-          <div class="inner">
+        <section className="intro">
+          <div className="inner">
      
             <div className="content">
               <h1 className="H1">¡BIENVENIDO A<span className="spaan"> SoftMark-UDC!</span></h1>
-              <Form onSubmit={this.handleSubmit} className="login-form">
+              <Form onSubmit={(e) => {this.handleSubmit(e)}} className="login-form">
                 <div className="logo">
                   <img alt="logo" src={logoudc2} />
                 </div>
