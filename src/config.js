@@ -28,8 +28,10 @@ const LISTAR_ESTRATEGIAS = `${HOST}/api/admin/marketing/:id/estrategias`
 const ADD_ANEXOS = `${HOST}/api/files`
 const VER_PLANES_MARKETING = `${HOST}/api/admin/marketing`
 const ENVIAR_MAIL = `${HOST}/api/admin/mail`
+const ACTUALIZAR_OBJETIVOS = `${HOST}/api/objetivos/:id`
 
 export {
+    ACTUALIZAR_OBJETIVOS,
     ENVIAR_MAIL,
     HOST,
     AC_ESTUDIANTES,

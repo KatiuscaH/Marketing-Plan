@@ -9,6 +9,7 @@ import './inicioEmpresario.css'
 import logoudc from '../../../src/logoudc.png';
 import VerPlanMarketing from './VerPlanMarketing';
 import ActualizarEstrategias from './ActualizarEstrategias';
+import ProgresoCumplido from './ProgresoCumplido';
 
 const Auth = new AuthService();
 class InicioEmpresario extends Component {
@@ -49,6 +50,11 @@ class InicioEmpresario extends Component {
                         </Row>
                         <Row align="middle" type="flex" justify="center">
                             <div style={{ padding: "10px" }}>
+                                <Button onClick={()=>this.cambiaEstado(4)} block size="large" type="primary" style={{ width: '200px' }}>Progreso</Button>
+                            </div>
+                        </Row>
+                        <Row align="middle" type="flex" justify="center">
+                            <div style={{ padding: "10px" }}>
                                 <Button block size="large" type="danger" style={{ width: '200px' }} onClick={this.handleLogout.bind(this)}>Cerrar Sesión</Button>
                             </div>
                         </Row>
@@ -64,6 +70,11 @@ class InicioEmpresario extends Component {
         } else if(this.state.estadoPlanes === 3){
             return(
                 <ActualizarEstrategias estadoCambiado={this.cambiaEstado}/>
+            )
+        }else if(this.state.estadoPlanes === 4){
+            return(
+
+                <ProgresoCumplido estadoCambiado={this.cambiaEstado}/>
             )
         }
     }
