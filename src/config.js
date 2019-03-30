@@ -1,4 +1,4 @@
-const HOST = "https://marketing-back.herokuapp.com"//https://marketing-back.herokuapp.com";//http://marketing-back.test:8080/
+const HOST = "http://206.189.202.242:8080"//https://marketing-back.herokuapp.com";//http://marketing-back.test:8080/
 const AC_ESTUDIANTES = `${HOST}/api/estudiante/:id`
 const ADD_ESTUDIANTES = `${HOST}/api/estudiante`
 const LISTAR_EMPRESARIO = `${HOST}/api/empresario`
