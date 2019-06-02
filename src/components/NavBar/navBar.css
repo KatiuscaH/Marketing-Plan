@@ -12,3 +12,12 @@
 .ant-layout-header {
     line-height: 45px;
 }
+
+.nombreUsuario {
+  float: left;
+  padding: 15px;
+}
+
+.h3Color {
+  color: #ffffff;
+}

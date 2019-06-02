@@ -18,6 +18,7 @@ import PlanAccion from '../contenido/PlanAccion';
 import Anexos from '../contenido/Anexos';
 import MatrizAnsoff from '../contenido/MatrizAnsoff';
 import DatosPlanMarketing from '../contenido/DatosPlanMarketing';
+import LogoCentral from "../contenido/logocentral";
 
 class ContenidoEstudiante extends Component {
     render() {
@@ -41,7 +42,7 @@ class ContenidoEstudiante extends Component {
                     <Route path="/subir-anexos" component={Anexos} />
                     <Route path="/matriz-ansoff" component={MatrizAnsoff} />
                     <Route path="/datos-iniciales" component={DatosPlanMarketing} />
-
+                    <Route path="/logo" component={LogoCentral} />
                     </Switch>
                 {this.props.children}
             </div>

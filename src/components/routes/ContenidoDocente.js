@@ -7,6 +7,7 @@ import GestionEmpresarios from '../contenidoDocente/GestionEmpresarios';
 import ProgresoEstudiante from '../contenidoDocente/ProgresoEstudiante';
 import ProgresoEmpresario from '../contenidoDocente/ProgresoEmpresario';
 import Retroalimentacion from '../contenidoDocente/Retroalimentacion';
+import LogoCentral from "../contenido/logocentral";
 
 
 class ContenidoDocente extends Component {
@@ -20,6 +21,7 @@ class ContenidoDocente extends Component {
                                 <Route path="/progreso-estudiantes" component={ProgresoEstudiante} />
                                 <Route path="/progreso-empresarios" component={ProgresoEmpresario} />
                                 <Route path="/retroalimentacion" component={Retroalimentacion} />
+                                <Route path="/logo" component={LogoCentral} />
                             </Switch>
                             {this.props.children}
                         </div>

@@ -12,8 +12,18 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      name: '',
+      lastName: '',
+      color: '#f56a00'
     };
+  }
+
+  componentDidMount() {
+    const userNme = JSON.parse(localStorage.getItem("user")).nombre;
+    const lastName = JSON.parse(localStorage.getItem("user")).apellido;
+    this.setState({ name: userNme, lastName: lastName })
+    console.log(localStorage.getItem("user"));
+
   }
 
   handleLogout() {
@@ -27,16 +37,21 @@ class NavBar extends Component {
         <Menu.Item key="1"><Icon type="poweroff" />Cerrar sesión</Menu.Item>
       </Menu>
     );
-
     return (
-      <div className="ajustes">
-
-        <Dropdown overlay={menu} trigger={['hover']}>
-          <a style={{ marginLeft: 8 }} className=".ant-layout-header">
-            Ajustes <Icon type="down" />
-          </a>
-        </Dropdown>
-
+      <div>
+        <div className="nombreUsuario">
+        <h3 className="h3Color">Bienvenido {this.state.name} {this.state.lastName}</h3>
+        </div>
+        <div className="ajustes">
+        <Avatar style={{ backgroundColor: this.state.color, verticalAlign: 'middle' }} size="large">
+          {this.state.name.charAt(0)}
+        </Avatar>
+          <Dropdown overlay={menu} trigger={['hover']}>
+            <a style={{ marginLeft: 8 }} className=".ant-layout-header">
+              Ajustes <Icon type="down" />
+            </a>
+          </Dropdown>
+        </div>
       </div>
 
     );

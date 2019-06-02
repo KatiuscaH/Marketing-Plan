@@ -19,6 +19,11 @@ const {
 } = Layout;
 const { Meta } = Card;
 class Login extends Component {
+
+  state = {
+    iconLoading: false
+  }
+
   constructor() {
     super();
     this.Auth = new AuthService();
@@ -29,16 +34,17 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        this.setState({iconLoading: true})
         this.Auth.login(values.email, values.password)
           .then(res => {
+            this.setState({iconLoading: false})
             //this.props.history.replace('/');
-
             if (this.Auth.loggedIn()) {
-              this.props.history.replace('/');
+              this.props.history.replace('/logo');
             }
           })
           .catch(err => {
-             
+            this.setState({iconLoading: false})
             message.error('Usuario y/o Contraseña inválidas');
           })
       }
@@ -79,7 +85,7 @@ class Login extends Component {
                   )}
                 </FormItem>
                 <FormItem>
-                  <Button type="primary" htmlType="submit" className="login-form-button">
+                  <Button type="primary" htmlType="submit" className="login-form-button" icon="login" loading={this.state.iconLoading}>
                     Ingresar
                  </Button>
                 </FormItem>
