@@ -23,7 +23,7 @@ const CollectionCreateForm = Form.create()(
 
 
             function handleChange(value) {
-                 
+
             }
 
             const { visible, onCancel, onCreate, form } = this.props;
@@ -33,18 +33,19 @@ const CollectionCreateForm = Form.create()(
                     visible={visible}
                     title="Agregar nuevo empresario"
                     okText="Crear"
+                    cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
-                        <FormItem label="Nombre">
+                        <FormItem label="Nombres">
                             {getFieldDecorator('nombre', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
                             })(
                                 <Input />
                             )}
                         </FormItem>
-                        <FormItem label="Apellido">
+                        <FormItem label="Apellidos">
                             {getFieldDecorator('apellido', {
                                 rules: [{ required: true, message: 'Por favor ingrese el apellido' }],
                             })(<Input />)}
@@ -72,7 +73,7 @@ const CollectionCreateForm = Form.create()(
                         </div>
 
                         <div style={{ display: 'inline-block' }}>
-                            <FormItem label="Periodo">
+                            <FormItem label="Período">
                                 {getFieldDecorator('periodo', {
                                     rules: [{ required: true, message: 'Ingrese el periodo' }],
                                 })(<Select
@@ -106,7 +107,7 @@ class FormEmpresario extends Component {
                 const empresarioList = res.data;
                 this.setState({ empresarioList, cargando: true });
             }).catch(err => {
-                 
+                message.error('No se han podido cargar los datos. Intente nuevamente')
             })
     }
     ///////////
@@ -126,10 +127,9 @@ class FormEmpresario extends Component {
             }
             axios.post(LISTAR_EMPRESARIO, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                     
-                     
                     form.resetFields();
                     this.setState({ visible: false, empresarioList: [...this.state.empresarioList, result.data] });
+                    message.success('Empresario creado con éxito')
                 }).catch(err => {
                     message.error("Ya existe un empresario con el correo ingresado")
                 })
@@ -146,7 +146,9 @@ class FormEmpresario extends Component {
         axios.delete(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
                 this.setState({ empresarioList: this.state.empresarioList.filter(item => item.id !== key) });
-
+                message.success('Empresario eliminado con éxito')
+            }).catch(err => {
+                message.error('No se ha podido eliminar el empresario. Intennte nuevamente')
             })
     }
 
@@ -155,8 +157,9 @@ class FormEmpresario extends Component {
             .then(res => {
                 const empresarioList = res.data;
                 this.setState({ empresarioList });
+                message.success('Tabla actualizada con éxito')
             }).catch(err => {
-                 
+                message.error('No se ha podido actualizar la tabla. Intennte nuevamente')
             })
 
     }
@@ -164,29 +167,29 @@ class FormEmpresario extends Component {
     render() {
 
         const { empresarioList } = this.state;
-if(!this.state.cargando){
-    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}><Spin size="large"/></div>
-}else{
-    return (
-        <div>
-            <div style={{ display: 'inline-block' }}>
-                <div style={{ paddingBottom: '30px', margin: '10px' }}>
-                    <Button type="primary" onClick={this.showModal} >Agregar empresario</Button>
-                    <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
+        if (!this.state.cargando) {
+            return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}><Spin size="large" /></div>
+        } else {
+            return (
+                <div>
+                    <div style={{ display: 'inline-block' }}>
+                        <div style={{ paddingBottom: '30px', margin: '10px' }}>
+                            <Button type="primary" onClick={this.showModal} icon="user-add" >Agregar empresario</Button>
+                            <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }} icon="reload">Actualizar</Button>
+                        </div>
+
+                    </div>
+
+                    <CollectionCreateForm
+                        wrappedComponentRef={this.saveFormRef}
+                        visible={this.state.visible}
+                        onCancel={this.handleCancel}
+                        onCreate={this.handleCreate}
+                    />
+                    <TablaEmpresario dataSource={empresarioList} onDelete={this.handleDelete} />
                 </div>
-
-            </div>
-
-            <CollectionCreateForm
-                wrappedComponentRef={this.saveFormRef}
-                visible={this.state.visible}
-                onCancel={this.handleCancel}
-                onCreate={this.handleCreate}
-            />
-            <TablaEmpresario dataSource={empresarioList} onDelete={this.handleDelete} />
-        </div>
-    );
-}
+            );
+        }
     }
 }
 

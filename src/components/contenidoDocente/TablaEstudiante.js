@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Table, Input, Popconfirm, Form, Spin } from 'antd';
+import { Table, Input, Popconfirm, Form, Spin, message, Icon } from 'antd';
 import axios from 'axios';
-import { AC_ESTUDIANTES } from '../../config';
+import { AC_ESTUDIANTES, ADD_ESTUDIANTES } from '../../config';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -48,15 +48,12 @@ class EditableCell extends Component {
   }
 
   save = () => {
-     
     const { record, handleSave } = this.props;
     this.form.validateFields((error, values) => {
       if (error) {
         return;
       }
       this.toggleEdit();
-       
-       
       handleSave({ ...record, ...values });
     });
   }
@@ -117,16 +114,16 @@ class EditableTable extends Component {
     super(props);
   }
 
-
   state = { dataSource: [] };
   
   handleSave = (row) => {
-     
     axios.put(AC_ESTUDIANTES.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then((result) => {
-         
+         this.setState({dataSource: result.data})
+         message.success('Estudiante actualizado con éxito. Presione el botón actualizar para ver los cambios reflejados.')
+      }).catch(err => {
+        message.error('No se ha podido actualizar el estudiante. Intente nuevamente.')
       })
-
     const newData = [...this.state.dataSource];
     const index = newData.findIndex(item => row.id === item.id);
     const item = newData[index];
@@ -146,12 +143,12 @@ class EditableTable extends Component {
       },
     };
     const configColumns = [{
-      title: 'Nombre',
+      title: 'Nombres',
       dataIndex: 'nombre',
       editable: true,
 
     }, {
-      title: 'Apellido',
+      title: 'Apellidos',
       dataIndex: 'apellido',
       editable: true,
     }, {
@@ -163,18 +160,18 @@ class EditableTable extends Component {
       dataIndex: 'year',
       editable: true,
     }, {
-      title: 'Periodo',
+      title: 'Período',
       dataIndex: 'periodo',
       editable: true,
     }, {
-      title: 'Operaciones',
+      title: 'Eliminar',
       dataIndex: 'operacion',
 
       render: (text, record) => {
         return (
           this.props.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
+              <Popconfirm title="¿Desea eliminar este estudiante?" okText="Si" cancelText="No" icon={<Icon type="delete" />} onConfirm={() => onDelete(record.id)}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null

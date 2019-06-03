@@ -22,13 +22,11 @@ class NavBar extends Component {
     const userNme = JSON.parse(localStorage.getItem("user")).nombre;
     const lastName = JSON.parse(localStorage.getItem("user")).apellido;
     this.setState({ name: userNme, lastName: lastName })
-    console.log(localStorage.getItem("user"));
-
   }
 
   handleLogout() {
     Auth.logout()
-    this.props.history.replace('/login');
+    this.props.history.replace('/cierre-sesion');
   }
 
   render() {

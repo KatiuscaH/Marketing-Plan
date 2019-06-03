@@ -39,13 +39,15 @@ const CollectionCreateForm = Form.create()(
             return (
                 <Modal
                     visible={visible}
-                    title="Enviar"
-                    okText="Crear"
+                    title="Enviar correo"
+                    okText="Enviar"
+                    cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
+                    okButtonProps={{icon: "arrow-right"}}
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
-                    <h2>A: {email}</h2>
+                    <h2>Enviar a: {email}</h2>
                         <FormItem label="Asunto">
                             {getFieldDecorator('subject', {
                                 rules: [{ required: true, message: 'Por favor ingrese el asunto' }],
@@ -53,7 +55,7 @@ const CollectionCreateForm = Form.create()(
                                 <Input />
                             )}
                         </FormItem>
-                        <FormItem label="contenido">
+                        <FormItem label="Contenido">
                             {getFieldDecorator('text', {
                                 rules: [ {
                                     required: true, message: 'Por favor ingrese el correo',
@@ -73,22 +75,25 @@ class EnviarRetroalimentacion extends Component {
         this.state = {
             datas: [],
             datas2: {presentacion:null},//Plan
-            datas3:[]//estrategias
+            datas3:[],//estrategias,
+            cargando: false
         }
         this.columns = [{
-            title: 'Nombre',
+            title: 'Nombres',
             dataIndex: 'nombre',
-        
+        }, {
+            title: 'Apellidos',
+            dataIndex: 'apellido',
         }, {
             title: 'Correo',
             dataIndex: 'email',
             
         },  , {
-            title: 'Operación',
+            title: 'Enviar correo',
             key: 'operacion',
             render: (text, record) => (
                 <div>
-                    <Button  onClick={() => this.showModal(record.email)} type="primary" style={{ marginRight: '10px' }} >
+                    <Button icon="mail" onClick={() => this.showModal(record.email)} type="primary" style={{ marginRight: '10px' }} >
                        Enviar Correo
                     </Button>
                  
@@ -119,13 +124,17 @@ class EnviarRetroalimentacion extends Component {
             if (err) {
                 return;
             }
+            this.setState({cargando: true})
             let nV = {...values, email: this.state.email}
             axios.post(ENVIAR_MAIL, nV, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
                     form.resetFields();
-                   this.setState({ visible: false });
+                   this.setState({ visible: false, cargando: false });
+                   message.success('Correo electrónico enviado con éxito.')
                 }).catch(err => {
-                     
+
+            this.setState({cargando: false})
+                     message.error('No se pudo enviar el correo electrónico. Intente nuevamente')
                 })
         });
     }
@@ -134,11 +143,10 @@ class EnviarRetroalimentacion extends Component {
         this.formRef = formRef;
     }
     componentDidMount() {
-
         axios.get(ADD_ESTUDIANTES, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const studentList = res.data;
-                this.setState({ studentList , cargando: true});
+                this.setState({ studentList});
             }).catch(err => {
                  
             })
@@ -150,6 +158,13 @@ class EnviarRetroalimentacion extends Component {
             state: this.state
         });
         
+        if(this.state.cargando){
+            return(
+                <div>
+                <Spin/>
+                </div>
+            )
+        } else {
         return (
             <div>
                 <Table rowKey="id" columns={this.columns} dataSource={this.state.studentList} bordered></Table>
@@ -163,6 +178,7 @@ class EnviarRetroalimentacion extends Component {
             </div>
         )
     }
+}
 }
 
 export default EnviarRetroalimentacion;

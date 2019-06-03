@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, message } from 'antd';
 import axios from 'axios';
 import { VER_PLANES_MARKETING , ELIMINAR_DATOS_INICIALES_PLAN,LISTAR_ESTRATEGIAS} from '../../config';
 import VerPlanesMarketing from '../contenidoDocente/VerPlanesMarketing';
@@ -13,10 +13,11 @@ class TablaProgresoEstudiante extends Component {
         this.state = {
             datas: [],
             datas2: {presentacion:null},//Plan
-            datas3:[]//estrategias
+            datas3:[],//estrategias,
+            iconLoading: false,
         }
         this.columns = [{
-            title: 'Nombre',
+            title: 'Nombre del plan de marketing',
             dataIndex: 'nombre',
         
         }, {
@@ -28,14 +29,14 @@ class TablaProgresoEstudiante extends Component {
             dataIndex: 'empresario',
         
         }, , {
-            title: 'Operación',
+            title: 'Progreso',
             key: 'operacion',
             render: (text, record) => (
                 <div>
-                    <Button onClick={()=>this.clic(record.id)} type="primary" style={{ marginRight: '10px' }} >
+                    <Button onClick={()=>this.clic(record.id)} type="primary" icon="eye" style={{ marginRight: '10px' }} loading={this.state.iconLoading}>
                         Ver Plan
                     </Button>
-                    <Button type="primary" onClick={()=>this.clicEstrategias(record.id)} >
+                    <Button type="primary" onClick={()=>this.clicEstrategias(record.id)} icon="bar-chart" style={{ marginRight: '10px' }} loading={this.state.iconLoading} >
                         Ver Estrategias
                      </Button>
                 </div>
@@ -45,11 +46,14 @@ class TablaProgresoEstudiante extends Component {
     }
 
     clic=(id)=>{
+        this.setState({iconLoading: true})
         axios.get(ELIMINAR_DATOS_INICIALES_PLAN.replace(':id', id), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
         .then(res => {
-           this.setState({datas2: res.data})
+           this.setState({datas2: res.data, iconLoading: false})
+           message.success('Plan de marketing seleccionado cargado con éxito.')
         }).catch(err => {
-             
+            this.setState({iconLoading: false})
+             message.error('No se ha podido cargar el plan de marketing seleccionado. Intente nuevamente')
         });
     }
    

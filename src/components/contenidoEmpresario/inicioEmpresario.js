@@ -16,7 +16,15 @@ class InicioEmpresario extends Component {
 
     state = {
         estadoPlanes: 1,
-
+        name: '',
+        lastName: '',
+        color: '#f56a00'
+    }
+ 
+    componentDidMount() {
+      const userNme = JSON.parse(localStorage.getItem("user")).nombre;
+      const lastName = JSON.parse(localStorage.getItem("user")).apellido;
+      this.setState({ name: userNme, lastName: lastName })
     }
 
     cambiaEstado=(estado)=>{
@@ -33,6 +41,9 @@ class InicioEmpresario extends Component {
 
             return (
                 <div>
+                    <div  style={{display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                    <h3>Bienvenido {this.state.name} {this.state.lastName}</h3>
+                        </div>
                     <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "35%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
                         <img alt="logo" src={logoudc} />
                     </div>

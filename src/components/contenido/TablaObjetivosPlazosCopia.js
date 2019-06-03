@@ -136,9 +136,9 @@ class TablaObjetivosPlanCopia extends Component {
     cumplidoObj=(campo)=>{
       axios.put((ACTUALIZAR_OBJETIVOS).replace(':id',campo),{ cumplido: 1 }, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then(res => {
-        message.success('Lo cumpliste');
+        message.success('¡Felicidades, Cumpliste el objetivo!');
       }).catch(err => {
-           message.error('Erro de servidor. Intente mas tarde');
+           message.error('No se ha podido marcar como completo. Intenta nuevamente');
       })
     }
 
@@ -160,7 +160,7 @@ class TablaObjetivosPlanCopia extends Component {
       width: 200
 
     }, {
-      title: 'Operaciones',
+      title: 'Cumplimiento',
       dataIndex: 'operacion',
    
       width: 50,
@@ -169,8 +169,8 @@ class TablaObjetivosPlanCopia extends Component {
         return (
           this.props.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Cumplido?" onConfirm={() => this.cumplidoObj(record.id)}>
-                <a href="javascript:;">Cumplido</a>
+              <Popconfirm title="¿Has cumplido la totalidad de este objetivo?" okText="Si" cancelText="No" onConfirm={() => this.cumplidoObj(record.id)}>
+                <a href="javascript:;">Objetivo cumplido</a>
               </Popconfirm>
             ) : null
         );
@@ -202,6 +202,7 @@ class TablaObjetivosPlanCopia extends Component {
           bordered
           dataSource={dataSource}
           columns={columns}
+          pagination={false}
         />
       </div>
     );

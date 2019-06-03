@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Table, Input,  Popconfirm, Form } from 'antd';
-import { ELIMINAR_EDITAR_EMPRESARIO } from '../../config';
+import { Table, Input,  Popconfirm, Form, message, Icon } from 'antd';
+import { ELIMINAR_EDITAR_EMPRESARIO, LISTAR_EMPRESARIO } from '../../config';
 import axios from 'axios';
 
 const FormItem = Form.Item;
@@ -121,9 +121,11 @@ class EditableTable extends Component {
      
     axios.put(ELIMINAR_EDITAR_EMPRESARIO.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
     .then((result)=>{
-       
+       this.setState({dataSource: result.data});
+       message.success('Empresario actualizado con éxito. Presione el botón actualizar para ver los cambios reflejados.')
+    }).catch(err => {
+      message.error('No se ha podido actualizar el empresario. Intente nuevamente.')
     })
-
     const newData = [...this.state.dataSource];
     const index = newData.findIndex(item => row.id === item.id);
     const item = newData[index];
@@ -133,7 +135,6 @@ class EditableTable extends Component {
     });
     this.setState({ dataSource: newData });
   }
-
   render() {
     const { dataSource, onDelete } = this.props;
     const components = {
@@ -144,36 +145,35 @@ class EditableTable extends Component {
     };
 
     const configColumns = [{
-      title: 'Nombre',
+      title: 'Nombres',
       dataIndex: 'nombre',
       editable: true,
       
       
     }, {
-      title: 'Apellido',
+      title: 'Apellidos',
       dataIndex: 'apellido',
       editable: true,
     }, {
       title: 'Correo',
-      dataIndex: 'email',
-      
+      dataIndex: 'email',      
     }, {
         title: 'Año',
         dataIndex: 'year',
         editable: true,
       }, {
-        title: 'Periodo',
+        title: 'Período',
         dataIndex: 'periodo',
         editable: true,
       }, {
-      title: 'Operaciones',
+      title: 'Eliminar',
       dataIndex: 'operacion',
       
       render: (text, record) => {
         return (
           this.props.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
+              <Popconfirm title="¿Desea eliminar este empresario?" okText="Si" cancelText="No" icon={<Icon type="delete" />} onConfirm={() => onDelete(record.id)}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null

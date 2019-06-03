@@ -40,18 +40,19 @@ const CollectionCreateForm = Form.create()(
                     visible={visible}
                     title="Agregar nuevo estudiante"
                     okText="Crear"
+                    cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
-                        <FormItem label="Nombre">
+                        <FormItem label="Nombres">
                             {getFieldDecorator('nombre', {
                                 rules: [{ required: true, message: 'Por favor ingrese el nombre' }],
                             })(
                                 <Input />
                             )}
                         </FormItem>
-                        <FormItem label="Apellido">
+                        <FormItem label="Apellidos">
                             {getFieldDecorator('apellido', {
                                 rules: [{ required: true, message: 'Por favor ingrese el apellido' }],
                             })(<Input />)}
@@ -79,7 +80,7 @@ const CollectionCreateForm = Form.create()(
                         </div>
 
                         <div style={{ display: 'inline-block' }}>
-                            <FormItem label="Periodo">
+                            <FormItem label="Período">
                                 {getFieldDecorator('periodo', {
                                     rules: [{ required: true, message: 'Ingrese el periodo' }],
                                 })(<Select
@@ -102,6 +103,7 @@ const CollectionCreateForm = Form.create()(
 
 
 class FormEstudiante extends Component {
+
     state = {
         visible: false,
         studentList: [],
@@ -109,13 +111,12 @@ class FormEstudiante extends Component {
     };
 
     componentDidMount() {
-
         axios.get(ADD_ESTUDIANTES, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const studentList = res.data;
                 this.setState({ studentList , cargando: true});
             }).catch(err => {
-                 
+                 message.error('No se han podido cargar los datos. Intente nuevamente')
             })
     }
 
@@ -133,16 +134,12 @@ class FormEstudiante extends Component {
             if (err) {
                 return;
             }
-
             axios.post(ADD_ESTUDIANTES, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                     
-                     
-                     
                     form.resetFields();
                     this.setState({ visible: false, studentList: [...this.state.studentList, result.data] });
+                    message.success('Estudiante creado con éxito')
                 }).catch(err => {
-                     
                     message.error("Ya existe un estudiante con el correo ingresado")
                 })
         });
@@ -156,8 +153,10 @@ class FormEstudiante extends Component {
     handleDelete = (key) => {
         axios.delete(AC_ESTUDIANTES.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
-
                 this.setState({ studentList: this.state.studentList.filter(item => item.id !== key) });
+                message.success('Estudiante eliminado con éxito')
+            }).catch(err => {
+                message.error('No se ha podido eliminar el estudiante. Intennte nuevamente')
             })
     }
 
@@ -166,13 +165,13 @@ class FormEstudiante extends Component {
             .then(res => {
                 const studentList = res.data;
                 this.setState({ studentList });
+                message.success('Tabla actualizada con éxito')
             }).catch(err => {
-                 
+                message.error('No se ha podido actualizar la tabla. Intennte nuevamente')
             })
     }
-    
+
     render() {
-        
         const { studentList } = this.state
         if(!this.state.cargando){
             return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}><Spin size="large"/></div>
@@ -181,8 +180,8 @@ class FormEstudiante extends Component {
                 <div >
                     <div style={{ display: 'inline-block' }}>
                         <div style={{ paddingBottom: '30px', margin: '10px' }}>
-                            <Button type="primary" onClick={this.showModal} >Agregar estudiante</Button>
-                            <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }}>Actualizar</Button>
+                            <Button type="primary" onClick={this.showModal} icon="user-add" >Agregar estudiante</Button>
+                            <Button type="primary" onClick={this.actualizar} style={{ margin: '10px' }} icon="reload">Actualizar tabla</Button>
                         </div>
     
                     </div>
@@ -192,7 +191,7 @@ class FormEstudiante extends Component {
                         onCancel={this.handleCancel}
                         onCreate={this.handleCreate}
                     />
-                    <TablaEstudiante dataSource={studentList} onDelete={this.handleDelete} />
+                    <TablaEstudiante dataSource={studentList} onDelete={this.handleDelete}/>
                 </div>
             );
         }

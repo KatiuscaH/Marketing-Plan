@@ -19,6 +19,7 @@ import Anexos from '../contenido/Anexos';
 import MatrizAnsoff from '../contenido/MatrizAnsoff';
 import DatosPlanMarketing from '../contenido/DatosPlanMarketing';
 import LogoCentral from "../contenido/logocentral";
+import CierreSesion from '../login/CierreSesion';
 
 class ContenidoEstudiante extends Component {
     render() {
@@ -43,6 +44,7 @@ class ContenidoEstudiante extends Component {
                     <Route path="/matriz-ansoff" component={MatrizAnsoff} />
                     <Route path="/datos-iniciales" component={DatosPlanMarketing} />
                     <Route path="/logo" component={LogoCentral} />
+
                     </Switch>
                 {this.props.children}
             </div>
