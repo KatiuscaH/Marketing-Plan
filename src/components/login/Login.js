@@ -54,21 +54,17 @@ class Login extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div>
-          <Header style={{ position: 'absolute', zIndex: 1, width: '100%', }}>
-          <div>
-      <img className="logoapp" src={softmarkudc}/>
-    </div>
-    </Header> 
+      <div >
    
         <section className="intro">
           <div className="inner">
      
             <div className="content">
-              <h1 className="H1">¡BIENVENIDO A<span className="spaan"> SoftMark-UDC!</span></h1>
+              <h1 className="H1">¡BIENVENIDO A<span className="spaan"> SOFTMARK-UDC!</span></h1>
+              
               <Form onSubmit={(e) => {this.handleSubmit(e)}} className="login-form">
                 <div className="logo">
-                  <img alt="logo" src={logoudc2} />
+          <img className="imgLogo" alt="logop" src={logoudc2} />
                 </div>
                 <FormItem>
                   {getFieldDecorator('email', {
@@ -151,6 +147,7 @@ class Login extends Component {
             </li>
           </ul>
           <h5 style={{textAlign:'center'}}>Universidad de Cartagena ©2019 Todos los derechos reservados</h5>
+          
       </Footer>
 
       </div>

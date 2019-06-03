@@ -24,7 +24,7 @@
 
 }
 
-img {
+.imgLogo {
   width: 200px;
   margin-right: 8px;
 }
@@ -47,8 +47,8 @@ html, body{
 }
 
 .intro .inner{
+  padding-top: 10vh;
   display: table-cell;
-  vertical-align: middle;
   width: 100vh;
   max-width: none;
 }
@@ -61,23 +61,18 @@ html, body{
 .H1{
   color: white;
   font-size: 4em;
-  padding-bottom: 15vh;
   font-weight: 700;
 }
 
-@media screen and (max-width: 768px){
+
+ @media screen and (max-width: 768px){
     .H1{
       font-size: 150%;
-      margin-top: 40px;
-      color: transparent;
+      margin-top: 30px;
+      padding-bottom: 20px;
     }
-    .spaan{
-      color: transparent;
-    }
-  .logoapp{
-    padding-bottom: 10%;
-  }
-}
+
+} 
 
 .spaan{
   color: "#CB4900";
@@ -134,3 +129,4 @@ h4, h5{
 .ant-layout-header {
  /* background: transparent;*/
 }
+
