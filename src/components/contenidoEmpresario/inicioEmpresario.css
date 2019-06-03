@@ -1,4 +1,6 @@
-body{
-    /*background: linear-gradient(to right, #FFD194, #D1913C);  
- /* background: linear-gradient(to right, #ffefba, #ffffff);*/
+.fondo {
+    background: linear-gradient(to right, #0000, #fceabb);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100vh;
 }
+

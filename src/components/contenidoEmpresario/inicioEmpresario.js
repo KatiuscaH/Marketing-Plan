@@ -33,16 +33,16 @@ class InicioEmpresario extends Component {
 
     handleLogout() {
         Auth.logout()
-        this.props.history.replace('/login');
+        this.props.history.replace('/cierre-sesion');
     }
     render() {
 
         if (this.state.estadoPlanes === 1) {
 
             return (
-                <div>
-                    <div  style={{display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                    <h3>Bienvenido {this.state.name} {this.state.lastName}</h3>
+                <div className="fondo">
+                    <div className="welcome" style={{display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
+                    <h3 >Bienvenido {this.state.name} {this.state.lastName}</h3>
                         </div>
                     <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "35%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
                         <img alt="logo" src={logoudc} />
