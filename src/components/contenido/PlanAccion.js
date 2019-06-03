@@ -55,6 +55,7 @@ const CollectionCreateForm = Form.create()(
                     visible={visible}
                     title="Agregar Plan de Acción"
                     okText="Crear"
+                    cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
@@ -91,6 +92,7 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                         <FormItem label="Presupuesto">
                             {getFieldDecorator('presupuesto', {
+                                initialValue: '$',
                                 rules: [{
                                     required: true, message: 'Por favor ingrese el presupuesto',
                                 }],

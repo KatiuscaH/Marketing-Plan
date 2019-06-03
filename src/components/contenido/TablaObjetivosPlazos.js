@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Table, Input, Popconfirm, Form } from 'antd';
-import { ELIMINAR_OBJETIVOS } from '../../config';
+import { Table, Input, Popconfirm, Form, Icon, message } from 'antd';
+import { ELIMINAR_OBJETIVOS , ADD_OBJETIVOS} from '../../config';
 import axios from 'axios';
+import './TablaObjetivosPlazo.css';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -120,9 +121,10 @@ class TablaObjetivosPlan extends Component {
       handleSave = (row) => {
       axios.put(ELIMINAR_OBJETIVOS.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then((result)=>{
-         
+        message.success('Se ha editado correctamente');
+      }).catch(err=>{
+        message.error('No se ha podido editar correctamente');
       })
-  
       const newData = [...this.state.dataSource];
       const index = newData.findIndex(item => row.id === item.id);
       const item = newData[index];
@@ -132,10 +134,10 @@ class TablaObjetivosPlan extends Component {
       });
       this.setState({ dataSource: newData });
     }
-    
+
 
   render() {
-    const { dataSource, onDelete } = this.props;
+    const { dataSource, onDelete, onUpdate } = this.props;
     const components = {
       body: {
         row: EditableFormRow,
@@ -148,19 +150,18 @@ class TablaObjetivosPlan extends Component {
       title: 'Descripción del objetivo',
       dataIndex: 'nombre',
       editable: true,
-      width: 200
+      width: 200,
 
     }, {
-      title: 'Operaciones',
+      title: 'Eliminar',
       dataIndex: 'operacion',
-      editable: true,
       width: 50,
 
       render: (text, record) => {
         return (
           this.props.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
+              <Popconfirm title="¿Desea eliminar este objetivo?"  okText="Si" cancelText="No" onConfirm={() => onDelete(record.id)} icon={<Icon type="delete" />}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null

@@ -108,6 +108,7 @@ class FormObjetivoPlazos extends Component {
             })
     }
 
+
     render() {
         const { objetivoList } = this.state
 
@@ -124,6 +125,7 @@ class FormObjetivoPlazos extends Component {
                     <div>
                         <div style={{ paddingBottom: '30px' }}>
                             <Button type="primary" onClick={this.showModal}>Agregar Objetivo</Button>
+                            <Button type="primary" onClick={this.componentDidMount}>Actualizar tabla</Button>
                         </div>
 
                         <CollectionCreateForm

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Popconfirm, Form } from 'antd';
+import { Table, Input, Popconfirm, Form, Icon } from 'antd';
 import { DATOS_INICIALES_PLAN } from '../../config';
 
 import axios from 'axios';
@@ -141,7 +141,7 @@ class TablaDatosPlan extends Component {
     };
 
     const configColumns = [{
-      title: 'Nombre del Plan de Marketing',
+      title: 'Nombre del plan de marketing',
       dataIndex: 'plan',
 
     }, {
@@ -153,14 +153,14 @@ class TablaDatosPlan extends Component {
       dataIndex: 'empresario_id',
 
     }, {
-      title: 'Operaciones',
+      title: 'Eliminar',
       dataIndex: 'operacion',
 
       render: (text, record) => {
         return (
           this.props.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
+              <Popconfirm title="¿Desea eliminar estos datos de plan de marketing?" okText="Si" cancelText="No" onConfirm={() => onDelete(record.id)} icon={<Icon type="delete" />}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null
@@ -192,6 +192,7 @@ class TablaDatosPlan extends Component {
           bordered
           dataSource={dataSource}
           columns={columns}
+          pagination={false}
         />
       </div>
     );

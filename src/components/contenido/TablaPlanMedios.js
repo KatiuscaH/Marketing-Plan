@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Table, Input,  Popconfirm, Form } from 'antd';
+import { Table, Input,  Popconfirm, Form, Icon } from 'antd';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -127,7 +127,7 @@ class TablaPlanMedios extends Component {
       dataIndex: 'publicidad',
       width: 100
     }, {
-      title: 'Caracteristica',
+      title: 'Característica',
       dataIndex: 'caracteristicas',
       width: 100
       
@@ -153,7 +153,7 @@ class TablaPlanMedios extends Component {
         dataIndex: 'costo',
         width: 100
       }, {
-      title: 'Operacion',
+      title: 'Eliminar',
       dataIndex: 'operacion',
        width: 100,
       
@@ -161,7 +161,7 @@ class TablaPlanMedios extends Component {
         return (
           this.props.dataSource.length >= 1
             ? (
-              <Popconfirm title="¿Eliminar?" onConfirm={() => onDelete(record.id)}>
+              <Popconfirm title="¿Desea eliminar este plan de medios?" okText="Si" cancelText="No" onConfirm={() => onDelete(record.id)} icon={<Icon type="delete" />}>
                 <a href="javascript:;">Eliminar</a>
               </Popconfirm>
             ) : null

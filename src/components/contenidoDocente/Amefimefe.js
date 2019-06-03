@@ -37,7 +37,7 @@ onEditorStateChange = (editorState) => {
 render() {
     return (
         <div>
-          <h1>Matriz MEFI - MEFE</h1>
+          <h1>Matríz MEFI - MEFE</h1>
              <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
         </div>
     )

@@ -57,7 +57,7 @@ class MenuEstudiante extends Component {
                         <Menu.Item key="6"><Link to="/analisis-clientes">Identificación de clientes actuales</Link></Menu.Item>
                         <Menu.Item key="7"><Link to="/competencia">Análisis de la Competencia</Link></Menu.Item>
                         <Menu.Item key="8"><Link to="/proveedores">Proveedores</Link></Menu.Item>
-                        <Menu.Item key="9"><Link to="/matriz-bcg">Matriz BCG</Link></Menu.Item>
+                        <Menu.Item key="9"><Link to="/matriz-bcg">Matríz BCG</Link></Menu.Item>
                         <Menu.Item key="10"><Link to="/matriz-dofa">Matríz DOFA</Link></Menu.Item>
                     
                 </SubMenu>

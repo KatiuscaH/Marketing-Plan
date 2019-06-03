@@ -41,7 +41,7 @@ class Apresentacion extends Component {
      
       return (
           <div>
-            <h1>Presentacion de la empresa</h1>
+            <h1>Presentación de la empresa</h1>
                <EditorDraft onChange={this.onChangeEditor} onEditorStateChange={this.onEditorStateChange} content={this.state.editorState} />
           </div>
       )
