@@ -156,6 +156,7 @@ class TablaObjetivosPlan extends Component {
       title: 'Eliminar',
       dataIndex: 'operacion',
       width: 50,
+      className: 'style-eliminar',
 
       render: (text, record) => {
         return (

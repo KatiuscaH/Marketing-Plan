@@ -17,7 +17,7 @@ const Option = AntdSelect.Option;
 const CollectionCreateForm = Form.create()(
 
     class extends React.Component {
-        state = { dataSource: [] };
+        state = { dataSource: []};
 
         componentDidMount() {
             this.setState(() => {
@@ -50,8 +50,9 @@ const CollectionCreateForm = Form.create()(
             return (
                 <Modal
                     visible={visible}
-                    title="Agregar nuevo estudiante"
-                    okText="Crear"
+                    title="Crear plan de marketing"
+                    okText="Guardar"
+                    cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
@@ -170,19 +171,19 @@ class DatosPlanMarketing extends Component {
 
     render() {
 
-       /* if (!this.state.cargando) {
+        if (!this.state.cargando) {
             return <div> <h1>Datos iniciales del Plan de Marketing</h1>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
                     <Spin size="large" />
                 </div>
             </div>
-        } else {*/
+        } else {
             if(this.state.campoS!==null ){
                 return (
                     <div>
                         <h1 style={{color: 'black'}}>Datos iniciales del Plan de Marketing</h1>
                         <div style={{ paddingBottom: '30px' }}>
-                            <Button type="primary" onClick={this.showModal}>Guardar Datos</Button>
+                            <Button type="primary" icon="save" onClick={this.showModal}>Guardar Datos</Button>
                         </div>
                         <CollectionCreateForm
                             wrappedComponentRef={this.saveFormRef}
@@ -195,7 +196,7 @@ class DatosPlanMarketing extends Component {
                     </div>
                 );
          }
-      // }
+       }
 
     }
 }

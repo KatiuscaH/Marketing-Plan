@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Table, Input,  Popconfirm, Form, Icon } from 'antd';
+import './TablaDatosPlan.css'
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -139,7 +140,8 @@ class TablaPlanMedios extends Component {
       }, {
         title: 'Fecha de realización de la publicidad',
         dataIndex: 'realizacion',
-        width: 100
+        width: 100,
+        className: 'fecha'
       },{
         title: 'Duración de la campaña',
         dataIndex: 'duracion',
@@ -151,11 +153,13 @@ class TablaPlanMedios extends Component {
       },{
         title: 'Costo total',
         dataIndex: 'costo',
-        width: 100
+        width: 100,
+        className: 'costo'
       }, {
       title: 'Eliminar',
       dataIndex: 'operacion',
        width: 100,
+       className: 'style-eliminar',
       
       render: (text, record) => {
         return (

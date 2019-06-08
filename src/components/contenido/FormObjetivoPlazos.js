@@ -29,7 +29,8 @@ const CollectionCreateForm = Form.create()(
                 <Modal
                     visible={visible}
                     title="Agregar nuevo objetivo"
-                    okText="Crear"
+                    okText="Guardar"
+                    cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
                 >
@@ -124,8 +125,8 @@ class FormObjetivoPlazos extends Component {
                 <div>
                     <div>
                         <div style={{ paddingBottom: '30px' }}>
-                            <Button type="primary" onClick={this.showModal}>Agregar Objetivo</Button>
-                            <Button type="primary" onClick={this.componentDidMount}>Actualizar tabla</Button>
+                            <Button style={{ marginRight: '20px' }} type="primary" icon="plus" onClick={this.showModal}>Agregar Objetivo</Button>
+                            <Button type="primary" onClick={this.componentDidMount} icon="reload">Actualizar tabla</Button>
                         </div>
 
                         <CollectionCreateForm

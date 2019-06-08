@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Input, Popconfirm, Form, Icon } from 'antd';
-
+import './TablaDatosPlan.css'
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
 
@@ -145,19 +145,23 @@ class TablaPlanAccion extends Component {
     }, {
       title: 'Fecha',
       dataIndex: 'fecha',
-      width: 100
+      width: 100,
+      className: 'fecha'
     }, {
       title: 'Presupuesto',
       dataIndex: 'presupuesto',
-      width: 100
+      width: 100,
+      className: 'costo'
     }, {
       title: 'Indicador de logro',
       dataIndex: 'indicador_logro',
-      width: 100
+      width: 100,
+      className: 'fecha'
     }, {
       title: 'Eliminar',
       dataIndex: 'operacion',
       width: 100,
+      className: 'fecha',
 
       render: (text, record) => {
         return (

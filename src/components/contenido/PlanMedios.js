@@ -4,6 +4,7 @@ import {
     Modal,
     Form,
     Input,
+    Spin
 } from 'antd';
 import TablaPlanMedios from './TablaPlanMedios';
 import { ADD_PLAN_MEDIOS, ELIMINAR_PLAN_MEDIOS } from '../../config';
@@ -29,7 +30,7 @@ const CollectionCreateForm = Form.create()(
                 <Modal
                     visible={visible}
                     title="Agregar Plan de Medios"
-                    okText="Crear"
+                    okText="Guardar"
                     cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
@@ -96,16 +97,19 @@ const CollectionCreateForm = Form.create()(
 class PlanMedios extends Component {
     state = {
         visible: false,
-        planMediosList: []
+        planMediosList: [],
+        cargando: false
     };
 
 
     componentDidMount() {
+        // this.setState({cargando: true});
         axios.get(ADD_PLAN_MEDIOS, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const planMediosList = res.data;
-                this.setState({ planMediosList});
+                this.setState({ planMediosList: planMediosList, cargando: true});
             }).catch(err => {
+                this.setState({  cargando: false});
                  
             })
     }
@@ -156,12 +160,20 @@ class PlanMedios extends Component {
 
     render() {
         const { planMediosList } = this.state
+        if (!this.state.cargando) {
+            return <div> 
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
+                    <Spin size="large" />
+                </div>
+            </div>
+        } else {
+
         return (
             <div>
 
                 <h1 style={{ textAlign: 'center', color: 'black'  }}>Plan de Medios</h1>
                 <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Agregar Plan de Medios</Button>
+                    <Button type="primary" onClick={this.showModal} icon="plus">Agregar Plan de Medios</Button>
                 </div>
 
                 <CollectionCreateForm
@@ -173,7 +185,7 @@ class PlanMedios extends Component {
                 <TablaPlanMedios dataSource={planMediosList} onDelete={this.handleDelete}/>
             </div>
         );
-    }
+    }}
 }
 
 

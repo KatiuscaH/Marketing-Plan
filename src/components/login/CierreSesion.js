@@ -21,7 +21,7 @@ class CierreSesion extends Component {
         <img src={logo}/>
         <h1>Gracias por hacer uso de SOFTMARKUDC</h1>
         <h2>Has cerrado sesión correctamente, para volver presiona el botón de inicio</h2>
-        <Button type="primary" value="large" icon="home" onClick={this.routeChange}>Inicio</Button>
+        <Button className="buton-cierre" type="primary" value="large" icon="home" onClick={this.routeChange}>Inicio</Button>
       </div>
       );
   }

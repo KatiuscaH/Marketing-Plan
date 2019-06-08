@@ -31,8 +31,8 @@ class SiderDemo extends Component {
           collapsedWidth="0" 
           width='270px'
         ><div className="scroll">
-          <div className="logoo">
-            <Link to="/logo"><img src={logoudc2} /></Link>
+          <div >
+            <Link to="/logo"><img className="logoo" src={logoudc2} /></Link>
           </div>
           
             <Menu theme="dark" mode="inline" >

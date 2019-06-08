@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Input, Popconfirm, Form, Icon } from 'antd';
 import { DATOS_INICIALES_PLAN } from '../../config';
-
+import './TablaDatosPlan.css';
 import axios from 'axios';
 
 const FormItem = Form.Item;
@@ -155,7 +155,7 @@ class TablaDatosPlan extends Component {
     }, {
       title: 'Eliminar',
       dataIndex: 'operacion',
-
+      className: 'style-eliminar',
       render: (text, record) => {
         return (
           this.props.dataSource.length >= 1

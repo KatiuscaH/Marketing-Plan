@@ -7,7 +7,7 @@ const ProtectedRoute = ({ component: Component , ...rest}) => {
     return <Route {...rest} render={props => 
         localStorage.getItem('user')
             ? <Component {...props} />
-            : <Redirect to="/cierre-sesion" />
+            : <Redirect to="/login" />
         }
     />
 }

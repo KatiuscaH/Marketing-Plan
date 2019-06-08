@@ -4,7 +4,8 @@ import {
     Modal,
     Form,
     Input,
-    Select
+    Select,
+    Spin
 } from 'antd';
 import TablaPlanAccion from './TablaPlanAccion';
 import { ADD_PLAN_ACCION, ELIMINAR_PLAN_ACCION,ADD_OBJETIVOS } from '../../config';
@@ -54,7 +55,7 @@ const CollectionCreateForm = Form.create()(
                 <Modal
                     visible={visible}
                     title="Agregar Plan de Acción"
-                    okText="Crear"
+                    okText="Guardar"
                     cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
@@ -118,7 +119,8 @@ const CollectionCreateForm = Form.create()(
 class PlanAccion extends Component {
     state = {
         visible: false,
-        planList: []
+        planList: [],
+        cargando: false
     };
 
     ////GET
@@ -127,7 +129,7 @@ class PlanAccion extends Component {
         axios.get(ADD_PLAN_ACCION, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const planList = res.data;
-                this.setState({ planList });
+                this.setState({ planList, cargando: true });
             }).catch(err => {
                  
             })
@@ -176,12 +178,19 @@ handleDelete = (key) => {
 }
     render() {
         const { planList } = this.state
+        if (!this.state.cargando) {
+            return <div> 
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
+                    <Spin size="large" />
+                </div>
+            </div>
+        } else {
         return (
             <div>
 
                 <h1 style={{ textAlign: 'center', color: 'black'  }}>Plan de Acción</h1>
                 <div style={{ paddingBottom: '30px' }}>
-                    <Button type="primary" onClick={this.showModal}>Agregar Plan de Acción</Button>
+                    <Button type="primary" onClick={this.showModal} icon="plus">Agregar Plan de Acción</Button>
                 </div>
 
                 <CollectionCreateForm
@@ -193,7 +202,7 @@ handleDelete = (key) => {
                 <TablaPlanAccion dataSource={planList} onDelete={this.handleDelete}/>
             </div>
         );
-    }
+    }}
 }
 
 
