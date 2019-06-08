@@ -27,11 +27,14 @@ class CuatroP extends Component {
             .then(({ data }) => {
                 if (data.coatrop) {
                     this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.coatrop))) })
+                    message.success('Datos cargados correctacmente')
+
                 } else {
                     this.setState({ editorState: EditorState.createEmpty() });
                 }
                 this.setState({ cargando: false })
             }).catch(err => {
+                message.error('Los datos no han podido cargarse. Intente nuevamente')
                  
             })
     }
@@ -44,6 +47,8 @@ class CuatroP extends Component {
             { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((res => {
                 this.setState({ iconLoading: false })
+                message.success('Los datos se han guardado correctamente')
+
             })
 
             ).catch(err => {

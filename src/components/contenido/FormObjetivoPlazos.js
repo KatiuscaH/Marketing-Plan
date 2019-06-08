@@ -4,7 +4,8 @@ import {
     Modal,
     Form,
     Input,
-    Spin
+    Spin,
+    message
 } from 'antd';
 import TablaObjetivosPlazos from './TablaObjetivosPlazos';
 import { ADD_OBJETIVOS, ELIMINAR_OBJETIVOS } from '../../config';
@@ -64,8 +65,9 @@ class FormObjetivoPlazos extends Component {
             .then(res => {
                 const objetivoList = res.data;
                 this.setState({ objetivoList, cargando: true });
+                message.success('Objetivos cargados correctamente')
             }).catch(err => {
-                 
+                 message.error('No se han podido cargar los objetivos. Intente nuevamente')
             })
     }
 
@@ -86,12 +88,12 @@ class FormObjetivoPlazos extends Component {
             }
             axios.post(ADD_OBJETIVOS, values, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
                 .then((result) => {
-                     
-                     
                     form.resetFields();
                     this.setState({ visible: false, objetivoList: [...this.state.objetivoList, result.data] });
+                    message.success('Objetivo guardado correctamente')
                 }).catch(err => {
-                    // message.error("err")
+                    message.error('No se pudo guardar el objetivo correctamente. Intente nuevamente')
+      
                 })
 
         });
@@ -105,6 +107,9 @@ class FormObjetivoPlazos extends Component {
         axios.delete(ELIMINAR_OBJETIVOS.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
                 this.setState({ objetivoList: this.state.objetivoList.filter(item => item.id !== key) });
+message.success('Objetivo eliminado correctamente');
+            }).catch(err => {
+message.error('No se pudo eliminar el objetivo correctamente. Intente nuevamente');
 
             })
     }

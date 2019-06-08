@@ -4,6 +4,7 @@ import {
     Modal,
     Form,
     Input,
+    message,
     Spin
 } from 'antd';
 import TablaPlanMedios from './TablaPlanMedios';
@@ -108,8 +109,11 @@ class PlanMedios extends Component {
             .then(res => {
                 const planMediosList = res.data;
                 this.setState({ planMediosList: planMediosList, cargando: true});
+                message.success('Plan de medios cargado correctamente')
+
             }).catch(err => {
                 this.setState({  cargando: false});
+                message.error('No se han podido cargar el plan de medios. Intente nuevamente')
                  
             })
     }
@@ -136,8 +140,11 @@ class PlanMedios extends Component {
                      
                     form.resetFields();
                     this.setState({ visible: false, planMediosList: [...this.state.planMediosList, result.data] });
+                    message.success('Plan de medios guardado correctamente')
+
                 }).catch(err => {
-                    //message.error("error")
+                    message.error('No se pudo guardar el plan de medios correctamente. Intente nuevamente')
+
                 })
 
         });
@@ -154,6 +161,11 @@ class PlanMedios extends Component {
             .then((result) => {
                  
                 this.setState({ planMediosList: this.state.planMediosList.filter(item => item.id !== key) });
+message.success('Plan de medios eliminado correctamente');
+
+            }).catch(er => {
+message.error('No se pudo eliminar el plan de medios correctamente. Intente nuevamente');
+
             })
      }
 

@@ -5,7 +5,8 @@ import {
     Input,
     Modal,
     Select as AntdSelect,
-    Spin
+    Spin,
+    message
 } from 'antd';
 import axios from 'axios';
 import TablaDatosPlan from './TablaDatosPlan';
@@ -118,9 +119,11 @@ class DatosPlanMarketing extends Component {
                         empresario_id: empresario,
                         id: campo,
                     }
-                     
+                     message.success('Datos del plan de marketing cargados correctamente')
                     this.setState({ datosPlanList: [datos], cargando: true });
                 }).catch(err => {
+                    this.setState({  cargando: false });
+                    message.error('Los Datos del plan de marketing no han podido cargarse. Intente nuevamente')
                      
                 })
 
@@ -152,7 +155,11 @@ class DatosPlanMarketing extends Component {
                     let ls = JSON.parse(localStorage.getItem('user'));
                     ls.marketing_id = result.data.id;
                     localStorage.setItem('user', JSON.stringify(ls));
-                })
+                    message.success('Datos del plan de marketing agregados correctamente')
+
+                }).catch(err => {
+                    message.error('Los Datos del plan de marketing no han podido agregarse. Intente nuevamente')
+                });
 
         });
     }
@@ -178,7 +185,7 @@ class DatosPlanMarketing extends Component {
                 </div>
             </div>
         } else {
-            if(this.state.campoS!==null ){
+            if(this.state.campoS!==null){
                 return (
                     <div>
                         <h1 style={{color: 'black'}}>Datos iniciales del Plan de Marketing</h1>
