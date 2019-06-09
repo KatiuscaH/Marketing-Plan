@@ -23,12 +23,14 @@ class VisualizarArchivos extends Component {
     {
       title: 'Nombre archivo',
       dataIndex: 'nombre',
-      width: 200
+      width: 400
+
 
     }, {
       title: 'Visualizar',
      dataIndex: 'url',
      className: 'fecha',
+     width: 200,
 
       render: (dataIndex) => (
         <div>
@@ -58,7 +60,7 @@ class VisualizarArchivos extends Component {
     return (
       
       <div>
-        <h1>Visualizar Archivos</h1>
+        <h1 style={{paddingBottom: '20px'}}>Visualizar Archivos Anexos</h1>
         <Table rowKey="id" columns={this.columns} dataSource={this.state.files} bordered></Table>
       </div>
     );
