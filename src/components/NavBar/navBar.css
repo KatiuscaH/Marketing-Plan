@@ -16,6 +16,7 @@
 .nombreUsuario {
   float: left;
   padding: 15px;
+  padding-left: 64px;
 }
 
 .h3Color {

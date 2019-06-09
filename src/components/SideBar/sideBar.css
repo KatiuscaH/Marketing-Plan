@@ -9,7 +9,12 @@
  
   
  .logoo {
-    height: 11vh;
+    height: 10vh;
+    margin: 16px;
+    cursor: pointer;
+  }
+ .logoSiderDocente {
+    height: 10vh;
     margin: 16px;
     cursor: pointer;
   }

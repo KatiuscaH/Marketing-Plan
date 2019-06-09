@@ -4,3 +4,8 @@
     height: 100vh;
 }
 
+.logoo {
+    height: 11vh;
+    margin: 16px;
+    cursor: pointer;
+  }

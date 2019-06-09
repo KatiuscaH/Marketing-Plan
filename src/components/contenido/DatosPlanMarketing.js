@@ -178,13 +178,13 @@ class DatosPlanMarketing extends Component {
 
     render() {
 
-        if (!this.state.cargando) {
-            return <div> <h1>Datos iniciales del Plan de Marketing</h1>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
-                    <Spin size="large" />
-                </div>
-            </div>
-        } else {
+        // if (!this.state.cargando) {
+        //     return <div> <h1>Datos iniciales del Plan de Marketing</h1>
+        //         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
+        //             <Spin size="large" />
+        //         </div>
+        //     </div>
+        // } else {
             if(this.state.campoS!==null){
                 return (
                     <div>
@@ -205,7 +205,7 @@ class DatosPlanMarketing extends Component {
          }
        }
 
-    }
+    // }
 }
 
 

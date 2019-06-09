@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Table, Button, message } from 'antd';
+import { Table, Button, message, Input, Icon } from 'antd';
 import axios from 'axios';
 import { VER_PLANES_MARKETING , ELIMINAR_DATOS_INICIALES_PLAN,LISTAR_ESTRATEGIAS} from '../../config';
 import VerPlanesMarketing from '../contenidoDocente/VerPlanesMarketing';
 import MostrarProgresoEstudiante from './MostrarProgresoEstudiante';
 import MostrarProgresoEstrategiasEstudiante from './MostrarProgresoEstrategiasEstudiante';
+import Highlighter from 'react-highlight-words';
 
 class TablaProgresoEstudiante extends Component {
 
@@ -15,10 +16,14 @@ class TablaProgresoEstudiante extends Component {
             datas2: {presentacion:null},//Plan
             datas3:[],//estrategias,
             iconLoading: false,
+            searchText: '',
         }
+        
         this.columns = [{
             title: 'Nombre del plan de marketing',
             dataIndex: 'nombre',
+      ...this.getColumnSearchProps('nombre')
+
         
         }, {
             title: 'Grupo',
@@ -44,6 +49,66 @@ class TablaProgresoEstudiante extends Component {
         }
         ];
     }
+    getColumnSearchProps = dataIndex => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+          <div style={{ padding: 8 , backgroundColor: 'antiquewhite'}}>
+            <Input
+              ref={node => {
+                this.searchInput = node;
+              }}
+              placeholder={`Buscar ${dataIndex}`}
+              value={selectedKeys[0]}
+              onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+              onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+              style={{ width: 188, marginBottom: 8, display: 'block' }}
+    
+            />
+            <Button
+              type="primary"
+              onClick={() => this.handleSearch(selectedKeys, confirm)}
+              icon="search"
+              size="small"
+              style={{ width: 90, marginRight: 8 }}
+            >
+              Buscar
+            </Button>
+            <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+              Borrar filtros
+            </Button>
+          </div>
+        ),
+        filterIcon: filtered => (
+          <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+        ),
+        onFilter: (value, record) =>
+          record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+          if (visible) {
+            setTimeout(() => this.searchInput.select());
+          }
+        },
+        render: text => (
+          <Highlighter
+            highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+            searchWords={[this.state.searchText]}
+            autoEscape
+            textToHighlight={text.toString()}
+          />
+        ),
+      });
+    
+      handleSearch = (selectedKeys, confirm) => {
+        confirm();
+        this.setState({ searchText: selectedKeys[0] });
+      };
+    
+      handleReset = clearFilters => {
+        clearFilters();
+        this.setState({ searchText: '' });
+      };
 
     clic=(id)=>{
         this.setState({iconLoading: true})

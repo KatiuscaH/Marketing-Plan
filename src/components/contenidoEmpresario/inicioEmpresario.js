@@ -45,7 +45,7 @@ class InicioEmpresario extends Component {
                     <h3 >Bienvenido {this.state.name} {this.state.lastName}</h3>
                         </div>
                     <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "35%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
-                        <img alt="logo" src={logoudc} />
+                        <img className="logoo" alt="logo" src={logoudc} />
                     </div>
 
                     <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "50%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>

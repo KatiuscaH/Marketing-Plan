@@ -32,7 +32,7 @@ const CollectionCreateForm = Form.create()(
                 <Modal
                     visible={visible}
                     title="Agregar nuevo empresario"
-                    okText="Crear"
+                    okText="Guardar"
                     cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
@@ -106,6 +106,8 @@ class FormEmpresario extends Component {
             .then(res => {
                 const empresarioList = res.data;
                 this.setState({ empresarioList, cargando: true });
+                message.success('Datos cargados correctamente')
+
             }).catch(err => {
                 message.error('No se han podido cargar los datos. Intente nuevamente')
             })

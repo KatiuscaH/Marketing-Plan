@@ -12,15 +12,14 @@ class TablaProgresoEmpresario extends Component {
         super(props);
         this.state = {
             datas: [],
-            idMark: 1
         }
         this.columns = [{
             title: 'Objetivo',
             dataIndex: 'nombre',
 
         },  {
-            title: 'Nombre Marketing',
-            dataIndex: ''
+            title: 'Nombre del plan de Marketing',
+            dataIndex: 'marketing.plan'
 
         },  {
             title: 'Indicador de logro',
@@ -50,6 +49,8 @@ class TablaProgresoEmpresario extends Component {
                 // console.log(datas[0].marketing_id);
                 this.setState({ datas: datas});
                 // this.verificarObjCumplido();
+                console.log(datas);
+                
             }).catch(err => {
 
             })

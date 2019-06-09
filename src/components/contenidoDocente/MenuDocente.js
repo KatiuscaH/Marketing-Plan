@@ -36,6 +36,7 @@ class MenuDocente extends Component {
                     </SubMenu>
                     <SubMenu key="sub3" title={<span><Icon type="message" theme="outlined" /><span>Retroalimentación </span></span>}>
                         <Menu.Item key="5"><Link to="/retroalimentacion">Enviar Retroalimentación</Link></Menu.Item>
+                        <Menu.Item key="6"><Link to="/archivos">Ver Archivos</Link></Menu.Item>
                     </SubMenu>
                 </Menu>
                 

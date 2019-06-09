@@ -29,8 +29,8 @@ class SiderDocente extends Component {
           collapsedWidth="0"
           width='250px'>
 
-          <div className="logoo">
-          <Link to="/logo"><img src={logoudc2} /></Link>
+          <div >
+          <Link to="/logo"><img className="logoSiderDocente" src={logoudc2} /></Link>
           </div>
 
           <Menu theme="dark" mode="inline" >

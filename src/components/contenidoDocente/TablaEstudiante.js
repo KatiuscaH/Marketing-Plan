@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Table, Input, Popconfirm, Form, Spin, message, Icon } from 'antd';
+import { Table, Input, Popconfirm, Form, Spin, message, Icon, Button } from 'antd';
 import axios from 'axios';
 import { AC_ESTUDIANTES, ADD_ESTUDIANTES } from '../../config';
+import '../contenido/TablaDatosPlan.css'
+import Highlighter from 'react-highlight-words';
+
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -114,7 +117,72 @@ class EditableTable extends Component {
     super(props);
   }
 
-  state = { dataSource: [] };
+  state = { dataSource: [] ,
+    searchText: '',};
+
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 , backgroundColor: 'antiquewhite'}}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Buscar ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+
+        />
+        <Button
+          type="primary"
+          onClick={() => this.handleSearch(selectedKeys, confirm)}
+          icon="search"
+          size="small"
+          style={{ width: 90, marginRight: 8 }}
+        >
+          Buscar
+        </Button>
+        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+          Borrar filtros
+        </Button>
+      </div>
+    ),
+    filterIcon: filtered => (
+      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select());
+      }
+    },
+    render: text => (
+      <Highlighter
+        highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+        searchWords={[this.state.searchText]}
+        autoEscape
+        textToHighlight={text.toString()}
+      />
+    ),
+  });
+
+  handleSearch = (selectedKeys, confirm) => {
+    confirm();
+    this.setState({ searchText: selectedKeys[0] });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
+
+
+
   
   handleSave = (row) => {
     axios.put(AC_ESTUDIANTES.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
@@ -146,26 +214,37 @@ class EditableTable extends Component {
       title: 'Nombres',
       dataIndex: 'nombre',
       editable: true,
+      ...this.getColumnSearchProps('nombre')
 
     }, {
       title: 'Apellidos',
       dataIndex: 'apellido',
       editable: true,
+
     }, {
       title: 'Correo',
       dataIndex: 'email',
+
       
     }, {
       title: 'Año',
       dataIndex: 'year',
       editable: true,
+      className: 'fecha',
+    sorter: (a, b) => a.year - b.year,
+    sortDirections: ['descend'],
     }, {
       title: 'Período',
       dataIndex: 'periodo',
       editable: true,
+      className: 'fecha',
+      sorter: (a, b) => a.periodo - b.periodo,
+      sortDirections: ['descend'],
+
     }, {
       title: 'Eliminar',
       dataIndex: 'operacion',
+      className: 'fecha',
 
       render: (text, record) => {
         return (

@@ -39,7 +39,7 @@ const CollectionCreateForm = Form.create()(
                 <Modal
                     visible={visible}
                     title="Agregar nuevo estudiante"
-                    okText="Crear"
+                    okText="Guardar"
                     cancelText="Cancelar"
                     onCancel={onCancel}
                     onOk={onCreate}
@@ -115,6 +115,7 @@ class FormEstudiante extends Component {
             .then(res => {
                 const studentList = res.data;
                 this.setState({ studentList , cargando: true});
+                message.success('Datos cargados correctamente')
             }).catch(err => {
                  message.error('No se han podido cargar los datos. Intente nuevamente')
             })
@@ -156,7 +157,7 @@ class FormEstudiante extends Component {
                 this.setState({ studentList: this.state.studentList.filter(item => item.id !== key) });
                 message.success('Estudiante eliminado con éxito')
             }).catch(err => {
-                message.error('No se ha podido eliminar el estudiante. Intennte nuevamente')
+                message.error('No se ha podido eliminar el estudiante. Intente nuevamente')
             })
     }
 

@@ -22,13 +22,13 @@ class MostrarProgresoEstrategiasEstudiante extends Component {
     
     return (
       <div className="table">
-        <h2>Objetivos</h2>
+       <h2 className="title">Objetivos</h2> 
         <TablaObjetivosPlanEmpresario dataSource={this.props.propiedades.objetivos} />
 
-        <h2 style={{paddingTop: '30px'}}>Estrategias</h2>
+        <h2 className="title" style={{paddingTop: '30px'}}>Estrategias</h2>
         <TablaPlanAccionEmpresario dataSource={this.props.propiedades.estrategias}/>
 
-        <h2 style={{paddingTop: '30px'}}>Plan de medios</h2>
+        <h2  className="title" style={{paddingTop: '30px'}}>Plan de medios</h2>
         <TablaPlanMediosEMpresario dataSource={this.props.propiedades.medios} />
       </div>
     )

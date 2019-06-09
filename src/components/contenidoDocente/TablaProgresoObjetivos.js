@@ -16,6 +16,7 @@ componentDidMount(){
   .then(res => {
       const objetivoList = res.data;
       this.setState({ objetivoList });
+      console.log(objetivoList)
   }).catch(err => {
        
   })
