@@ -27,7 +27,7 @@ class CuatroP extends Component {
             .then(({ data }) => {
                 if (data.coatrop) {
                     this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.coatrop))) })
-                    message.success('Datos cargados correctacmente')
+                    message.success('Datos cargados correctamente')
 
                 } else {
                     this.setState({ editorState: EditorState.createEmpty() });
@@ -35,6 +35,7 @@ class CuatroP extends Component {
                 this.setState({ cargando: false })
             }).catch(err => {
                 message.error('Los datos no han podido cargarse. Intente nuevamente')
+        this.setState({ cargando: false })
                  
             })
     }

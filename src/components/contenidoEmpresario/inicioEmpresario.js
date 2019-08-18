@@ -10,6 +10,7 @@ import logoudc from '../../../src/logoudc.png';
 import VerPlanMarketing from './VerPlanMarketing';
 import ActualizarEstrategias from './ActualizarEstrategias';
 import ProgresoCumplido from './ProgresoCumplido';
+import softmarkudc from '../../../src/softmarkudc.png'
 
 const Auth = new AuthService();
 class InicioEmpresario extends Component {
@@ -41,14 +42,17 @@ class InicioEmpresario extends Component {
 
             return (
                 <div className="fondo">
-                    <div className="welcome" style={{display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
+                    <div className="welcome" style={{display: 'flex', justifyContent: 'center', paddingTop: '50px' }}>
                     <h3 >Bienvenido {this.state.name} {this.state.lastName}</h3>
                         </div>
-                    <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "35%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "41%", left: "50%", margin: "-160px 0 0 -160px", paddingLeft:"55px "}}>
                         <img className="logoo" alt="logo" src={logoudc} />
                     </div>
+                    <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "50%", left: "46%", margin: "-160px 0 0 -160px", paddingLeft:"55px " }}>
+                        <img className="logoo2" alt="logo" src={softmarkudc} />
+                    </div>
 
-                    <div style={{ display: "flex", flexDirection: "column", position: "absolute", top: "50%", left: "50%", margin: "-160px 0 0 -160px", padding: "55px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "55%"}}>
                         <Row align="middle" type="flex" justify="center">
                             <div style={{ padding: "10px" }} >
                                 <Button onClick={()=>this.cambiaEstado(2)} size="large" type="primary" style={{ width: '200px' }}>Ver plan de Marketing</Button>

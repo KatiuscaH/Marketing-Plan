@@ -27,7 +27,7 @@ class Competencia extends Component {
             .then(({ data }) => {
                 if (data.competencia) {
                     this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.competencia))) })
-                    message.success('Datos cargados correctacmente')
+                    message.success('Datos cargados correctamente')
 
                 } else {
                     this.setState({ editorState: EditorState.createEmpty() });
@@ -35,6 +35,7 @@ class Competencia extends Component {
                 this.setState({ cargando: false })
             }).catch(err => {
                 message.error('Los datos no han podido cargarse. Intente nuevamente')
+        this.setState({ cargando: false })
                  
             })
     }

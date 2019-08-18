@@ -27,13 +27,14 @@ class AnalisisPes extends Component {
             .then(({ data }) => {
                 if (data.pest) {
                     this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.pest))) })
-                    message.success('Datos cargados correctacmente')
+                    message.success('Datos cargados correctamente')
 
                 } else {
                     this.setState({ editorState: EditorState.createEmpty() });
                 }
                 this.setState({ cargando: false })
             }).catch(err => {
+        this.setState({ cargando: false })
                  
                 message.error('Los datos no han podido cargarse. Intente nuevamente')
             })

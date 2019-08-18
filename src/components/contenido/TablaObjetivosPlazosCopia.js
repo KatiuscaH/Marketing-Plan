@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Popconfirm, Form , message} from 'antd';
+import { Table, Input, Popconfirm, Form, message } from 'antd';
 import { ELIMINAR_OBJETIVOS, ACTUALIZAR_OBJETIVOS } from '../../config';
 import axios from 'axios';
 
@@ -114,33 +114,49 @@ class TablaObjetivosPlanCopia extends Component {
     super(props);
   }
 
-  state = { dataSource: [] }
+  state = {
+    dataSource: [],
+    objCumplido: 'No'
+  }
 
   ////////PUT
-      handleSave = (row) => {
-      axios.put(ELIMINAR_OBJETIVOS.replace(":id", row.id), row,{ headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
-      .then((result)=>{
-         
+  handleSave = (row) => {
+    axios.put(ELIMINAR_OBJETIVOS.replace(":id", row.id), row, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+      .then((result) => {
+
       })
-  
-      const newData = [...this.state.dataSource];
-      const index = newData.findIndex(item => row.id === item.id);
-      const item = newData[index];
-      newData.splice(index, 1, {
-        ...item,
-        ...row,
-      });
-      this.setState({ dataSource: newData });
-    }
-    
-    cumplidoObj=(campo)=>{
-      axios.put((ACTUALIZAR_OBJETIVOS).replace(':id',campo),{ cumplido: 1 }, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+
+    const newData = [...this.state.dataSource];
+    const index = newData.findIndex(item => row.id === item.id);
+    const item = newData[index];
+    newData.splice(index, 1, {
+      ...item,
+      ...row,
+    });
+    this.setState({ dataSource: newData });
+  }
+
+  cumplidoObj = (campo) => {
+    axios.put((ACTUALIZAR_OBJETIVOS).replace(':id', campo), { cumplido: 1 }, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then(res => {
-        message.success('¡Felicidades, Cumpliste el objetivo!');
+        message.success('¡Felicidades, Cumpliste el objetivo!. Actualiza la página para ver los cambios reflejados.');
+        this.setState({ objCumplido: 'Si' });
+
       }).catch(err => {
-           message.error('No se ha podido marcar como completo. Intenta nuevamente');
+        message.error('No se ha podido marcar como completo. Intenta nuevamente');
       })
-    }
+  }
+
+  noCumplido = (campo) => {
+    axios.put((ACTUALIZAR_OBJETIVOS).replace(':id', campo), { cumplido: 0 }, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
+      .then(res => {
+        message.success('¡Aún no has cumplido con el objetivo!. Actualiza la página para ver los cambios reflejados.');
+        this.setState({ objCumplido: 'Si' });
+
+      }).catch(err => {
+        message.error('No se ha podido marcar como completo. Intenta nuevamente');
+      })
+  }
 
 
   render() {
@@ -154,28 +170,38 @@ class TablaObjetivosPlanCopia extends Component {
 
     const configColumns = [
       {
-      title: 'Descripción del objetivo',
-      dataIndex: 'nombre',
-
-      width: 200
-
-    }, {
-      title: 'Cumplimiento',
-      dataIndex: 'operacion',
-   
-      width: 50,
-
-      render: (text, record) => {
-        return (
-          this.props.dataSource.length >= 1
-            ? (
-              <Popconfirm title="¿Has cumplido la totalidad de este objetivo?" okText="Si" cancelText="No" onConfirm={() => this.cumplidoObj(record.id)}>
-                <a href="javascript:;">Objetivo cumplido</a>
-              </Popconfirm>
-            ) : null
-        );
+        title: 'Descripción del objetivo',
+        dataIndex: 'nombre',
+        width: 200
       },
-    }];
+      {
+        title: 'Cumplido',
+        render: (text, record) => {
+          return (
+            <div>
+            Cumplido: 
+            {record.cumplido ? ' Si' : ' No'}
+          </div>
+          )
+        }
+      },
+      {
+        title: 'Cumplimiento',
+        dataIndex: 'operacion',
+
+        width: 50,
+
+        render: (text, record) => {
+          return (
+            this.props.dataSource.length >= 1
+              ? (
+                <Popconfirm title="¿Has cumplido la totalidad de este objetivo?" okText="Si" cancelText="No" onConfirm={() => this.cumplidoObj(record.id)} onCancel={() => this.noCumplido(record.id)}>
+                  <a href="javascript:;">Objetivo cumplido</a>
+                </Popconfirm>
+              ) : null
+          );
+        },
+      }];
 
 
     const columns = configColumns.map((col) => {

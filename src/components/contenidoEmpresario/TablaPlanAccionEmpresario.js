@@ -12,12 +12,7 @@ class TablaPlanAccionEmpresario extends Component {
   render() {
     const { dataSource, onDelete } = this.props;
 
-    const configColumns = [{
-      title: 'Objetivo estratégico',
-      dataIndex: 'objetivo_id',
-
-      width: 100
-    }, {
+    const configColumns = [ {
       title: 'Tácticas (Corto Plazo)',
       dataIndex: 'tactica',
       width: 100

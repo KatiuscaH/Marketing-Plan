@@ -118,6 +118,8 @@ class FormEstudiante extends Component {
                 message.success('Datos cargados correctamente')
             }).catch(err => {
                  message.error('No se han podido cargar los datos. Intente nuevamente')
+        this.setState({ cargando: false })
+
             })
     }
 

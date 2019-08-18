@@ -39,7 +39,8 @@ export class ProgesoCumplido extends Component {
         </div>
         <div style={{paddingTop: '30px'}} >
           <h1>Progreso de objetivos</h1>
-          <p>Aquí podrás marcar como completos los objetivos propuestos una vez completes todas las estrategias planteadas. Para marcar como completo, presiona sobre 'Objetivo cumplido' y selecciona Si o No. </p>
+          <p>Aquí podrás marcar como completos los objetivos propuestos una vez realices todas las estrategias planteadas.
+</p>
         <TablaObjetivosPlanCopia dataSource={this.state.propiedades.objetivos} />
         </div>
       </div>

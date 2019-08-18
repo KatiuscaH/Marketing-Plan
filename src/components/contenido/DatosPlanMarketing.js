@@ -159,6 +159,7 @@ class DatosPlanMarketing extends Component {
 
                 }).catch(err => {
                     message.error('Los Datos del plan de marketing no han podido agregarse. Intente nuevamente')
+                    
                 });
 
         });

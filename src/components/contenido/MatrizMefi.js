@@ -27,7 +27,7 @@ class MatrizMefi extends Component {
             .then(({ data }) => {
                 if (data.mefi) {
                     this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(data.mefi))) })
-                    message.success('Datos cargados correctacmente')
+                    message.success('Datos cargados correctamente')
 
                 } else {
                     this.setState({ editorState: EditorState.createEmpty() });
@@ -35,6 +35,7 @@ class MatrizMefi extends Component {
                 this.setState({ cargando: false })
             }).catch(err => {
                 message.error('Los datos no han podido cargarse. Intente nuevamente')
+        this.setState({ cargando: false })
                  
             })
     }

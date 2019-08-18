@@ -110,6 +110,8 @@ class FormEmpresario extends Component {
 
             }).catch(err => {
                 message.error('No se han podido cargar los datos. Intente nuevamente')
+        this.setState({ cargando: false })
+
             })
     }
     ///////////

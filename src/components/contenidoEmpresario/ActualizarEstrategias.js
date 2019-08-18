@@ -37,7 +37,7 @@ export class ActualizarEstrategias extends Component {
         </div>
         <div style={{paddingTop: '30px'}} >
           <h1>Estrategias, Objetivos y Plan de medios</h1>
-          <p>Aquí podrá ver las estrageias, objetivos y plan de medios creados para usted. Un objetivo está completo en su totalidad cuando todas las estrategias asociadas a este estan completas.</p>
+          <p>Aquí podrá ver las estrategias, objetivos y plan de medios creados para usted.</p>
         <MostrarProgresoEstrategiasEstudiante propiedades={this.state.propiedades}/>
         </div>
       </div>

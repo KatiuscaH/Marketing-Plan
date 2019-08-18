@@ -68,6 +68,8 @@ class FormObjetivoPlazos extends Component {
                 message.success('Objetivos cargados correctamente')
             }).catch(err => {
                  message.error('No se han podido cargar los objetivos. Intente nuevamente')
+        this.setState({ cargando: false })
+
             })
     }
 

@@ -49,7 +49,7 @@ const CollectionCreateForm = Form.create()(
                     okButtonProps={{icon: "arrow-right"}}
                 >
                     <Form layout="vertical" onSubmit={this.handleCreate}>
-                    <h2>Enviar a: {email}</h2>
+                    <h2 style={{color: '#000'}}>Enviar a: {email}</h2>
                         <FormItem label="Asunto">
                             {getFieldDecorator('subject', {
                                 rules: [{ required: true, message: 'Por favor ingrese el asunto' }],
@@ -212,12 +212,14 @@ class EnviarRetroalimentacion extends Component {
         this.formRef = formRef;
     }
     componentDidMount() {
+        this.setState({ cargando: true});
         axios.get(ADD_ESTUDIANTES, { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then(res => {
                 const studentList = res.data;
-                this.setState({ studentList});
+                this.setState({ studentList, cargando: false});
+                message.success('Datos cargados correctamente')
             }).catch(err => {
-                 
+                message.error('Los datos no han podido cargarse. Intente nuevamente')                 
             })
     }
 
@@ -229,9 +231,9 @@ class EnviarRetroalimentacion extends Component {
         
         if(this.state.cargando){
             return(
-                <div>
-                <Spin/>
-                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
+                <Spin size="large" />
+              </div>
             )
         } else {
         return (
