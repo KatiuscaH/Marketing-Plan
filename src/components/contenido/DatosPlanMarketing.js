@@ -76,7 +76,7 @@ const CollectionCreateForm = Form.create()(
                                     required: true, message: 'Por favor seleccione el empresario asignado',
                                 }],
                             })(
-                                <AntdSelect>
+                                <AntdSelect placeholder="Seleccione un empresario">
                                     {this.state.dataSource.map(item => (<Option key={item.value} value={item.value}>{item.label}</Option>))}
                                 </AntdSelect>
                             )}
@@ -98,7 +98,8 @@ class DatosPlanMarketing extends Component {
         visible: false,
         datosPlanList: [],
         cargando: false,
-        campoS: false
+        campoS: false,
+        botonActivo: false
 
     };
     ////componer aqui lo del campo
@@ -151,7 +152,7 @@ class DatosPlanMarketing extends Component {
                 .then((result) => {
                      
                     form.resetFields();
-                    this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] });
+                    this.setState({ visible: false, datosPlanList: [...this.state.datosPlanList, result.data] , botonActivo: true});
                     let ls = JSON.parse(localStorage.getItem('user'));
                     ls.marketing_id = result.data.id;
                     localStorage.setItem('user', JSON.stringify(ls));
@@ -172,7 +173,7 @@ class DatosPlanMarketing extends Component {
     handleDelete = (key) => {
         axios.delete(ELIMINAR_DATOS_INICIALES_PLAN.replace(":id", key), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
             .then((result) => {
-                this.setState({ datosPlanList: this.state.datosPlanList.filter(item => item.id !== key) });
+                this.setState({ datosPlanList: this.state.datosPlanList.filter(item => item.id !== key), botonActivo: false });
             })
     }
 
@@ -191,7 +192,7 @@ class DatosPlanMarketing extends Component {
                     <div>
                         <h1 style={{color: 'black'}}>Datos iniciales del Plan de Marketing</h1>
                         <div style={{ paddingBottom: '30px' }}>
-                            <Button type="primary" icon="save" onClick={this.showModal}>Guardar Datos</Button>
+                            <Button type="primary" icon="save" onClick={this.showModal} disabled={this.state.botonActivo}>Guardar Datos</Button>
                         </div>
                         <CollectionCreateForm
                             wrappedComponentRef={this.saveFormRef}

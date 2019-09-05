@@ -25,11 +25,14 @@ class TablaPlanAccionEmpresario extends Component {
     }, {
       title: 'Fecha',
       dataIndex: 'fecha',
-      width: 100
+      width: 100,
+      className: 'fecha',
     }, {
       title: 'Presupuesto',
       dataIndex: 'presupuesto',
-      width: 100
+      width: 100,
+      className: 'costo',
+
     }, {
       title: 'Indicador de logro',
       dataIndex: 'indicador_logro',

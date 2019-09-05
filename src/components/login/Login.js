@@ -61,6 +61,7 @@ class Login extends Component {
      
             <div className="content">
               <h1 className="H1">¡BIENVENIDO A<span className="spaan"> SOFTMARK-UDC!</span></h1>
+              <p className="subtitle">Software para la gestión de planes de Marketing</p>
               
               <Form onSubmit={(e) => {this.handleSubmit(e)}} className="login-form">
                 <div className="logo">

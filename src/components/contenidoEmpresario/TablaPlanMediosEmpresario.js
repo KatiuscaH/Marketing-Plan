@@ -29,7 +29,8 @@ class TablaPlanMediosEMpresario extends Component {
       }, {
         title: 'Fecha de realización de la publicidad',
         dataIndex: 'realizacion',
-        width: 100
+        width: 100,
+        className: 'fecha',
       },{
         title: 'Duración de la campaña',
         dataIndex: 'duracion',
@@ -41,7 +42,8 @@ class TablaPlanMediosEMpresario extends Component {
       },{
         title: 'Costo total',
         dataIndex: 'costo',
-        width: 100
+        width: 100,
+        className: 'costo',
     }];
 
 

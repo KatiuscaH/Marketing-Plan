@@ -214,16 +214,20 @@ class EditableTable extends Component {
       title: 'Nombres',
       dataIndex: 'nombre',
       editable: true,
-      ...this.getColumnSearchProps('nombre')
+      ...this.getColumnSearchProps('nombre'),
+      width: 200
 
     }, {
       title: 'Apellidos',
       dataIndex: 'apellido',
       editable: true,
+      width: 200
+
 
     }, {
       title: 'Correo',
       dataIndex: 'email',
+      width: 200
 
       
     }, {
@@ -231,6 +235,7 @@ class EditableTable extends Component {
       dataIndex: 'year',
       editable: true,
       className: 'fecha',
+      width: 200,
     sorter: (a, b) => a.year - b.year,
     sortDirections: ['descend'],
     }, {
@@ -238,6 +243,7 @@ class EditableTable extends Component {
       dataIndex: 'periodo',
       editable: true,
       className: 'fecha',
+      width: 200,
       sorter: (a, b) => a.periodo - b.periodo,
       sortDirections: ['descend'],
 
@@ -245,6 +251,7 @@ class EditableTable extends Component {
       title: 'Eliminar',
       dataIndex: 'operacion',
       className: 'fecha',
+      width: 200,
 
       render: (text, record) => {
         return (

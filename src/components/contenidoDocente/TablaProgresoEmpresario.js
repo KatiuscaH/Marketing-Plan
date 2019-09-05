@@ -14,17 +14,22 @@ class TablaProgresoEmpresario extends Component {
             datas: [],
             cargando: false
         }
-        this.columns = [{
+        this.columns = [
+            {
+                title: 'Nombre del plan de Marketing',
+                dataIndex: 'marketing.plan',
+                width: 200,
+                sorter: (a, b) => a.marketing.plan.length - b.marketing.plan.length,
+                sortDirections: ['descend'],
+            },{
             title: 'Objetivo',
             dataIndex: 'nombre',
+            width: 200,
 
-        }, {
-            title: 'Nombre del plan de Marketing',
-            dataIndex: 'marketing.plan'
-
-        }, {
+        },  {
             title: 'Indicador de logro',
             key: 'operacion',
+            width: 200,
             render: (text, record) => (
                 <div>
                     {record.cumplido ? 'Objetivo cumplido' : 'Objetivo NO cumplido'}

@@ -24,23 +24,27 @@ class TablaProgresoEstudiante extends Component {
     this.columns = [{
       title: 'Nombre del plan de marketing',
       dataIndex: 'nombre',
+      width: 200,
       ...this.getColumnSearchProps('nombre')
 
 
     }, {
       title: 'Grupo',
+      width: 200,
       dataIndex: 'grupo',
 
     }, {
       title: 'Empresario asignado',
       dataIndex: 'empresario',
+      width: 200,
 
     }, , {
       title: 'Progreso',
       key: 'operacion',
+      width: 200,
       render: (text, record) => (
         <div>
-          <Button onClick={() => this.clic(record.id)} type="primary" icon="eye" style={{ marginRight: '10px' }} loading={this.state.iconLoading}>
+          <Button onClick={() => this.clic(record.id)} type="primary" icon="eye" style={{ marginRight: '10px' }} loading={this.state.iconLoading} >
             Ver Plan
                     </Button>
           <Button type="primary" onClick={() => this.clicEstrategias(record.id)} icon="bar-chart" style={{ marginRight: '10px' }} loading={this.state.iconLoading} >
@@ -128,9 +132,11 @@ class TablaProgresoEstudiante extends Component {
     axios.get(LISTAR_ESTRATEGIAS.replace(':id', id), { headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` } })
       .then(res => {
         console.log('estrategias', res.data);
+        message.success('Estrategias cargadas con éxito.')
 
         this.setState({ datas3: res.data })
       }).catch(err => {
+        message.error('No se han podido cargar las estrategias seleccionadas. Intente nuevamente')
 
       });
   }
@@ -162,13 +168,13 @@ class TablaProgresoEstudiante extends Component {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30vh' }}>
               <Spin size="large" />
             </div>
-          </div> : <div>
+          </div> : <div id="plan">
               <Table rowKey="id" columns={this.columns} dataSource={this.state.datas} bordered></Table>
               <hr></hr>
               <MostrarProgresoEstudiante propiedad={this.state.datas2} />
               <hr></hr>
 
-              <MostrarProgresoEstrategiasEstudiante propiedades={this.state.datas3} />
+              <MostrarProgresoEstrategiasEstudiante propiedades={this.state.datas3} id="estrategias" />
               <hr></hr>
 
             </div>
