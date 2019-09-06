@@ -84,19 +84,21 @@ class EnviarRetroalimentacion extends Component {
         this.columns = [{
             title: 'Nombres',
             dataIndex: 'nombre',
-      ...this.getColumnSearchProps('nombre')
+      ...this.getColumnSearchProps('nombre'),
+      width: 200
 
         }, {
             title: 'Apellidos',
             dataIndex: 'apellido',
+            width: 200
         }, {
-            title: 'Correo',
-            dataIndex: 'email',
-            
-            
+            title: 'Plan de Marketing',
+            dataIndex: 'marketing.plan',
+            width: 200
         },  , {
             title: 'Enviar correo',
             key: 'operacion',
+            width: 200,
       className: 'fecha',
             render: (text, record) => (
                 <div>

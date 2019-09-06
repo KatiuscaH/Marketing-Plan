@@ -15,19 +15,20 @@ class VisualizarArchivos extends Component {
     this.columns = [{
       title: 'Nombres',
       dataIndex: 'user.nombre',
+      width: 200
 
     }, {
       title: 'Apellidos',
       dataIndex: 'user.apellido',
+      width: 200
 
     },
     {
-      title: 'Nombre archivo',
-      dataIndex: 'nombre',
-      width: 400
-
-
-    }, {
+      title: 'Plan de Marketing',
+      dataIndex: 'user.marketing.plan',
+      width: 200
+  },
+     {
       title: 'Visualizar',
      dataIndex: 'url',
      className: 'fecha',
